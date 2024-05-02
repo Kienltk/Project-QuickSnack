@@ -1,72 +1,170 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Category Page</title>
-    <!-- Bootstrap CSS -->
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Custom CSS -->
-    <style>
-        .card {
-            border: none; /* Loại bỏ viền */
-            
-        }
-        .card-img-top {
-            border-radius: 50%;
-            width: 150px; /* Điều chỉnh kích thước ảnh nếu cần */
-            height: 150px; /* Điều chỉnh kích thước ảnh nếu cần */
-            object-fit: cover; /* Đảm bảo ảnh vừa với khu vực giới hạn */
-            align-self: center; 
-        }
-        .card-title {
-            text-align: center; /* Căn giữa chữ */
-            margin-top: 10px; /* Khoảng cách từ ảnh đến tiêu đề */
-        }
-    </style>
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="../../public/css/header.css">
 </head>
-<body>
-<?php 
-include '../../views/includes/header.php';
-?>
-<a href=""></a>
-<div class="container">
-    <div class="row">
-        <?php
-        include ('../../database/connect_database/index.php');
-        
-        // Truy vấn để lấy dữ liệu từ bảng image_category
-        $sql = "SELECT * FROM image_category";
-        $result = $conn->query($sql);
-        
-        // Kiểm tra nếu có dữ liệu được trả về
-        if ($result->num_rows > 0) {
-            // Duyệt qua từng hàng dữ liệu và hiển thị
-            while($row = $result->fetch_assoc()) {
-                echo '<div class="col-md-3 mb-3">';
-                echo '<div class="card">';
-                echo '<a href="#"><img src="' . $row["address_img_category"] . '" class="card-img-top" alt="Category Image"></a>';
-                echo '<div class="card-body">';
-                echo '<h5 class="card-title">' . $row["name"] . '</h5>';
-                echo '</div>';
-                echo '</div>';
-                echo '</div>';
-            }
-        } else {
-            echo "0 results";
-        }
-        $conn->close();
-        ?>
-    </div>
-</div>
-<?php 
-include '../../views/includes/footer.php';
-?>
 
-<!-- Bootstrap JS -->
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<body>
+    <header>
+        <?php
+        include '..\includes\header.php';
+        ?>
+    </header>
+
+    <section class="container my-3">
+        <h1>Category</h1>
+        <div class="row my-5">
+            <div class="col-12 col-sm-3">
+                <div class="card text-center" style="border: none;">
+                    <img src="../../public/image/quick-caramel-cake.jpg" class="card-img-top rounded-circle mx-auto d-block" style="width: 200px; height: 200px;" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">Cake</h5>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-sm-3">
+                <div class="card text-center" style="border: none;">
+                    <img src="../../public/image/pastries.jpg" class="card-img-top rounded-circle mx-auto d-block" style="width: 200px; height: 200px;" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">Pastries</h5>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-sm-3">
+                <div class="card text-center" style="border: none;">
+                    <img src="../../public/image/burger.jpg" class="card-img-top rounded-circle mx-auto d-block" style="width: 200px; height: 200px;" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">Burger</h5>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-sm-3">
+                <div class="card text-center" style="border: none;">
+                    <img src="../../public/image/vegan.jpg" class="card-img-top rounded-circle mx-auto d-block" style="width: 200px; height: 200px;" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">vegan</h5>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12 col-sm-3">
+                <div class="card text-center" style="border: none;">
+                    <img src="../../public/image/desserts.jpg" class="card-img-top rounded-circle mx-auto d-block" style="width: 200px; height: 200px;" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">Desserts</h5>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-sm-3">
+                <div class="card text-center" style="border: none;">
+                    <img src="../../public/image/smoothies.jpg" class="card-img-top rounded-circle mx-auto d-block" style="width: 200px; height: 200px;" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">Smoothies</h5>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-sm-3">
+                <div class="card text-center" style="border: none;">
+                    <img src="../../public/image/kids.jpg" class="card-img-top rounded-circle mx-auto d-block" style="width: 200px; height: 200px;" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">Kids</h5>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-sm-3">
+                <div class="card text-center" style="border: none;">
+                    <img src="../../public/image/salad.jpg" class="card-img-top rounded-circle mx-auto d-block" style="width: 200px; height: 200px;" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">Salad</h5>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12 col-sm-3">
+                <div class="card text-center" style="border: none;">
+                    <img src="../../public/image/quick-caramel-cake.jpg" class="card-img-top rounded-circle mx-auto d-block" style="width: 200px; height: 200px;" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">Cake</h5>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-sm-3">
+                <div class="card text-center" style="border: none;">
+                    <img src="../../public/image/pastries.jpg" class="card-img-top rounded-circle mx-auto d-block" style="width: 200px; height: 200px;" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">Pastries</h5>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-sm-3">
+                <div class="card text-center" style="border: none;">
+                    <img src="../../public/image/burger.jpg" class="card-img-top rounded-circle mx-auto d-block" style="width: 200px; height: 200px;" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">Burger</h5>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-sm-3">
+                <div class="card text-center" style="border: none;">
+                    <img src="../../public/image/vegan.jpg" class="card-img-top rounded-circle mx-auto d-block" style="width: 200px; height: 200px;" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">vegan</h5>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12 col-sm-3">
+                <div class="card text-center" style="border: none;">
+                    <img src="../../public/image/desserts.jpg" class="card-img-top rounded-circle mx-auto d-block" style="width: 200px; height: 200px;" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">Desserts</h5>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-sm-3">
+                <div class="card text-center" style="border: none;">
+                    <img src="../../public/image/smoothies.jpg" class="card-img-top rounded-circle mx-auto d-block" style="width: 200px; height: 200px;" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">Smoothies</h5>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-sm-3">
+                <div class="card text-center" style="border: none;">
+                    <img src="../../public/image/kids.jpg" class="card-img-top rounded-circle mx-auto d-block" style="width: 200px; height: 200px;" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">Kids</h5>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-sm-3">
+                <div class="card text-center" style="border: none;">
+                    <img src="../../public/image/salad.jpg" class="card-img-top rounded-circle mx-auto d-block" style="width: 200px; height: 200px;" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">Salad</h5>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </section>
+
+    <footer>
+        <?php
+        include '..\includes\footer.php';
+        ?>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 
 </body>
+
 </html>

@@ -16,6 +16,7 @@
     <header>
         <!-- place navbar here -->
     </header>
+
     <main>
         <div class="container">
             <h2 class="my-5 ">
@@ -303,7 +304,7 @@
                         </div>
                         <div class="">Icon</div>
                     </div>
-                    
+
                     <div>
                         <img src="../../public/image/rounded.png" alt="" class="product_image"><br>
                         <span class="product_category">Dairy Free</span>

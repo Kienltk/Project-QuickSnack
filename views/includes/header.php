@@ -12,7 +12,7 @@
 <body> -->
     <nav class="navbar navbar-expand-lg bg-body-tertiary">
         <div class="container-fluid">
-            <a class="navbar-brand ms-3" href="#">
+            <a class="navbar-brand ms-3" href="../home/home.php">
                 <img src="../../public/image/Untitled-1 1.png" alt="" width="50" height="30">
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -21,10 +21,10 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav mx-auto">
                     <li class="nav-item">
-                        <a class="nav-link active mx-3 navbar_text" href="category.php">Category</a>
+                        <a class="nav-link active mx-3 navbar_text" href="../products/category.php">Category</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active mx-3 navbar_text" href="food.php">Food</a>
+                        <a class="nav-link active mx-3 navbar_text" href="../products/products.php">Food</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link active mx-3 navbar_text" href="gallery.php">Gallery</a>

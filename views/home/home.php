@@ -43,7 +43,7 @@
 
             <div class="image-slider">
                 <div class="image">
-                    <img src="../../public/image/Easy Saucy Ramen Noodles (Vegan Recipe) 1.png" alt="" class="img-fluid" />
+                    <a href="../products/product_detail.php"><img src="../../public/image/Easy Saucy Ramen Noodles (Vegan Recipe) 1.png" alt="" class="img-fluid" /></a>
                 </div>
                 <div class="image">
                     <img src="../../public/image/Homemade Shoyu Ramen Noodles (Soy Sauce Flavored Chuka Soba) _ Sudachi 1.png" alt="" class="img-fluid" />
