@@ -7,6 +7,130 @@
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="../../public/css/about.css">
+    <style>body {
+    background-color: #f8f9fa; 
+    font-family: Arial, sans-serif; 
+}
+
+.background {
+    background-color: #FFFFFF; 
+    border: 2px solid #FFA500; 
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); 
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out; 
+}
+
+.background:hover {
+    transform: translateY(-5px); 
+}
+
+.col-lg-2:hover {
+    box-shadow: 0 0 10px rgba(255, 165, 0, 0.5); 
+}
+.background img {
+    transition: transform 0.3s ease-in-out;
+}
+
+.background:hover img {
+    transform: scale(1.1);
+}
+
+
+h2{
+    font-weight: bold;
+    color: #FFA500; 
+}
+h3 {
+    font-weight: bold;
+    color: #333; 
+}
+
+h2 {
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+h3 {
+    font-size: 18px;
+    margin-bottom: 15px;
+}
+
+/* Container styles */
+.container {
+    max-width: 1200px;
+    margin: 40px auto;
+    padding: 20px;
+}
+
+.container-xxl {
+    max-width: 1400px;
+    margin: 40px auto;
+    padding: 20px;
+}
+
+/* Grid styles */
+.row {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.col-lg-2 {
+    flex: 0 0 20%;
+    max-width: 20%;
+    margin: 10px;
+}
+
+.col-lg-2:hover {
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); 
+}
+
+/* Header styles */
+header {
+    background-color: #FFFFFF; 
+    padding: 20px;
+    text-align: center;
+}
+
+header h2 {
+    font-size: 36px;
+    margin-bottom: 10px;
+}
+#our_story,#our_mission,#our_content,#our_goals {
+    color: #FFA500; 
+}
+@media (min-width: 576px) and (max-width: 1000px) {
+    .col-lg-2 {
+        flex: 0 0 calc(50% - 20px); 
+        max-width: calc(50% - 20px); 
+    }
+}
+
+
+@media (max-width: 576px) {
+    .col-lg-2 {
+        flex-basis: 50%; 
+        max-width: 50%;
+    }
+
+    .row {
+        flex-wrap: wrap;
+    }
+
+    .col-lg-2:nth-child(odd) {
+        margin-right: 0; 
+    }
+}
+
+/* Điều chỉnh kích thước ảnh cho thiết bị có độ phân giải thấp hơn */
+@media (max-width: 576px) {
+    .background img {
+        height: 80px; 
+        width: auto; 
+    }
+}
+</style>
 </head>
 <body>
     <!-- header -->

@@ -11,14 +11,14 @@
 
 <body>
     <div class="footer">
-        <div class="row footer_row">
+        <div class="row footer_row" style="padding-left: 50px;">
             <div class="col footer_col">
                 <img src="../../public/image/Untitled-1 1.png" class="logo">
                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Commodo libero viverra dapibus odio sit
                     malesuada in quis.
                     Arcu tristique elementum viverra integer id.</p>
                 <form>
-                    <div class="social-icon">
+                    <div class="social-icon" style="padding-left: 30px;">
                         <i class="fa-brands fa-square-facebook"></i>
                         <i class="fa-brands fa-square-twitter"></i>
                         <i class="fa-brands fa-square-instagram"></i>

@@ -7,6 +7,18 @@
     <title>Document</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <link rel="stylesheet" href="../../public/css/header.css">
+    <style>
+    .navbar {
+  background-color: #ffffff;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding-left: 30px;
+  padding-right: 30px;
+}
+#search_bar {
+  width: 300px !important; 
+}
+</style>
 </head>
 
 <body>
@@ -34,7 +46,7 @@
                     </li>
 
                 </ul>
-                <form class="d-flex" role="search">
+                <form class="d-flex" role="search" style="padding-right: 20px;">
                     <div class="input-group me-1">
                         <input class="form-control" type="search" placeholder="Search" aria-label="Search" id="search_bar">
                         <div class="input-group-text">
