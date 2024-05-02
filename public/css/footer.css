@@ -1,0 +1,116 @@
+body,
+html {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+}
+
+/* Style the footer */
+.footer {
+  background-color: #fff;
+  color: #e37e21;
+  padding: 40px 20px;
+}
+
+/* Style the row */
+.footer_row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+/* Style the column */
+.footer_col {
+  flex: 1;
+  margin-right: 20px;
+  margin-bottom: 20px;
+}
+.footer_col p {
+  padding-left: 30px; 
+}
+
+.logo {
+  padding-left: 30px; 
+}
+
+.footer_col:last-child {
+  margin-right: 0;
+}
+
+/* Style the logo */
+.logo {
+  width: 100%;
+  max-width: 150px;
+  height: auto;
+}
+
+/* Style social icons */
+.social-icon {
+  margin-top: 20px;
+}
+
+.social-icon i {
+  color: #e37e21;
+  font-size: 24px;
+  margin-right: 10px;
+}
+
+/* Style quick links and user links */
+h3 {
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+}
+
+ul li {
+  margin-bottom: 10px;
+}
+
+ul li a {
+  text-decoration: none;
+  font-size: 16px;
+  font-weight: medium;
+}
+
+h3,
+ul li a {
+  color: #000;
+  transition: color 0.3s;
+}
+
+h3:hover,
+ul li a:hover {
+  color: #e37e21;
+}
+
+/* Style the location */
+.location {
+  width: 100%;
+  height: auto;
+  margin-top: 20px;
+}
+
+/* Style the copyright text */
+.copyright {
+  text-align: center;
+  margin-top: 20px;
+  color: #000;
+  transition: color 0.3s;
+}
+
+.copyright:hover {
+  color: #e37e21;
+}
+
+/* Media queries for responsiveness */
+@media screen and (max-width: 768px) {
+  .footer_col {
+    flex: 0 0 100%;
+    margin-bottom: 20px;
+  }
+}

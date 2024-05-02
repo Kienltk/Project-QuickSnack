@@ -1,0 +1,139 @@
+/* subject to change: 
+           header_background_color */
+/* @import url('https://fonts.google.com/specimen/Commissioner'); */
+
+.navbar {
+  background-color: #ffffff;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+.navbar_text {
+  font-family: "Commissioner", sans-serif !important;
+  font-size: 18px !important;
+  color: #000;
+}
+
+/* dropdown hover */
+.navbar .nav-item .dropdown-menu {
+  display: none;
+}
+
+.navbar .nav-item:hover .dropdown-menu {
+  display: block;
+}
+
+#saved_recipes {
+  margin-right: 0;
+}
+
+#search_bar {
+  width: 200px !important;
+  height: 30px;
+  border-top-left-radius: 15px;
+  border-bottom-left-radius: 15px;
+  padding: 5px 15px;
+  background-color: #fff;
+  border: 1px solid #ffa500;
+}
+
+/* to delete */
+#search_icon {
+  font-size: 16px;
+}
+
+.input-group-text {
+  background-color: #fff;
+  border: 1px solid #ffa500;
+  border-left: none;
+  border-top-right-radius: 15px;
+  border-bottom-right-radius: 15px;
+  transition: all 0.3s ease;
+  height: 30px;
+}
+
+/* Khi di chuột vào biểu tượng tìm kiếm */
+.input-group-text:hover {
+  background-color: #ffa500;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Header styles */
+.navbar_text {
+  font-family: "Commissioner";
+  font-size: 120% !important;
+  color: #000;
+}
+
+.navbar .nav-item .dropdown-menu {
+  display: none;
+}
+
+.navbar .nav-item:hover .dropdown-menu {
+  display: block;
+}
+
+#saved_recipes {
+  margin-right: -200px;
+}
+
+#search_bar {
+  width: 200px !important;
+}
+
+/* Icon search */
+#search_icon {
+  font-size: 16px;
+  transition: all 0.3s ease;
+  color: #ffa500;
+}
+
+/* Khi di chuột vào biểu tượng tìm kiếm */
+#search_icon:hover {
+  transform: scale(1.1);
+  color: #fff;
+}
+
+/* Màu chữ "Sign in" khi hover */
+.btn-outline-success {
+  color: #ffa500;
+  border-color: #ffa500;
+  margin-right: 20px;
+}
+
+/* Khi di chuột vào nút "Sign in" */
+.btn-outline-success:hover {
+  background-color: #ffa500;
+  color: #fff;
+}
+
+/* Fixed navbar on scroll */
+nav.fixed-top {
+  position: fixed;
+  width: 100%;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+}
+
+body {
+  padding-top: 0;
+}
+
+.navbar-nav {
+  flex-direction: row;
+}
+
+.navbar-nav .nav-item {
+  margin-right: 20px;
+}
+
+.navbar-nav .nav-item:last-child {
+  margin-right: 0;
+}
+
+.navbar-nav .nav-item:nth-last-child(2) {
+  margin-right: auto;
+}

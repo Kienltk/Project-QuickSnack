@@ -1,0 +1,122 @@
+.container-box {
+    max-width: 80%; /* Adjust width as needed */
+    margin: 50px auto; /* Adjust margin as needed */
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); /* Add shadow */
+    padding: 20px;
+  }
+  
+  body {
+    background-color: #e3e3e3;
+    font-family: "Poppins", sans-serif;
+  }
+  
+  .container-fluid {
+    padding: 0;
+  }
+  
+  .row {
+    margin: 0;
+  }
+  
+  .col-left {
+    padding: 0;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-image: url("https://images.pexels.com/photos/1410235/pexels-photo-1410235.jpeg?auto=compress&cs=tinysrgb&w=600");
+    background-size: cover;
+    background-position: center;
+  }
+  
+  .col-right {
+    padding: 20px; /* Adjust padding as needed */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .form-control {
+    border: 1px solid #e37e21;
+    border-radius: 10px;
+    padding: 15px;
+    background-color: #f7f7f7;
+    margin-bottom: 20px;
+    transition: border-color 0.3s;
+  }
+  
+  .form-control:focus {
+    border-color: #fbb387;
+  }
+  
+  .btn-primary {
+    background-color: #fbb387;
+    border: 1px solid #fbb387;
+    border-radius: 10px;
+    color: #ffffff;
+    padding: 15px;
+    width: 100%;
+    transition: background-color 0.3s, border-color 0.3s;
+    margin-bottom: 10px;
+  }
+  
+  .btn-primary:hover {
+    background-color: #f46b0a;
+    border-color: #f46b0a;
+  }
+  
+  .btn-facebook,
+  .btn-google {
+    border-radius: 10px;
+    color: #ffffff;
+    padding: 15px;
+    width: 100%;
+    transition: background-color 0.3s, border-color 0.3s;
+    margin-bottom: 10px;
+  }
+  
+  .btn-facebook {
+    background-color: #4285f4;
+    border: 1px solid #4285f4;
+  }
+  
+  .btn-facebook:hover {
+    background-color: #3b79db;
+    border-color: #3b79db;
+  }
+  
+  .btn-google {
+    background-color: #ea0e0e;
+    border: 1px solid #e61111;
+  }
+  
+  .btn-google:hover {
+    background-color: #d10909;
+    border-color: #d10909;
+  }
+  
+  .text-muted {
+    color: #8c8c8c;
+    text-decoration: none;
+    transition: color 0.3s;
+  }
+  
+  .text-muted:hover {
+    color: #f46b0a;
+  }
+  
+  /* Make the container-box full-width on small screens */
+  @media (max-width: 768px) {
+    .container-box {
+      width: 100%;
+    }
+    .col-left {
+      display: none; /* Hide the left column on small screens */
+    }
+    .col-right {
+      padding: 20px 10px; /* Adjust padding as needed */
+    }
+  }
+  
