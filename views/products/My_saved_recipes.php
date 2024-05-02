@@ -1,16 +1,15 @@
 <?php
 //to-delete
 include ("../../database/connect_database/index.php");
-$query = "SELECT user_id, username FROM user WHERE username = '$_COOKIE[username]';";
+$query = "SELECT user_id, username FROM user WHERE user_id = '$_COOKIE[userID]';";
 
             $result = mysqli_query($conn, $query);
             $data = mysqli_fetch_array($result);
-            echo $data['user_id'];
 //
 
 
 include ("../../models/products/my_saved_recipes_function.php");
-$user_category = getUserCategory('1');
+$user_category = getUserCategory($_COOKIE["userID"]);
 if (isset($_GET["id"])) {
     $user_category_product = getProductFromUserCategory($_GET["id"]);
 }
@@ -21,14 +20,13 @@ $i = 0;
 <!doctype html>
 <html lang="en">
     <head>
-        <title></title>
+        <title><?php echo $data['username'] . "'s Saved Recipe"; ?></title>
         <!-- Required meta tags -->
         <meta charset="utf-8"/>
         <meta
             name="viewport"
             content="width=device-width, initial-scale=1, shrink-to-fit=no"
         />
-
         <!-- Bootstrap CSS v5.2.1 -->
         <link
             href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
@@ -40,10 +38,8 @@ $i = 0;
     </head>
 
     <body>
-        <header>
-        </header>
         <main>
-<!--Title-->
+            <?php include ("../includes/header.php"); ?>
             <div class="container">
                 <h1>My Saved Recipes</h1>
                 <h2>
@@ -51,7 +47,9 @@ $i = 0;
                     if (isset($_GET["id"])) {
                         $a = getProductByUserCategoryByCategoryId($_GET["id"]);
                         $row = $a->fetch_assoc();
-                        echo "Category: " . $row["user_category_name"];
+                        if ($user_category_product->num_rows > 0) {
+                            echo "Category: " . $row["user_category_name"];
+                        } else echo "Empty list";
                     ?>
                         <a href="my_saved_recipes.php"><br>Back</a>
                     <?php
@@ -107,7 +105,7 @@ $i = 0;
                     ?>
                             <div class="col-lg-3">
                                 <div class="container mb-4 category_tab">
-                                <img src="../../public/image/rectangle.png" alt="" class="product_image pt-3"><br>
+                                <img src="<?php echo getImage($row["quick_snack_id"])["address_img"]; ?>" alt="" class="product_image pt-3"><br>
                                 <span class="product_category"><?php echo $row["category_name"] ?></span>
                                 <h5 class="product_name mt-1 mb-0"><?php echo $row["name"] ?></h5>
                                 <div style="text-align: left;">
@@ -138,10 +136,10 @@ $i = 0;
             crossorigin="anonymous"
         ></script>
 
-        <script
+        <!-- <script
             src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"
             integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+"
             crossorigin="anonymous"
-        ></script>
+        ></script> -->
     </body>
 </html>

@@ -15,7 +15,7 @@
         }
 
         h1 {
-            color: coral;
+            color: coral !important;
         }
 
         .grid-container {
@@ -39,15 +39,17 @@
 
         .grid-container div:hover img {
             filter: grayscale(0);
+
         }
 
         .grid-container div:hover {
             border-color: coral;
+            transform: scale(1.1);
         }
 
         .grid-container div img {
             width: 100%;
-            filter: grayscale(100%);
+            /* filter: grayscale(100%); */
             border-radius: 5px;
             transition: all .25s ease-in-out;
         }

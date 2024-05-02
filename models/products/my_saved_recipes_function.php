@@ -37,4 +37,15 @@ function getProductByUserCategoryByCategoryId($param) {
     $conn->close();
     return $result;
 }
+
+function getImage($param){
+    include ("../../database/connect_database/index.php");
+    $smtc = $conn->prepare("SELECT * FROM image_quick_snack WHERE quick_snack_id = ?");
+    $smtc->bind_param('i', $param);
+    $smtc->execute();
+    $result = $smtc->get_result();
+    $conn->close();
+    $return = $result->fetch_assoc();
+    return $return;
+}
 ?>

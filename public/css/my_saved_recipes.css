@@ -11,6 +11,11 @@
     font-weight: bold;
 }
 
+.product_image {
+    width: 200px;
+    height: 200px;
+}
+
 .product_time {
     color: #DC582A;
     font-weight: bold;
