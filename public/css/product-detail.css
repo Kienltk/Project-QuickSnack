@@ -76,56 +76,8 @@
   background-color: #fff;
   border-color: #ff9a62;
   color: #ff9a62;
-  border-radius: 3px;
 }
 .btn_comment:hover {
   background-color: #ff9a62;
   color: white;
-}
-.rating {
-  display: inline-block;
-}
-
-.rating input {
-  display: none;
-}
-
-.rating label {
-  cursor: pointer;
-}
-
-.rating label i {
-  color: #ccc;
-  font-size: 20px; /* kích thước nhỏ hơn */
-}
-
-.rating input:checked ~ label i {
-  color: #ffc107;
-}
-
-.rating {
-  display: inline-block;
-  unicode-bidi: bidi-override;
-  direction: rtl;
-}
-
-.rating > input {
-  display: none;
-}
-
-.rating > label {
-  display: inline-block;
-  position: relative;
-  width: 1em;
-}
-
-.rating > label:before {
-  content: "\2605";
-  position: absolute;
-  color: #ccc;
-}
-
-.rating > input:checked ~ label:before,
-.rating > input:checked ~ label ~ label:before {
-  color: #ffc107;
 }
