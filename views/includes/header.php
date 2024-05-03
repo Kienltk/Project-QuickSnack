@@ -56,7 +56,7 @@
                             </ul>
                         </li>
                     } -->
-                <a href="login.php">
+                <a href="../auth/SignIn.php">
                     <button class="btn btn-outline-success mt-2 mb-2">
                         Sign in
                     </button>
@@ -66,7 +66,7 @@
     </nav>
 
 
-    <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 
     <script>
         // navbar fixed on scroll
@@ -85,4 +85,4 @@
     </script>
 </body>
 
-</html> -->
+</html>

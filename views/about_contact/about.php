@@ -8,6 +8,7 @@
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="../../public/css/about.css">
+    <link rel="stylesheet" href="../../public/css/header.css">
     <style>
         body {
             background-color: #f8f9fa;
