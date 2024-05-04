@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -10,6 +11,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <link rel="stylesheet" href="../../public/css/signin.css">
 </head>
+
 <body>
     <div class="container-box">
         <div class="container-fluid">
@@ -21,6 +23,9 @@
                     <!-- Right Column - Sign In Form -->
                     <div class="card-body">
                         <form>
+                            <div class="navbar-brand ms-3" href="../home/home.php">
+                                <img src="..\..\public\image\logo.jpg" alt="Logo" width="50" height="30">
+                            </div>
                             <div class="text-center mb-4">
                                 <h1 class="h3 mb-3 fw-bold">Sign In</h1>
                             </div>
@@ -35,21 +40,22 @@
 
                             <div class="mb-4">
                                 <button class="btn btn-primary btn-lg btn-block" type="submit">Sign In</button>
-                            </div><p class="mb-5 text-center text-muted">Don't have an account? <a href="#!" class="text-muted">Sign up here</a></p>
+                            </div>
+                            <p class="mb-5 text-center text-muted">Don't have an account? <a href="#!" class="text-muted" style="color: #f46b0a !important ; ">Sign up here</a></p>
 
                             <div class="text-center">
                                 <a href="#!" class="small text-muted" style="text-decoration: none">Forgot Password?</a>
                             </div>
                             <div class="text-center" style="color: #e37e21; margin-top: 5%;">
-                              <p>-----------------Or -----------------</p>
-                          </div>
+                                <p>-----------------Or -----------------</p>
+                            </div>
 
                             <div class="mb-4">
                                 <button class="btn btn-facebook" type="button"><i class="fab fa-facebook"></i> Sign in with Facebook</button>
                                 <button class="btn btn-google" type="button"><i class="fab fa-google"></i> Sign in with Google</button>
                             </div>
 
-                            
+
                         </form>
                     </div>
                 </div>
@@ -60,4 +66,5 @@
     <!-- Bootstrap Bundle with Popper -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-x2Zv0Aj5a9znzUdytcT6t5GzjpzPA1zhmzLMWbDQs9N5JUX2Y6omw2ms4cO8ETfE" crossorigin="anonymous"></script>
 </body>
+
 </html>

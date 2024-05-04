@@ -2,7 +2,7 @@
 $hostName = "localhost";
 $userName_db = "root";
 $password_db = "12345678";
-$databaseName = "test";
+$databaseName = "quick_snack_db";
 
 $conn = new mysqli($hostName, $userName_db, $password_db, $databaseName);
 
