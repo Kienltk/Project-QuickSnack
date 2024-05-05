@@ -95,7 +95,11 @@
 .btn-outline-success {
   color: #ffa500;
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
   border-color: #ffa500;
+=======
+  border: 2px solid #ffa500;
+>>>>>>> Stashed changes
 =======
   border: 2px solid #ffa500;
 >>>>>>> Stashed changes

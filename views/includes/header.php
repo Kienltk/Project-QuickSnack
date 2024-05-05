@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="../../public/css/header.css">
     <style>
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
     .navbar {
   background-color: #ffffff;
   padding-top: 10px;
@@ -21,6 +22,8 @@
 }
 </style>
 =======
+=======
+>>>>>>> Stashed changes
         .navbar {
             background-color: #ffffff;
             padding-top: 10px;
@@ -46,6 +49,9 @@
             font-weight: bolder; 
         }
     </style>
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
 </head>
 
@@ -109,7 +115,11 @@
                     </li>
                     <li class="nav-item">
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
                         <a class="nav-link active mx-4 navbar_text" href="login.php" id="saved_recipes">My Saved Recipes</a>
+=======
+                        <a class="nav-link mx-4 navbar_text <?php echo $login_class; ?>" href="login.php" id="saved_recipes">My Saved Recipes</a>
+>>>>>>> Stashed changes
 =======
                         <a class="nav-link mx-4 navbar_text <?php echo $login_class; ?>" href="login.php" id="saved_recipes">My Saved Recipes</a>
 >>>>>>> Stashed changes
