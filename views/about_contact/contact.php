@@ -19,20 +19,23 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&display=swap">
   <style>
     @media (max-width: 768px) {
-  .hero-image {
-    height: 15vh;
-  }
-  .heart-icon {
-    width: 50px;
-    height: 50px;
-  }
-  h1 span{
-    font-size: 40px;
-  }
-  .contact-info p {
-    font-size: 16px;
-  }
-}
+      .hero-image {
+        height: 15vh;
+      }
+
+      .heart-icon {
+        width: 50px;
+        height: 50px;
+      }
+
+      h1 span {
+        font-size: 40px;
+      }
+
+      .contact-info p {
+        font-size: 16px;
+      }
+    }
   </style>
 </head>
 

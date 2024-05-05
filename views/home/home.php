@@ -1,5 +1,3 @@
-<<<<<<< Updated upstream
-=======
 <?php
 include("../../database/connect_database/index.php");
 
@@ -235,4 +233,4 @@ function getRandomImage1Url($conn)
     </body>
 
 </html>
->>>>>>> Stashed changes
+

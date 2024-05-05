@@ -8,19 +8,6 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <link rel="stylesheet" href="../../public/css/header.css">
     <style>
-<<<<<<< Updated upstream
-    .navbar {
-  background-color: #ffffff;
-  padding-top: 10px;
-  padding-bottom: 10px;
-  padding-left: 30px;
-  padding-right: 30px;
-}
-#search_bar {
-  width: 300px !important; 
-}
-</style>
-=======
         .navbar {
             background-color: #ffffff;
             padding-top: 10px;
@@ -32,6 +19,7 @@
         #search_bar {
             width: 30% !important;
         }
+
         .navbar_text {
             transition: transform 0.3s;
         }
@@ -42,11 +30,11 @@
         }
 
         .active {
-            color: #ffa500 !important; 
-            font-weight: bolder; 
+            color: #ffa500 !important;
+            font-weight: bolder;
         }
     </style>
->>>>>>> Stashed changes
+
 </head>
 
 <body>
@@ -108,11 +96,8 @@
                         <a class="nav-link mx-3 navbar_text <?php echo $gallery_class; ?>" href="gallery.php">Gallery</a>
                     </li>
                     <li class="nav-item">
-<<<<<<< Updated upstream
-                        <a class="nav-link active mx-4 navbar_text" href="login.php" id="saved_recipes">My Saved Recipes</a>
-=======
+
                         <a class="nav-link mx-4 navbar_text <?php echo $login_class; ?>" href="login.php" id="saved_recipes">My Saved Recipes</a>
->>>>>>> Stashed changes
                     </li>
 
                 </ul>
