@@ -1,5 +1,4 @@
 $(document).ready(function () {
-    var isRegister = $('#emailInput').length > 0;
 
     function debounce(func, delay) {
         let timeout;
@@ -11,6 +10,13 @@ $(document).ready(function () {
                 func.apply(context, args);
             }, delay);
         };
+    }
+
+    function setCookie(cookieName, cookieValue, expirationDays) {
+        var d = new Date();
+        d.setTime(d.getTime() + (expirationDays * 24 * 60 * 60 * 1000));
+        var expires = "expires=" + d.toUTCString();
+        document.cookie = cookieName + "=" + cookieValue + ";" + expires + ";path=/";
     }
 
     function validateFullName(fullName) {
@@ -30,7 +36,7 @@ $(document).ready(function () {
         } else if (!/^[a-zA-Z0-9_]+$/.test(username)) {
             return "Username can only contain letters, numbers.";
         } else if (username.length < 5 || username.length > 100) {
-            return "The username length must be between 5 and 100 characters.";
+            return "Username length must be over 5 characters";
         } else if (/\s$/.test(username)) {
             return "The username cannot end with whitespace.";
         }
@@ -114,102 +120,97 @@ $(document).ready(function () {
     });
 
     $('#submitButton').on('click', function () {
-        var fullName = $('#fullNameInput').val();
+
         var username = $('#usernameInput').val();
-        var email = $('#emailInput').val();
-        var gender = $('#gender').val();
         var password = $('#passwordInput').val();
-        var confirmPassword = $('#confirmPasswordInput').val();
-        var termsChecked = $('#agreeTerms').prop('checked');
-        var hasError = false;
-
-
-        var fullNameError = validateFullName(fullName);
-        $('#fullNameError').text(fullNameError);
-        if (fullNameError !== '') {
-            hasError = true;
-        }
 
         var usernameError = validateUsername(username);
         $('#usernameError').text(usernameError);
-        if (usernameError !== '') {
-            hasError = true;
-        }
-
-        if ($('#emailInput').length > 0) {
-            var emailError = validateEmail(email);
-            $('#emailError').text(emailError);
-            if (emailError !== '') {
-                hasError = true;
-            }
-        }
 
         var passwordError = validatePassword(password);
         $('#passwordError').text(passwordError);
-        if (passwordError !== '') {
-            hasError = true;
+
+        if (usernameError !== '' || passwordError !== '') {
+            return;
         }
 
-        var confirmPasswordError = '';
-        if (confirmPassword.trim() === '') {
-            confirmPasswordError = "Confirm password cannot be empty.";
-        } else if (confirmPassword !== password) {
-            confirmPasswordError = "Passwords do not match.";
-        } else {
-            confirmPasswordError = validatePassword(confirmPassword);
-        }
-        $('#confirmPasswordError').text(confirmPasswordError);
-        if (confirmPasswordError !== '') {
-            hasError = true;
-        }
-
-        var genderError = gender ? '' : "Gender must be selected.";
-        $('#genderError').text(genderError);
-        if (genderError !== '') {
-            hasError = true;
-        }
-
-
-        var termsError = termsChecked ? '' : "You must agree to the terms and conditions.";
-        $('#termsError').text(termsError);
-        if (termsError !== '') {
-            hasError = true;
-        }
-
-        if (!hasError) {
-            var postData = {
-                fullName: fullName,
-                username: username,
-                email: email,
-                gender: gender,
-                password: password,
-                submit: true
-            };
-
-            if ($('#emailInput').length > 0) {
-                postData.email = email;
-            }
+        if ($('#emailInput').length === 0) {
 
             $.ajax({
                 type: 'POST',
-                url: '../../models/auth/auth_register.php',
-                data: postData,
+                url: '../../models/auth/auth_login.php',
+                data: {
+                    username: username,
+                    password: password,
+                    submit: true
+                },
                 success: function (data) {
-                    if (isRegister) {
+                    if (data.includes('Logged in successfully')) {
+                        $('#resultMessage').html('<span style="color: green;">' + data + '</span>');
+                        setCookie('loggedInUser', username, 7);
+                        setTimeout(function () {
+                            window.location.href = '../../views/home/home.php';
+                        }, 2000);
+                    } else {
+                        $('#resultMessage').html('<span style="color: red;">' + data + '</span>');
+                    }
+                }
+            });
+        } else {
+            var fullName = $('#fullNameInput').val();
+            var email = $('#emailInput').val();
+            var gender = $('#gender').val();
+            var confirmPassword = $('#confirmPasswordInput').val();
+            var termsChecked = $('#agreeTerms').prop('checked');
+
+            var fullNameError = validateFullName(fullName);
+            $('#fullNameError').text(fullNameError);
+
+            var emailError = validateEmail(email);
+            $('#emailError').text(emailError);
+
+            var confirmPasswordError = '';
+            if (confirmPassword.trim() === '') {
+                confirmPasswordError = "Confirm password cannot be empty.";
+            } else if (confirmPassword !== password) {
+                confirmPasswordError = "Passwords do not match.";
+            } else {
+                confirmPasswordError = validatePassword(confirmPassword);
+            }
+            $('#confirmPasswordError').text(confirmPasswordError);
+
+            var genderError = gender ? '' : "Gender must be selected.";
+            $('#genderError').text(genderError);
+
+            var termsError = termsChecked ? '' : "You must agree to the terms and conditions.";
+            $('#termsError').text(termsError);
+
+            if (fullNameError === '' && emailError === '' && confirmPasswordError === '' && genderError === '' && termsError === '') {
+                var postData = {
+                    fullName: fullName,
+                    username: username,
+                    email: email,
+                    gender: gender,
+                    password: password,
+                    submit: true
+                };
+
+                $.ajax({
+                    type: 'POST',
+                    url: '../../models/auth/auth_register.php',
+                    data: postData,
+                    success: function (data) {
                         if (data.includes('Create a successful account')) {
                             $('#resultMessage').html('<span style="color: green;">' + data + '</span>');
-                        } else {
-                            $('#resultMessage').html('<span style="color: red;">' + data + '</span>');
-                        }
-                    } else {
-                        if (data.includes('Logged in successfully')) {
-                            $('#resultMessage').html('<span style="color: green;">' + data + '</span>');
+                            setTimeout(function () {
+                                window.location.href = '../../views/auth/SignIn.html';
+                            }, 2000);
                         } else {
                             $('#resultMessage').html('<span style="color: red;">' + data + '</span>');
                         }
                     }
-                }
-            })
+                });
+            }
         }
     });
 });

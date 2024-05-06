@@ -2,7 +2,7 @@
 require_once('../../database/query_database/user.php');
 
 if (isset($_COOKIE['username'])) {
-    header("Location: ../../view/home");
+    header("Location: ../../views/home/home.php");
     exit();
 }
 
@@ -13,9 +13,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["submit"])) {
 
     if (userExistence($username, $email)) {
         $userData = userExistence($username, $email);
-        if ($userData['username'] == $username && $userData['password_hash'] == true) {
+        if ($userData['username'] == $username && password_verify($password, $userData['password_hash']) == true) {
             $check = "Logged in successfully";
-        } else if ($userData['username'] == $username && $userData['password_hash'] == false) {
+            setcookie('username', $username, time() + (86400 * 30), '/');
+        } else if ($userData['username'] == $username && password_verify($password, $userData['password_hash']) == false) {
             $check = "Password is incorrect";
         } else if ($userData['username'] == $username) {
             $check = "Username is not registered";
@@ -27,4 +28,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["submit"])) {
     }
 
     echo $check;
-} 
+} else {
+    echo "ngu";
+}

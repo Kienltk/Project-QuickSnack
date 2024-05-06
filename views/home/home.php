@@ -79,41 +79,7 @@ function getRandomImage1Url($conn)
             </div>
 
             <div class="image-slider">
-                <!-- <div class="image">
-                    <img src="../../public/image/Easy Saucy Ramen Noodles (Vegan Recipe) 1.png" alt="" class="img-fluid" />
-                </div>
-                <div class="image">
-                    <img src="../../public/image/Homemade Shoyu Ramen Noodles (Soy Sauce Flavored Chuka Soba) _ Sudachi 1.png" alt="" class="img-fluid" />
-                </div>
-                <div class="image">
-                    <img src="../../public/image/Jack Daniels Burgers 1.png" alt="" class="img-fluid" />
-                </div>
-                <div class="image">
-                    <img src="../../public/image/Jack Daniels Burgers 2.png" alt="" class="img-fluid" />
-                </div>
-                <div class="image">
-                    <img src="../../public/image/Pizza 1.png" alt="" class="img-fluid" />
-                </div>
-                <div class="image">
-                    <img src="../../public/image/Jack Daniels Burgers 1.png" alt="" class="img-fluid" />
-                </div>
-                <div class="image">
-                    <img src="../../public/image/Homemade Shoyu Ramen Noodles (Soy Sauce Flavored Chuka Soba) _ Sudachi 1.png" alt="" class="img-fluid" />
-                </div> -->
                 <?php
-                // $randomImage1 = getRandomImage1Url($conn);
-                // if ($randomImage1) {
-                //     $imageDivs = '';
-                //     for ($i = 0; $i < 10; $i++) {
-                //         echo '<div class="image">';
-                //         echo '<a href="../products/product_detail.php?quick_snack_id=' . $randomImage1['quick_snack_id'] . '">';
-                //         echo '<img src="' . $randomImage1['address_img'] . '" class="img-fluid" alt="Random Image">';
-                //         echo '</a>';
-                //         echo '</div>';
-                //     }
-                // } else {
-                //     echo "Không có hình ảnh được tìm thấy.";
-                // }
                 $sql = "SELECT * FROM image_quick_snack WHERE kind = 1";
                 $result = mysqli_query($conn, $sql);
                 if ($result->num_rows > 0) {

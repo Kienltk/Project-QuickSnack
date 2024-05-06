@@ -19,6 +19,7 @@
         #search_bar {
             width: 30% !important;
         }
+
         .navbar_text {
             transition: transform 0.3s;
         }
@@ -29,8 +30,8 @@
         }
 
         .active {
-            color: #ffa500 !important; 
-            font-weight: bolder; 
+            color: #ffa500 !important;
+            font-weight: bolder;
         }
     </style>
 
@@ -122,7 +123,7 @@
                             </ul>
                         </li>
                     } -->
-                <a href="login.php">
+                <a href="../auth/SignIn.html">
                     <button class="btn btn-outline-success mt-2 mb-2">
                         Sign in
                     </button>
