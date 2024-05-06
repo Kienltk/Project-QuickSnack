@@ -15,12 +15,12 @@ function userExistence($username, $email)
 
 
 
-function insertUser($username, $email, $password)
+function insertUser($fullname, $username, $email, $gender, $password)
 {
     include('../../database/connect_database/index.php');
     $hashed_password = password_hash($password, PASSWORD_DEFAULT);
-    $stmt = $conn->prepare("INSERT INTO user(username, email, password) VALUES (?, ?, ?)");
-    $stmt->bind_param("sss", $username, $email, $hashed_password);
+    $stmt = $conn->prepare("INSERT INTO user(fullname, username, email, gender, password_hash) VALUES (?, ?, ?, ?, ?)");
+    $stmt->bind_param("sssss", $fullname, $username, $email, $gender, $hashed_password);
     $success = $stmt->execute();
     $stmt->close();
     $conn->close();
