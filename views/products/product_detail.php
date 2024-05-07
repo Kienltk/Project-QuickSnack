@@ -65,6 +65,12 @@ $query = 'SELECT * FROM image_quick_snack WHERE quick_snack_id= ' . $id . ' AND 
 $result = $conn->query($query);
 ?>
 
+<?php
+include ('../../database/connect_database/index.php');
+$query2 = "SELECT * FROM user";
+$result2 = $conn->query($query2);
+$row4 = $result2->fetch_assoc();
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -122,6 +128,8 @@ $result = $conn->query($query);
                 <span style="color: #8c8c8c;font-size: small;"> 4.5/5 Review </span>
             </span>
         </div>
+
+
         <div class="row pt-4">
             <div class="col-12 col-md-8 pb-0">
 
@@ -292,6 +300,7 @@ $result = $conn->query($query);
             <div class="comment-form mt-4">
                 <form id="comment-form" action="../../database/query_database/comment_handler.php" method="post">
                     <input type="hidden" name="quick_snack_id" value="<?php echo $id; ?>">
+                    <input type="hidden" name="user_id" value="<?php echo $row4['user_id']; ?>">
                     <div>
                         <label for="comment" class="form-label">Comment</label>
                         <textarea class="form-control" id="comment" name="comment" rows="3" required></textarea>
