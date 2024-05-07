@@ -1,6 +1,6 @@
 create database quick_snack_db;
 
-
+use quick_snack_db;
 -- CREATE TABLE --
 	-- Independent
 create table user (
@@ -583,56 +583,67 @@ VALUES
 	-- Image quick snack
 INSERT INTO image_quick_snack (quick_snack_id, name_image, kind, address_img)
 VALUES 
-(1, 'Vietnamese Stir-Fried Mixed Vegetables', 0, '../../public/image/product/Vietnamese Stir-Fried Mixed Vegetables2.jpg'),
+(1, 'Vietnamese Stir-Fried Mixed Vegetables', 0, '../../public/image/product/Vietnamese Stir-Fried Mixed Vegetables.jpg'),
 (1, 'Vietnamese Stir-Fried Mixed Vegetables', 1, '../../public/image/product/Vietnamese Stir-Fried Mixed Vegetables1.jpg'),
+(1, 'Vietnamese Stir-Fried Mixed Vegetables', 1, '../../public/image/product/Vietnamese Stir-Fried Mixed Vegetables2.jpg'),
 (1, 'Vietnamese Stir-Fried Mixed Vegetables', 1, '../../public/image/product/Vietnamese Stir-Fried Mixed Vegetables3.jpg'),
-(1, 'Vietnamese Stir-Fried Mixed Vegetables', 1, '../../public/image/product/Vietnamese Stir-Fried Mixed Vegetables.jpg'),
 
-(2, 'Savory Cheese Cornbread Muffins', 0, '../../public/image/product/Savory Cheese Cornbread Muffins3.jpg'),
+(2, 'Savory Cheese Cornbread Muffins', 0, '../../public/image/product/Savory Cheese Cornbread Muffins.jpg'),
 (2, 'Savory Cheese Cornbread Muffins', 1, '../../public/image/product/Savory Cheese Cornbread Muffins1.jpg'),
-(2, 'Savory Cheese Cornbread Muffins', 1, '../../public/image/product/Savory Cheese Cornbread Muffins.jpg'),
 (2, 'Savory Cheese Cornbread Muffins', 1, '../../public/image/product/Savory Cheese Cornbread Muffins2.jpg'),
+(2, 'Savory Cheese Cornbread Muffins', 1, '../../public/image/product/Savory Cheese Cornbread Muffins3.jpg'),
 
-(3, 'Japanese Vegetable Miso Soup', 0, '../../public/image/product/Japanese Vegetable Miso Soup2.jpg'),
+(3, 'Japanese Vegetable Miso Soup', 0, '../../public/image/product/Japanese Vegetable Miso Soup.jpg'),
 (3, 'Japanese Vegetable Miso Soup', 1, '../../public/image/product/Japanese Vegetable Miso Soup1.jpg'),
-(3, 'Japanese Vegetable Miso Soup', 1, '../../public/image/product/Japanese Vegetable Miso Soup.jpg'),
+(3, 'Japanese Vegetable Miso Soup', 1, '../../public/image/product/Japanese Vegetable Miso Soup2.jpg'),
 (3, 'Japanese Vegetable Miso Soup', 1, '../../public/image/product/Japanese Vegetable Miso Soup3.jpg'),
 
 (4, 'Thai Pad Thai', 0, '../../public/image/product/Thai Pad Thai.jpg'),
 (4, 'Thai Pad Thai', 1, '../../public/image/product/Thai Pad Thai1.jpg'),
 (4, 'Thai Pad Thai', 1, '../../public/image/product/Thai Pad Thai2.jpg'),
+(4, 'Thai Pad Thai', 1, '../../public/image/product/Thai Pad Thai3.jpg'),
 
 (5, 'Pizza Wrap Sandwiches', 0, '../../public/image/product/Pizza Wrap Sandwiches.jpg'),
 (5, 'Pizza Wrap Sandwiches', 1, '../../public/image/product/Pizza Wrap Sandwiches1.jpg'),
 (5, 'Pizza Wrap Sandwiches', 1, '../../public/image/product/Pizza Wrap Sandwiches2.jpg'),
+(5, 'Pizza Wrap Sandwiches', 1, '../../public/image/product/Pizza Wrap Sandwiches3.jpg'),
 
 (6, 'Fried Rice Recipe With Chinese Sausage', 0, '../../public/image/product/Fried Rice Recipe With Chinese Sausage.jpg'),
 (6, 'Fried Rice Recipe With Chinese Sausage', 1, '../../public/image/product/Fried Rice Recipe With Chinese Sausage1.jpg'),
 (6, 'Fried Rice Recipe With Chinese Sausage', 1, '../../public/image/product/Fried Rice Recipe With Chinese Sausage2.jpg'),
+(6, 'Fried Rice Recipe With Chinese Sausage', 1, '../../public/image/product/Fried Rice Recipe With Chinese Sausage3.jpg'),
 
 (7, 'Longan Fruit Juice', 0, '../../public/image/product/Longan Fruit Juice.jpg'),
 (7, 'Longan Fruit Juice', 1, '../../public/image/product/Longan Fruit Juice1.jpg'),
 (7, 'Longan Fruit Juice', 1, '../../public/image/product/Longan Fruit Juice2.jpg'),
+(7, 'Longan Fruit Juice', 1, '../../public/image/product/Longan Fruit Juice3.jpg'),
 
 (8, 'Bagel Bites', 0, '../../public/image/product/Bagel Bites.jpg'),
 (8, 'Bagel Bites', 1, '../../public/image/product/Bagel Bites1.jpg'),
 (8, 'Bagel Bites', 1, '../../public/image/product/Bagel Bites2.jpg'),
+(8, 'Bagel Bites', 1, '../../public/image/product/Bagel Bites3.jpg'),
 
-(9, 'High Protein Quinoa Energy Bars', 0, '../../public/image/product/Pizza Wrap Sandwiches.jpg'),
+(9, 'High Protein Quinoa Energy Bars', 0, '../../public/image/product/High Protein Quinoa Energy Bars.jpg'),
 (9, 'High Protein Quinoa Energy Bars', 1, '../../public/image/product/High Protein Quinoa Energy Bars1.jpg'),
 (9, 'High Protein Quinoa Energy Bars', 1, '../../public/image/product/High Protein Quinoa Energy Bars2.jpg'),
+(9, 'High Protein Quinoa Energy Bars', 1, '../../public/image/product/High Protein Quinoa Energy Bars3.jpg'),
 
-(10, 'High Protein Quinoa Energy Bars', 0, '../../public/image/product/Ham and Cheese Pinwheels.jpg'),
+(10, 'Ham and Cheese Pinwheels', 0, '../../public/image/product/Ham and Cheese Pinwheels.jpg'),
 (10, 'Ham and Cheese Pinwheels', 1, '../../public/image/product/Ham and Cheese Pinwheels1.jpg'),
 (10, 'Ham and Cheese Pinwheels', 1, '../../public/image/product/Ham and Cheese Pinwheels2.jpg'),
+(10, 'Ham and Cheese Pinwheels', 1, '../../public/image/product/Ham and Cheese Pinwheels3.jpg'),
 
 (11, 'Pizza Crostini Appetizer', 0, '../../public/image/product/Pizza Crostini Appetizer.jpg'),
 (11, 'Pizza Crostini Appetizer', 1, '../../public/image/product/Pizza Crostini Appetizer1.jpg'),
 (11, 'Pizza Crostini Appetizer', 1, '../../public/image/product/Pizza Crostini Appetizer2.jpg'),
+(11, 'Pizza Crostini Appetizer', 1, '../../public/image/product/Pizza Crostini Appetizer3.jpg'),
 
 (12, 'Gluten-Free Apple Oat Muffins', 0, '../../public/image/product/Gluten-Free Apple Oat Muffins.jpg'),
 (12, 'Gluten-Free Apple Oat Muffins', 1, '../../public/image/product/Gluten-Free Apple Oat Muffins1.jpg'),
-(12, 'Gluten-Free Apple Oat Muffins', 1, '../../public/image/product/Gluten-Free Apple Oat Muffins2.jpg');
+(12, 'Gluten-Free Apple Oat Muffins', 1, '../../public/image/product/Gluten-Free Apple Oat Muffins2.jpg'),
+(12, 'Gluten-Free Apple Oat Muffins', 1, '../../public/image/product/Gluten-Free Apple Oat Muffins3.jpg');
+
+
 	-- User catefory
 INSERT INTO user_category (user_category_name, user_id)
 VALUES 
