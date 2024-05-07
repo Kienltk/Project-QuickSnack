@@ -1,9 +1,9 @@
 <?php
 include("../../database/connect_database/index.php");
 
-function getRandomImage0Url($conn)
+function getRandomImageUrl($conn)
 {
-    $sql = "SELECT quick_snack_id, address_img FROM image_quick_snack WHERE kind = 0 ORDER BY RAND() LIMIT 1";
+    $sql = "SELECT quick_snack_id, address_img FROM image_quick_snack WHERE kind = 1 ORDER BY RAND() LIMIT 1";
     $result = mysqli_query($conn, $sql);
     if ($result) {
         $row = mysqli_fetch_assoc($result);
@@ -13,20 +13,24 @@ function getRandomImage0Url($conn)
     }
 }
 
-function getRandomImage1Url($conn)
+
+function displayCategories($conn)
 {
-    $sql = "SELECT quick_snack_id, address_img FROM image_quick_snack WHERE kind = 1 ORDER BY RAND() LIMIT 10";
-    $result = mysqli_query($conn, $sql);
-    if ($result) {
-        // Lấy ngẫu nhiên một hình ảnh từ kết quả trả về
-        $randomIndex = rand(0, mysqli_num_rows($result) - 1);
-        mysqli_data_seek($result, $randomIndex);
-        $row = mysqli_fetch_assoc($result);
-        return $row;
-    } else {
-        return null;
+    $sql = "SELECT * FROM category";
+    $stmt = $conn->prepare($sql);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $categories = [];
+    while ($row = $result->fetch_assoc()) {
+        $categories[] = $row;
     }
+    return $categories;
 }
+
+$categories = displayCategories($conn);
+$num_categories = count($categories);
+$categories_per_slide = 5;
+$num_slides = ceil($num_categories / $categories_per_slide);
 
 ?>
 <!DOCTYPE html>
@@ -40,6 +44,26 @@ function getRandomImage1Url($conn)
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel="stylesheet" href="../../public/css/home.css" />
+    <style>
+        .category-item.active {
+            background-color: rgba(255, 165, 0, 1);
+            color: #ffffff;
+        }
+
+        .btn-outline-primary {
+            background-color: rgba(255, 165, 0, 1);
+            border-color: rgba(255, 165, 0, 0.5);
+            color: #ffffff;
+            transition: transform 0.3s;
+        }
+
+        .btn-outline-primary:hover {
+            background-color: rgba(255, 165, 0, 1);
+            border-color: rgba(255, 165, 0, 1);
+            color: #ffffff;
+            transform: scale(1.1);
+        }
+    </style>
 </head>
 
 <body">
@@ -52,18 +76,18 @@ function getRandomImage1Url($conn)
     <section class="container my-5">
 
         <h1>
-            Welcome 
-            <?php 
-            $username = isset($_COOKIE["username"]) ? htmlspecialchars($_COOKIE["username"]) : ""; 
+            Welcome
+            <?php
+            $username = isset($_COOKIE["username"]) ? htmlspecialchars($_COOKIE["username"]) : "";
             echo $username;
             ?>
         </h1>
         <div>
             <?php
-            $randomImage0 = getRandomImage0Url($conn);
-            if ($randomImage0) {
-                echo '<a href="../products/product_detail.php?quick_snack_id=' . $randomImage0['quick_snack_id'] . '">';
-                echo '<img src="' . $randomImage0['address_img'] . '" class="img-fluid" alt="Random Image">';
+            $randomImage = getRandomImageUrl($conn);
+            if ($randomImage) {
+                echo '<a href="../products/product_detail.php?quick_snack_id=' . $randomImage['quick_snack_id'] . '">';
+                echo '<img src="' . $randomImage['address_img'] . '" class="img-fluid" alt="Random Image">';
                 echo '</a>';
             } else {
                 echo '<img src="" class="img-fluid" alt="Random Image">';
@@ -79,22 +103,45 @@ function getRandomImage1Url($conn)
 
         <div style="border-top: #F27900 solid 2px; border-bottom: #F27900 solid 2px;" class="my-5">
             <div class="row justify-content-center mx-2 mt-3 mb-5">
-                <span class="category-item badge fs-5 col-2 mb-2 me-1" style="opacity: 100%;">All</span>
+                <!-- <span class="category-item badge fs-5 col-2 mb-2 me-1" style="opacity: 100%;">All</span>
                 <span class="category-item badge fs-5 col-2 mb-2 me-1">Kids</span>
                 <span class="category-item badge fs-5 col-2 mb-2 me-1">Healthy</span>
                 <span class="category-item badge text-wrap fs-5 col-4 mb-2 me-1">Easy to Digest</span>
-                <span class="category-item badge fs-5 col-2 mb-2 me-1">Smoothies</span>
+                <span class="category-item badge fs-5 col-2 mb-2 me-1">Smoothies</span> -->
+                <div class="carousel slide" data-bs-ride="carousel" id="categoryCarousel">
+                    <div class="carousel-inner">
+                        <?php for ($i = 0; $i < $num_slides; $i++) : ?>
+                            <div class="carousel-item <?= $i == 0 ? 'active' : '' ?>">
+                                <div class="d-flex justify-content-center">
+                                    <?php for ($j = $i * $categories_per_slide; $j < min(($i + 1) * $categories_per_slide, $num_categories); $j++) : ?>
+                                        <button class="category-item btn_category mb-2 me-1 <?= isset($_GET['category']) && $_GET['category'] == $categories[$j]['category_id'] ? 'active' : '' ?>" data-category-id="<?= $categories[$j]['category_id'] ?>">
+                                            <?= $categories[$j]['category_name'] ?>
+                                        </button>
+                                    <?php endfor; ?>
+                                </div>
+                            </div>
+                        <?php endfor; ?>
+                    </div>
+                    <button class="carousel-control-prev" type="button" data-bs-target="#categoryCarousel" data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true" style="background-color: #E37E21;"></span>
+                        <span class="visually-hidden">Previous</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#categoryCarousel" data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true" style="background-color: #E37E21;"></span>
+                        <span class="visually-hidden">Next</span>
+                    </button>
+                </div>
             </div>
 
             <div class="image-slider">
                 <?php
-                $sql = "SELECT * FROM image_quick_snack WHERE kind = 1";
+                $sql = "SELECT * FROM image_quick_snack WHERE kind = 0";
                 $result = mysqli_query($conn, $sql);
                 if ($result->num_rows > 0) {
                     while ($row = $result->fetch_assoc()) {
                         echo '<div class="image">';
                         echo '<a href="../products/product_detail.php?quick_snack_id=' . $row['quick_snack_id'] . '">';
-                        echo '<img src="' . $row['address_img'] . '" class="img-fluid" alt="Random Image">';
+                        echo '<img src="' . $row['address_img'] . '" class="img-fluid" alt="Random Image"  style = "border: 2px solid #f57c0c;">';
                         echo '</a>';
                         echo '</div>';
                     }
@@ -110,7 +157,6 @@ function getRandomImage1Url($conn)
             <div class="row my-3">
                 <div class="col-12 col-md-6 mb-3">
                     <img src="../../public/image/big-hamburger-with-double-beef-french-fries_252907-8 1.png" alt="" class="rounded img-fluid text-center" />
-
                 </div>
                 <div class="col-12 col-md-6">
                     <div class="row row-cols-1 row-cols-md-2 g-4">
@@ -236,6 +282,37 @@ function getRandomImage1Url($conn)
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 
     <script src="../../public/js/home.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            $('.category-item').on('click', '.category-item', function() {
+                var categoryId = $(this).data('category-id');
+                $.ajax({
+                    type: 'GET',
+                    url: 'get_images_by_category.php',
+                    data: {
+                        category_id: categoryId
+                    },
+                    success: function(data) {
+                        $('.image-slider').html('');
+                        $.each(data, function(index, image) {
+                            $('.image-slider').append('<div class="image"><a href="product-detail.php?quick_snack_id=' + image.quick_snack_id + '"><img src="' + image.address_img + '" class="img-fluid"></a></div>');
+                        });
+
+                        // Remove active class from all category items
+                        $('.category-item').removeClass('active');
+                        // Add active class to the clicked category item
+                        $(this).addClass('active');
+
+                        // Scroll to the beginning of the image slider
+                        $('.image-slider').animate({
+                            scrollLeft: 0
+                        }, 'fast');
+                    }
+                });
+            });
+        });
+    </script>
     </body>
 
 </html>
