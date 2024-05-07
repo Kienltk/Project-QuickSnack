@@ -50,6 +50,14 @@ function getRandomImage1Url($conn)
     </header>
 
     <section class="container my-5">
+
+        <h1>
+            Welcome 
+            <?php 
+            $username = isset($_COOKIE["username"]) ? htmlspecialchars($_COOKIE["username"]) : ""; 
+            echo $username;
+            ?>
+        </h1>
         <div>
             <?php
             $randomImage0 = getRandomImage0Url($conn);
