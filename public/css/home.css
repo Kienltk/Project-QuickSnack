@@ -1,10 +1,22 @@
-.category-item {
-  background-color: #f57c0c;
-  opacity: 65%;
-  color: white;
-  width: max-content;
+
+.category-item.active {
+  background-color: rgba(255, 165, 0, 1)!important; 
+  color: #ffffff !important;
 }
 
+.btn-outline-primary {
+  background-color: rgba(255, 165, 0, 1) !important; 
+  border-color: rgba(255, 165, 0, 0.5) !important; 
+  color: #ffffff !important;
+  transition: transform 0.3s !important; 
+}
+
+.btn-outline-primary:hover {
+  background-color: rgb(255, 97, 5) !important; 
+  border-color: rgba(255, 165, 0, 1) !important; 
+  color: #ffffff !important; 
+  transform: scale(1.1) !important; 
+}
 .image-slider {
   padding-bottom: 50px;
 }

@@ -9,7 +9,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $user_id = $_POST['user_id'];
 
     // Chuẩn bị câu lệnh SQL sử dụng prepared statement
-    $query = "INSERT INTO review (quick_snack_id,user_id, comment, rating) VALUES (?,?,?, ?)";
+    $query = "INSERT INTO review (quick_snack_id,user_id, comment, rating) VALUES (?,?,?,?)";
     $stmt = $conn->prepare($query);
     $stmt->bind_param("iisi", $quick_snack_id, $user_id, $comment, $rating);
 

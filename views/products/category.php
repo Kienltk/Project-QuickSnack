@@ -9,19 +9,21 @@
     <!-- Custom CSS -->
     <style>
         .card {
-            border: none; /* Loại bỏ viền */
+            box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px !important; 
+            margin: 15px !important;
             
         }
         .card-img-top {
-            border-radius: 50%;
-            width: 150px; /* Điều chỉnh kích thước ảnh nếu cần */
-            height: 150px; /* Điều chỉnh kích thước ảnh nếu cần */
-            object-fit: cover; /* Đảm bảo ảnh vừa với khu vực giới hạn */
-            align-self: center; 
+            border-radius: 50%  !important;
+            width: 150px    !important; 
+            height: 150px   !important; 
+            object-fit: cover   !important; 
+            align-self: center  !important; 
         }
         .card-title {
-            text-align: center; /* Căn giữa chữ */
-            margin-top: 10px; /* Khoảng cách từ ảnh đến tiêu đề */
+            text-align: center  !important;
+            height: 50px !important;
+            margin-top: 10px    !important; 
         }
     </style>
 </head>
@@ -29,7 +31,6 @@
 <?php 
 include '../../views/includes/header.php';
 ?>
-<a href=""></a>
 <div class="container">
     <div class="row">
         <?php
@@ -45,7 +46,7 @@ include '../../views/includes/header.php';
             while($row = $result->fetch_assoc()) {
                 echo '<div class="col-md-3 mb-3">';
                 echo '<div class="card">';
-                echo '<a href="#"><img src="' . $row["address_img_category"] . '" class="card-img-top" alt="Category Image"></a>';
+                echo '<img src="' . $row["address_img_category"] . '" class="card-img-top" alt="Category Image">';
                 echo '<div class="card-body">';
                 echo '<h5 class="card-title">' . $row["name"] . '</h5>';
                 echo '</div>';

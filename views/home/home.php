@@ -72,18 +72,29 @@ $num_slides = ceil($num_categories / $categories_per_slide);
             <hr style="color: #E37E21; width: 30%; height: 5px; background-color: #E37E21; border-radius: 5px; opacity: 1;" class="position-absolute top-0 start-50 translate-middle-x">
         </div>
 
-        <div style="border-top: #F27900 solid 2px; border-bottom: #F27900 solid 2px;" class="my-5 position-relative">
-                <div class="category_list mt-3 mx-auto text-center" style = "width: 50%">
-                    <?php
-                    $sql = "SELECT * FROM category";
-                    $result = mysqli_query($conn, $sql);
-                    if ($result->num_rows > 0) {
-                        while ($row = $result->fetch_assoc()) {
-                            echo '<a href="#" class = "btn btn_category text-wrap">' .$row['category_name']. '</a>';
-                        }
-                    }
-                    ?>
+        <div class="carousel slide" data-bs-ride="carousel" id="categoryCarousel">
+        <div class="carousel-inner">
+            <?php for ($i = 0; $i < $num_slides; $i++) :?>
+                <div class="carousel-item <?= $i == 0 ? 'active' : ''?>">
+                    <div class="d-flex justify-content-center">
+                        <?php for ($j = $i * $categories_per_slide; $j < min(($i + 1) * $categories_per_slide, $num_categories); $j++) :?>
+                            <button class="category-item btn btn-outline-primary btn-sm mb-2 me-1 <?= isset($_GET['category']) && $_GET['category'] == $categories[$j]['category_id'] ? 'active' : ''?>" data-category-id="<?= $categories[$j]['category_id']?>">
+                                <?= $categories[$j]['category_name']?>
+                            </button>
+                        <?php endfor;?>
+                    </div>
                 </div>
+            <?php endfor;?>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#categoryCarousel" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true" style="background-color: #E37E21;"></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#categoryCarousel" data-bs-slide="next" >
+            <span class="carousel-control-next-icon" aria-hidden="true" style="background-color: #E37E21;"></span>
+            <span class="visually-hidden">Next</span>
+        </button>
+    </div>
 
             <div class="image-slider my-5">
                 <?php
@@ -147,6 +158,33 @@ $num_slides = ceil($num_categories / $categories_per_slide);
             });
         });
     </script> -->
+    <script>
+    $(document).ready(function() {
+    $('.category-item').on('click', '.category-item', function() {
+        var categoryId = $(this).data('category-id');
+        $.ajax({
+            type: 'GET',
+            url: 'get_images_by_category.php',
+            data: {category_id: categoryId},
+            success: function(data) {
+                $('.image-slider').html('');
+                $.each(data, function(index, image) {
+                    $('.image-slider').append('<div class="image"><a href="product-detail.php?quick_snack_id=' + image.quick_snack_id + '"><img src="' + image.address_img + '" class="img-fluid"></a></div>');
+                });
+
+                // Remove active class from all category items
+                $('.category-item').removeClass('active');
+                // Add active class to the clicked category item
+                $(this).addClass('active');
+
+                // Scroll to the beginning of the image slider
+                $('.image-slider').animate({ scrollLeft: 0 }, 'fast');
+            }
+        });
+    });
+});
+</script>
+    
     </body>
 
 </html>
