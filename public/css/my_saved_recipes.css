@@ -7,6 +7,10 @@
     color: black;
 }
 
+.product_image {
+    width: 250px;
+    height: 250px;
+}
 .product_name {
     font-weight: bold;
 }

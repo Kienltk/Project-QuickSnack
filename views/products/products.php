@@ -3,7 +3,8 @@
 include("../../database/query_database/products.php");
 $category = getCategory();
 $ingredient = getIngredient();
-$product = getProduct();
+$product_bottom = getProductBottomTable();
+$product_right = getProductRightTable();
 $i = 0;
 ?>
 
@@ -26,13 +27,12 @@ $i = 0;
     <?php
     include("../includes/header.php");
     ?>
-    this is test version
     <main>
         
         <div class="container">
             <h2 class="my-5 ">
-                The result for
-                <span class="search_result">"russian salad"</span> <!-- Search result -->
+                <!-- The result for
+                <span class="search_result">"russian salad"</span> Search result -->
             </h2>
         </div>
         <div class="container">
@@ -70,29 +70,6 @@ $i = 0;
                                         <td>
                                             <input type="checkbox" name="search" value="<?php echo $row["category_id"]; ?>">
                                             <?php echo $row["category_name"]; ?>
-                                        </td>
-                                <?php
-                                    }
-                                }
-                                ?>
-                            <tr class="border_top">
-                                <th>
-                                    Ingredient
-                                </th>
-                            <tr>
-                                <?php
-                                if ($ingredient->num_rows > 0) {
-                                    $i = 0;
-                                    while ($row = $ingredient->fetch_assoc()) {
-                                        $i++;
-                                        if ($i > 3) {
-                                            $i = 1;
-                                            echo "</tr><tr>";
-                                        }
-                                ?>
-                                        <td>
-                                            <input type="checkbox" name="search" value="<?php echo $row["ingredient_id"]; ?>">
-                                            <?php echo $row["ingredient_name"]; ?>
                                         </td>
                                 <?php
                                     }
@@ -147,136 +124,33 @@ $i = 0;
                     </form>
                 </div>
                 <!--Right table-->
-                <div class="col-lg-2">
-                    <div class="container mb-4 product_tab">
-                        <img src="../../public/image/rounded.png" alt="" class="product_image pt-3 pt-3"><br>
-                        <span class="product_category">Dairy Free</span>
-                        <h5 class="product_name mt-1 mb-0">Russian Salad</h5>
+                <?php
+                if ($product_right->num_rows > 0) {
+                    $i = 3;
+                    while ($row = $product_right->fetch_assoc()) {
+                        $i++;
+                        if ($i > 3) {
+                            $i = 1;
+                            echo "<div class=\"col-lg-2\">";
+                        }
+                ?>
+                        <div class="container mb-4 product_tab">
+                        <img src="<?php echo getImage($row["quick_snack_id"])["address_img"]?>" alt="" class="product_image pt-3"><br>
+                        <span class="product_category"><?php echo $row["category_name"] ?></span>
+                        <h5 class="product_name mt-1 mb-0"><?php echo $row["name"] ?></h5>
                         <div style="text-align: left;">
-                            <span class="product_time">40 Min</span>
-                            <span class="product_rating">4.5</span>
+                            <span class="product_time"><?php echo $row["time"]; ?></span>
+                            <span class="product_rating"><?php echo $row["avg_rating"]; ?></span>
                         </div>
-                        <span class="product_icon">Icon</span> <br>
+                        <span class="product_icon mb-3">Icon</span>
                     </div>
-                    <?php
-                    if ($ingredient->num_rows > 0) {
-                        $i = 0;
-                        while ($row = $ingredient->fetch_assoc()) {
-                            $i++;
-                            if ($i > 3) {
-                                $i = 1;
-                                echo "</tr><tr>";
-                            }
-                    ?>
-                            <td>
-                                <input type="checkbox" name="search" value="<?php echo $row["ingredient_id"]; ?>">
-                                <?php echo $row["ingredient_name"]; ?>
-                            </td>
-                    <?php
+                <?php
+                        if ($i == 3) {
+                            echo "</div>";
                         }
                     }
-                    ?>
-                </div>
-                <!--Row loop start here-->
-                <div class="col-lg-2">
-                    <div class="container mb-4 product_tab">
-                        <img src="../../public/image/rounded.png" alt="" class="product_image pt-3"><br>
-                        <span class="product_category">Dairy Free</span>
-                        <h5 class="product_name mt-1 mb-0">Russian Salad</h5>
-                        <div style="text-align: left;">
-                            <span class="product_time">40 Min</span>
-                            <span class="product_rating">4.5</span>
-                        </div>
-                        <span class="product_icon mb-3">Icon</span>
-                    </div>
-                    <!--Column loop start here-->
-                    <div class="container my-4 product_tab">
-                        <img src="../../public/image/rounded.png" alt="" class="product_image pt-3"><br>
-                        <span class="product_category">Dairy Free</span>
-                        <h5 class="product_name mt-1 mb-0">Russian Salad</h5>
-                        <div style="text-align: left;">
-                            <span class="product_time">40 Min</span>
-                            <span class="product_rating">4.5</span>
-                        </div>
-                        <span class="product_icon">Icon</span> <br>
-                    </div>
-                    <div class="container my-4 product_tab">
-                        <img src="../../public/image/rounded.png" alt="" class="product_image pt-3"><br>
-                        <span class="product_category">Dairy Free</span>
-                        <h5 class="product_name mt-1 mb-0">Russian Salad</h5>
-                        <div style="text-align: left;">
-                            <span class="product_time">40 Min</span>
-                            <span class="product_rating">4.5</span>
-                        </div>
-                        <span class="product_icon">Icon</span> <br>
-                    </div>
-                </div>
-                <div class="col-lg-2">
-                    <div class="container mb-4 product_tab">
-                        <img src="../../public/image/rounded.png" alt="" class="product_image pt-3"><br>
-                        <span class="product_category">Dairy Free</span>
-                        <h5 class="product_name mt-1 mb-0">Russian Salad</h5>
-                        <div style="text-align: left;">
-                            <span class="product_time">40 Min</span>
-                            <span class="product_rating">4.5</span>
-                        </div>
-                        <span class="product_icon mb-3">Icon</span>
-                    </div>
-                    <!--Column loop start here-->
-                    <div class="container my-4 product_tab">
-                        <img src="../../public/image/rounded.png" alt="" class="product_image pt-3"><br>
-                        <span class="product_category">Dairy Free</span>
-                        <h5 class="product_name mt-1 mb-0">Russian Salad</h5>
-                        <div style="text-align: left;">
-                            <span class="product_time">40 Min</span>
-                            <span class="product_rating">4.5</span>
-                        </div>
-                        <span class="product_icon">Icon</span> <br>
-                    </div>
-                    <div class="container my-4 product_tab">
-                        <img src="../../public/image/rounded.png" alt="" class="product_image pt-3"><br>
-                        <span class="product_category">Dairy Free</span>
-                        <h5 class="product_name mt-1 mb-0">Russian Salad</h5>
-                        <div style="text-align: left;">
-                            <span class="product_time">40 Min</span>
-                            <span class="product_rating">4.5</span>
-                        </div>
-                        <span class="product_icon">Icon</span> <br>
-                    </div>
-                </div>
-                <div class="col-lg-2">
-                    <div class="container mb-4 product_tab">
-                        <img src="../../public/image/rounded.png" alt="" class="product_image pt-3"><br>
-                        <span class="product_category">Dairy Free</span>
-                        <h5 class="product_name mt-1 mb-0">Russian Salad</h5>
-                        <div style="text-align: left;">
-                            <span class="product_time">40 Min</span>
-                            <span class="product_rating">4.5</span>
-                        </div>
-                        <span class="product_icon mb-3">Icon</span>
-                    </div>
-                    <!--Column loop start here-->
-                    <div class="container my-4 product_tab">
-                        <img src="../../public/image/rounded.png" alt="" class="product_image pt-3"><br>
-                        <span class="product_category">Dairy Free</span>
-                        <h5 class="product_name mt-1 mb-0">Russian Salad</h5>
-                        <div style="text-align: left;">
-                            <span class="product_time">40 Min</span>
-                            <span class="product_rating">4.5</span>
-                        </div>
-                        <span class="product_icon">Icon</span> <br>
-                    </div>
-                    <div class="container my-4 product_tab">
-                        <img src="../../public/image/rounded.png" alt="" class="product_image pt-3"><br>
-                        <span class="product_category">Dairy Free</span>
-                        <h5 class="product_name mt-1 mb-0">Russian Salad</h5>
-                        <div style="text-align: left;">
-                            <span class="product_time">40 Min</span>
-                            <span class="product_rating">4.5</span>
-                        </div>
-                        <span class="product_icon">Icon</span> <br>
-                    </div>
-                </div>
+                }
+                ?>
             </div>
         </div>
         </div>
@@ -288,17 +162,17 @@ $i = 0;
             </h3>
             <div class="row">
                 <?php
-                if ($product->num_rows > 0) {
-                    $i;
-                    while ($row = $product->fetch_assoc()) {
+                if ($product_bottom->num_rows > 0) {
+                    $i = 0;
+                    while ($row = $product_bottom->fetch_assoc()) {
                         $i++;
                         if ($i > 4) {
                             break;
                         }
                 ?>
                         <div class="col-xxl-3">
-                            <div class="container product_tab">
-                                <img src="../../public/image/rectangle.png" alt="" class="product_image pt-3"><br>
+                            <div class="container product_tab bottom_table_tab">
+                                <img src="<?php echo getImage($row["quick_snack_id"])["address_img"] ?>" alt="" class="product_image pt-3"><br>
                                 <span class="product_category"><?php echo $row["category_name"] ?></span>
                                 <h5 class="product_name mt-1 mb-0"><?php echo $row["name"] ?></h5>
                                 <div style="text-align: left;">

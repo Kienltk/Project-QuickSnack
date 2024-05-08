@@ -65,6 +65,10 @@ th {
     margin-top: 20px;
 }
 
+.bottom_table_tab {
+    height: 530px;
+}
+
 #load_more {
     width: 300px;
     background-color: #E37E21;
