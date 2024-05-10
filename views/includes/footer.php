@@ -13,11 +13,7 @@
     <div class="footer">
         <div class="row footer_row" style="padding-left: 50px;">
             <div class="col footer_col">
-<<<<<<< Updated upstream
-                <img src="../../public/image/Untitled-1 1.png" class="logo">
-=======
                 <img src="../../public/image/logo.png" class="logo">
->>>>>>> Stashed changes
                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Commodo libero viverra dapibus odio sit
                     malesuada in quis.
                     Arcu tristique elementum viverra integer id.</p>

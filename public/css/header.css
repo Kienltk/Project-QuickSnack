@@ -6,13 +6,8 @@
   background-color: #ffffff;
   padding-top: 10px;
   padding-bottom: 10px;
-<<<<<<< Updated upstream
-  padding-left: 20px;
-  padding-right: 20px;
-=======
   padding-left: 30px;
   padding-right: 30px;
->>>>>>> Stashed changes
 }
 
 .navbar_text {
@@ -35,12 +30,8 @@
 }
 
 #search_bar {
-<<<<<<< Updated upstream
-  height: 30px;
-=======
   width: 25% !important;
   height: 35px;
->>>>>>> Stashed changes
   border-top-left-radius: 15px;
   border-bottom-left-radius: 15px;
   padding: 5px 15px;
@@ -60,12 +51,8 @@
   border-top-right-radius: 15px;
   border-bottom-right-radius: 15px;
   transition: all 0.3s ease;
-<<<<<<< Updated upstream
-  height: 30px;
-=======
   height: 35px;
   margin-right: 20px;
->>>>>>> Stashed changes
 }
 
 /* Khi di chuột vào biểu tượng tìm kiếm */
@@ -79,15 +66,12 @@
   font-family: "Commissioner";
   font-size: 120% !important;
   color: #000;
-<<<<<<< Updated upstream
-=======
   transition: transform 0.3s;
 }
 
 .navbar_text:hover {
   color: #ffa500 !important;
   transform: scale(1.1);
->>>>>>> Stashed changes
 }
 
 .navbar .nav-item .dropdown-menu {
@@ -118,33 +102,17 @@
 /* Màu chữ "Sign in" khi hover */
 .btn-outline-success {
   color: #ffa500;
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-  border-color: #ffa500;
-=======
-  border: 2px solid #ffa500;
->>>>>>> Stashed changes
-=======
-  border: 2px solid #ffa500;
->>>>>>> Stashed changes
-  margin-right: 20px;
-=======
   border-color: #ffa500;
   border: 2px solid #ffa500;
   margin-right: 20px;
   border-radius: 15px;
->>>>>>> Stashed changes
 }
 
 /* Khi di chuột vào nút "Sign in" */
 .btn-outline-success:hover {
   background-color: #ffa500;
   color: #fff;
-<<<<<<< Updated upstream
-=======
   border: 2px solid #ff8800 !important;
->>>>>>> Stashed changes
 }
 
 /* Fixed navbar on scroll */
@@ -156,23 +124,21 @@ nav.fixed-top {
   z-index: 1000;
 }
 
-<<<<<<< Updated upstream
-=======
 .active {
   color: #ffa500 !important;
   font-weight: bolder;
 }
 
->>>>>>> Stashed changes
 body {
   padding-top: 0;
 }
+.form-control:focus {
+  border-color: initial;
+  /* hoặc bạn có thể đặt border-color: transparent; */
+  box-shadow: none;
+}
 
-<<<<<<< Updated upstream
-.navbar-nav {
-=======
 /* .navbar-nav {
->>>>>>> Stashed changes
   flex-direction: row;
 }
 
@@ -186,8 +152,4 @@ body {
 
 .navbar-nav .nav-item:nth-last-child(2) {
   margin-right: auto;
-<<<<<<< Updated upstream
-}
-=======
 } */
->>>>>>> Stashed changes

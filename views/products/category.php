@@ -14,6 +14,7 @@
             
         }
         .card-img-top {
+            margin-top: 15px !important;
             border-radius: 50%  !important;
             width: 150px    !important; 
             height: 150px   !important; 
