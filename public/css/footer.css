@@ -1,0 +1,15 @@
+.directory, 
+.copyright {
+  color: #000;
+  font-weight: 500;
+  transition: color 0.3s;
+}
+
+.directory:hover {
+  color: #e37e21;
+}
+
+.title-directory,
+.social-icon {
+  color: #e37e21;
+}

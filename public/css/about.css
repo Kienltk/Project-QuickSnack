@@ -1,0 +1,113 @@
+/* 
+
+.background {
+    background-color: #FFFFFF; 
+    border: 2px solid #FFA500; 
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); 
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out; 
+}
+
+.background:hover {
+    transform: translateY(-5px); 
+}
+
+.col-lg-2:hover {
+    box-shadow: 0 0 10px rgba(255, 165, 0, 0.5); 
+}
+.background img {
+    transition: transform 0.3s ease-in-out;
+}
+
+.background:hover img {
+    transform: scale(1.1);
+}
+
+
+h2{
+    font-weight: bold;
+    color: #FFA500; 
+}
+h3 {
+    font-weight: bold;
+    color: #333; 
+}
+
+h2 {
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+h3 {
+    font-size: 18px;
+    margin-bottom: 15px;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 40px auto;
+    padding: 20px;
+}
+
+.container-xxl {
+    max-width: 1400px;
+    margin: 40px auto;
+    padding: 20px;
+}
+
+
+.row {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.col-lg-2 {
+    flex: 0 0 20%;
+    max-width: 20%;
+    margin: 10px;
+}
+
+.col-lg-2:hover {
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); 
+}
+
+
+header {
+    background-color: #FFFFFF; 
+    padding: 20px;
+    text-align: center;
+}
+
+header h2 {
+    font-size: 36px;
+    margin-bottom: 10px;
+}
+#our_story,#our_mission,#our_content,#our_goals {
+    color: #FFA500; 
+} */
+
+/* Điều chỉnh kích thước cột và bố trí cho thiết bị có độ phân giải thấp hơn */
+@media (max-width: 1000px) {
+    .col-lg-2 {
+        flex-basis: 50%; 
+        max-width: 50%;
+    }
+
+    .row {
+        flex-wrap: wrap;
+    }
+
+    .col-lg-2:nth-child(odd) {
+        margin-right: 0; 
+    }
+}
+
+
+@media (max-width: 576px) {
+    .background img {
+        height: 80px;
+        width: auto; 
+    }
+}
