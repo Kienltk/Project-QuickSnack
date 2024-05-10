@@ -15,7 +15,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     // Thực thi câu lệnh SQL
     if ($stmt->execute()) {
-        header("Location: ../../views/products/product_detail.php?id=$quick_snack_id");
+        header("Location: ../../views/products/product_detail.php?quick_snack_id=$quick_snack_id");
         exit; // Dừng kịch bản sau khi chuyển hướng
     } else {
         echo "Error: " . $stmt->error;

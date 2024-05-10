@@ -1,3 +1,41 @@
+<?php
+// Include database connection file
+include ("../../database/connect_database/index.php");
+
+// Set pagination variables
+$limit = 20; // Number of records per page
+$page = isset($_GET['page']) ? $_GET['page'] : 1;
+$start = ($page - 1) * $limit;
+
+// Fetch records from database
+$sql = "SELECT name_image, address_img FROM image_quick_snack LIMIT $limit OFFSET $start";
+$result = $conn->query($sql);
+
+// Check if records exist
+if ($result->num_rows > 0) {
+    $images = array();
+    while ($row = $result->fetch_assoc()) {
+        $images[] = array(
+            'name' => $row["name_image"],
+            'address' => $row["address_img"]
+        );
+    }
+} else {
+    $images = array();
+}
+
+// Close database connection
+
+
+// Calculate total pages
+$sql = "SELECT COUNT(*) FROM image_quick_snack";
+$result = $conn->query($sql);
+$row = $result->fetch_row();
+$total_records = $row[0];
+$total_pages = ceil($total_records / $limit);
+$conn->close();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -5,6 +43,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gallery</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="../../public/css/style.css">
+    <link rel="stylesheet" href="../../public/css/header.css">
+    <link rel="stylesheet" href="../../public/css/footer.css">
     <style>
         .title {
             display: flex;
@@ -12,10 +56,7 @@
             align-items: center;
             flex-direction: column;
             font-family: sans-serif;
-        }
-
-        h1 {
-            color: coral;
+            color: #E37E21;
         }
 
         .grid-container {
@@ -32,9 +73,10 @@
             width: 100%;
             border: solid 2px black;
             padding: 5px;
-            box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.5);
+            box-shadow: 5px 5px 5px rgba(0, 0,
+                    0, 0.5);
             border-radius: 5px;
-            transition: all .25s ease-in-out;
+            transition: all.25s ease-in-out;
         }
 
         .grid-container div:hover img {
@@ -43,60 +85,80 @@
 
         .grid-container div:hover {
             border-color: coral;
+            transform: scale(1.1);
         }
 
-        .grid-container div img {
+        .grid-container img {
             width: 100%;
-            filter: grayscale(100%);
+            /* filter: grayscale(1); */
             border-radius: 5px;
-            transition: all .25s ease-in-out;
         }
 
-        .grid-container div p {
-            margin: 5px 0;
-            padding: 0;
+        .grid-container p {
+            font-family: sans-serif;
+            color: #333;
+            margin-top: 10px;
             text-align: center;
-            font-style: italic;
+        }
+
+        .pagination {
+            display: flex;
+
+
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .pagination a {
+            margin: 0 5px;
+            padding: 5px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            text-decoration: none;
+            color: #333;
+        }
+
+        .pagination a:hover {
+            background-color: #f2f2f2;
+        }
+
+        .pagination .active {
+            background-color: #E37E21;
+            color: #fff;
         }
     </style>
 </head>
 
 <body>
 
-    <?php
-    include '../../views/includes/header.php';
-    ?>
+    <?php include '../../views/includes/header.php'; ?>
 
-    <div class="title"><h1>Gallery</h1></div>
-
-    <div class="grid-container">
-        <?php
-        include("../../database/connect_database/index.php");
-        $sql = "SELECT name_image, address_img FROM image_quick_snack";
-        $result = $conn->query($sql);
-
-
-        if ($result->num_rows > 0) {
-            while ($row = $result->fetch_assoc()) {
-                echo "<div>";
-                echo "<img class='grid-item' src='" . $row["address_img"] . "' alt=''>";
-                echo "<p>" . $row["name_image"] . "</p>";
-                echo "</div>";
-            }
-        } else {
-            echo "Không có dữ liệu";
-        }
-
-        $conn->close();
-        ?>
-
+    <div class="title">
+        <h1>Gallery</h1>
     </div>
 
-    <?php
-    include '../../views/includes/footer.php';
-    ?>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-    
+    <div class="grid-container">
+        <?php foreach ($images as $image) { ?>
+            <div>
+                <img src="<?php echo $image['address']; ?>" alt="">
+                <p><?php echo $image['name']; ?></p>
+            </div>
+        <?php } ?>
+    </div>
+
+    <!-- Pagination -->
+    <div class="pagination">
+        <?php for ($i = 1; $i <= $total_pages; $i++) { ?>
+            <a href="?page=<?php echo $i; ?>"><?php echo $i; ?></a>
+        <?php } ?>
+    </div>
+
+    <?php include '../../views/includes/footer.php'; ?>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossorigin="anonymous"></script>
+    <script src="https://kit.fontawesome.com/54dbfefd83.js" crossorigin="anonymous"></script>
 
 </body>
 

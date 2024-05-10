@@ -71,6 +71,28 @@ function getComment()
     $result = $conn->query($query);
     return $result;
 }
+function countComments($conn, $quick_snack_id)
+{
+    $query = "SELECT COUNT(*) AS total_comments FROM review WHERE quick_snack_id = ?";
+    $stmt = $conn->prepare($query);
+    $stmt->bind_param("i", $quick_snack_id);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $row = $result->fetch_assoc();
+    return $row['total_comments'];
+}
+function averageRating($conn, $quick_snack_id)
+{
+    $query = "SELECT AVG(rating) AS avg_rating FROM review WHERE quick_snack_id = ?";
+    $stmt = $conn->prepare($query);
+    $stmt->bind_param("i", $quick_snack_id);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $row = $result->fetch_assoc();
+    // Làm tròn số lượng rating trung bình
+    $avg_rating = ($row['avg_rating']);
+    return $avg_rating;
+}
 
 $id = $_GET['quick_snack_id'];
 $query = 'SELECT * FROM image_quick_snack WHERE quick_snack_id= ' . $id . ' AND kind = 1 LIMIT 1';
@@ -83,8 +105,7 @@ $result = $conn->query($query);
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Russian Salad</title>
-    <!--PHP Product Name-->
+    <title><?php echo $detailRow['name']; ?></title> <!--PHP Product Name-->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
@@ -92,8 +113,6 @@ $result = $conn->query($query);
     <link rel="stylesheet" href="https://unpkg.com/ionicons@5.1.2/dist/ionicons.min.css" />
     <link rel="stylesheet" href="../../public/css/product-detail.css" />
     <link rel="stylesheet" href="../../public/css/header.css">
-    <link rel="stylesheet" href="../../public/css/footer.css">
-    <link rel="stylesheet" href="../../public/css/style.css">
     <style>
         .wishlist-link {
             color: #ff9a62;
@@ -102,6 +121,10 @@ $result = $conn->query($query);
         .wishlist-link.wished {
             color: #ff9a62;
             background-color: #ff9a62;
+        }
+
+        .comment-count {
+            cursor: pointer;
         }
     </style>
 </head>
@@ -112,23 +135,19 @@ $result = $conn->query($query);
         include '..\includes\header.php';
         ?>
     </header>
-
     <div class="container">
         <div class="head">
             <p class="product-detail pt-5">
-                Home > Product > <span class="fw-bold">
-                    <?php echo $detailRow['name']; ?>
-                </span>
+                Home > Product > <span class="fw-bold"><?php echo $detailRow['name']; ?></span>
                 <?php
                 if (isset($_COOKIE['userID'])) {
                     $user_id = $_COOKIE['userID'];
                     $isInWishlist = isInWishlist($detailRow['quick_snack_id'], $conn, $user_id);
 
                     ?>
-                    <a
-                        href="../../models/products/products_detail.php?product_id=<?php echo $detailRow['quick_snack_id'] ?>">
-                        <?php ($isInWishlist ? '<i class="fa-solid fa-bookmark wishlist-link.wished" id="favoriteIcon"></i>' : '<i class="far fa-bookmark wishlist-link" id="favoriteIcon"></i>') ?>"
-                    </a>
+                    <a href="../../models/products/products_detail.php?product_id=<?php echo $detailRow['quick_snack_id'] ?>"
+                        class=" wishlist-link <?php ($isInWishlist ? '.wished' : '') ?>"><i class="far fa-bookmark"
+                            id="favoriteIcon"></i></a>
                     <?php
                 } else {
                     ?>
@@ -136,19 +155,20 @@ $result = $conn->query($query);
                     <?php
                 }
                 ?>
-
+                <!-- <a href="" id="favoriteButton">
+                    <i class="far fa-bookmark" id="favoriteIcon" style='color:#ff9a62'></i>
+                </a> -->
             </p>
-            <h3>
-                <?php echo $detailRow['name']; ?>
-            </h3>
+            <h3><?php echo $detailRow['name']; ?></h3>
         </div>
         <div class="icon align-items-center">
             <div class="d-flex d-sm-inline">
                 <span class="pt-1 fw-bold">
                     <i class="fas fa-user" style="color: #ff9a62"></i> Author
                 </span>
-                <span class="pt-1 fw-bold">
-                    <i class="fas fa-comment" style="color: #ff9a62"></i> Comment
+                <span class="pt-1 fw-bold comment-count">
+                    <i class="fas fa-comment " style="color: #ff9a62"></i>
+                    <?php echo countComments($conn, $id); ?> Comment
                 </span>
                 <span class="pt-1 fw-bold">
                     <i class="fas fa-heart" style="color: #ff9a62"></i> Like
@@ -163,7 +183,9 @@ $result = $conn->query($query);
                 <i class="fas fa-star star-icon" style="color: #ff9a62"></i>
                 <i class="fas fa-star star-icon" style="color: #ff9a62"></i>
                 <i class="fas fa-star-half-alt star-icon" style="color: #ff9a62"></i>
-                <span style="color: #8c8c8c;font-size: small;"> 4.5/5 Review </span>
+                <span style="color: #8c8c8c;font-size: small;">
+                    <?php echo averageRating($conn, $id); ?>/5 Review
+                </span>
             </span>
         </div>
 
@@ -203,51 +225,35 @@ $result = $conn->query($query);
                         <tbody>
                             <tr>
                                 <th scope="row">Calories</th>
-                                <td>
-                                    <?php echo $data['calories']; ?>
-                                </td>
+                                <td><?php echo $data['calories']; ?></td>
                             </tr>
                             <tr>
                                 <th scope="row">Carbs</th>
-                                <td>
-                                    <?php echo $data['carbs']; ?>
-                                </td>
+                                <td><?php echo $data['carbs']; ?></td>
                             </tr>
                             <tr>
                                 <th scope="row">Fat</th>
-                                <td>
-                                    <?php echo $data['fat']; ?>
-                                </td>
+                                <td><?php echo $data['fat']; ?></td>
                             </tr>
                             <tr>
                                 <th scope="row">Protein</th>
-                                <td>
-                                    <?php echo $data['protein']; ?>
-                                </td>
+                                <td><?php echo $data['protein']; ?></td>
                             </tr>
                             <tr>
                                 <th scope="row">Fiber</th>
-                                <td>
-                                    <?php echo $data['fiber']; ?>
-                                </td>
+                                <td><?php echo $data['fiber']; ?></td>
                             </tr>
                             <tr>
                                 <th scope="row">Net carbs</th>
-                                <td>
-                                    <?php echo $data['net_crabs']; ?>
-                                </td>
+                                <td><?php echo $data['net_crabs']; ?></td>
                             </tr>
                             <tr>
                                 <th scope="row">Sodium</th>
-                                <td>
-                                    <?php echo $data['sodium']; ?>
-                                </td>
+                                <td><?php echo $data['sodium']; ?></td>
                             </tr>
                             <tr>
                                 <th scope="row">Cholesterol</th>
-                                <td>
-                                    <?php echo $data['cholesterol']; ?>
-                                </td>
+                                <td><?php echo $data['cholesterol']; ?></td>
                             </tr>
                         </tbody>
                     </table>
@@ -315,17 +321,11 @@ $result = $conn->query($query);
                                 <img src="https://via.placeholder.com/50" alt="Avatar" />
                             </div>
                             <div class="comment-content">
-                                <h6>
-                                    <?php echo $commentRow['fullname']; ?>
-                                </h6>
-                                <p class="comment-date">
-                                    <?php echo $commentRow['time']; ?>
-                                </p>
+                                <h6><?php echo $commentRow['fullname']; ?></h6>
+                                <p class="comment-date"><?php echo $commentRow['time']; ?></p>
                             </div>
                         </div>
-                        <p class="comment-text">
-                            <?php echo $commentRow['comment']; ?>
-                        </p>
+                        <p class="comment-text"><?php echo $commentRow['comment']; ?></p>
                         <div class="comment-rating">
                             <?php
                             // Lấy giá trị rating từ cơ sở dữ liệu
@@ -360,7 +360,7 @@ $result = $conn->query($query);
             <div class="comment-form mt-4">
                 <form id="comment-form" action="../../database/query_database/comment_handler.php" method="post">
                     <input type="hidden" name="quick_snack_id" value="<?php echo $id; ?>">
-                    <input type="hidden" name="user_id" value="<?php echo $row4['user_id']; ?>">
+                    <input type="hidden" name="user_id" value="<?php echo $user_id; ?>">
                     <div>
                         <label for="comment" class="form-label">Comment</label>
                         <textarea class="form-control" id="comment" name="comment" rows="3" required></textarea>
@@ -394,37 +394,27 @@ $result = $conn->query($query);
         include '..\includes\footer.php';
         ?>
     </footer>
+    <script src="https://kit.fontawesome.com/54dbfefd83.js" crossorigin="anonymous"></script>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
         crossorigin="anonymous"></script>
     <!-- Trong phần JavaScript -->
     <script>
-        // Trong phần JavaScript của trang product_detail.php
-        document.getElementById("favoriteButton").addEventListener("click", function () {
-            // Đảo lớp của biểu tượng bookmark giữa "far" và "fas" để thay đổi giữa trống và fill
-            var icon = document.getElementById("favoriteIcon");
-            icon.classList.toggle("far");
-            icon.classList.toggle("fas");
+        document.addEventListener('DOMContentLoaded', function () {
+            // Lấy phần tử chứa số lượng comment
+            var commentCount = document.querySelector('.comment-count');
 
-            // Gửi yêu cầu AJAX để lưu thông tin sản phẩm vào cơ sở dữ liệu
-            // Bạn cần xử lý yêu cầu AJAX này trong tập tin PHP để lưu thông tin sản phẩm
-            var productId = <?php echo $detailRow['quick_snack_id']; ?>; // Lấy product_id từ PHP
-            var userId = <?php echo isset($_SESSION['userId']) ? $_SESSION['userId'] : 'null'; ?>; // Lấy user_id từ PHP hoặc set là null nếu không có
-            var xhr = new XMLHttpRequest();
-            xhr.open("POST", "save_recipes_product.php", true);
-            xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
-            xhr.onreadystatechange = function () {
-                if (xhr.readyState === XMLHttpRequest.DONE) {
-                    // Xử lý phản hồi từ server (nếu cần)
-                }
-            };
-            xhr.send(JSON.stringify({
-                productId: productId,
-                userId: userId
-            }));
+            // Thêm sự kiện click cho phần tử chứa số lượng comment
+            commentCount.addEventListener('click', function () {
+                // Di chuyển màn hình xuống phần comment
+                var commentBox = document.querySelector('.comment-box');
+                commentBox.scrollIntoView({ behavior: 'smooth' });
+            });
         });
     </script>
+
+
 
 </body>
 

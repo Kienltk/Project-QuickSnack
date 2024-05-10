@@ -30,8 +30,8 @@
 }
 
 #search_bar {
-  width: 30% !important;
-  height: 30px;
+  width: 25% !important;
+  height: 35px;
   border-top-left-radius: 15px;
   border-bottom-left-radius: 15px;
   padding: 5px 15px;
@@ -51,7 +51,7 @@
   border-top-right-radius: 15px;
   border-bottom-right-radius: 15px;
   transition: all 0.3s ease;
-  height: 30px;
+  height: 35px;
   margin-right: 20px;
 }
 
@@ -104,14 +104,15 @@
   color: #ffa500;
   border-color: #ffa500;
   border: 2px solid #ffa500;
-  border: 2px solid #ffa500;
   margin-right: 20px;
+  border-radius: 15px;
 }
 
 /* Khi di chuột vào nút "Sign in" */
 .btn-outline-success:hover {
   background-color: #ffa500;
   color: #fff;
+  border: 2px solid #ff8800 !important;
 }
 
 /* Fixed navbar on scroll */
@@ -130,6 +131,11 @@ nav.fixed-top {
 
 body {
   padding-top: 0;
+}
+.form-control:focus {
+  border-color: initial;
+  /* hoặc bạn có thể đặt border-color: transparent; */
+  box-shadow: none;
 }
 
 /* .navbar-nav {
