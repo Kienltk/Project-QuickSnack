@@ -1,7 +1,7 @@
 <?php
 function getCategory()
 {
-    include("../../database/connect_database/index.php");
+    include ("../../database/connect_database/index.php");
     $smtc = $conn->prepare("SELECT * FROM category");
     $smtc->execute();
     $result = $smtc->get_result();
@@ -11,7 +11,7 @@ function getCategory()
 
 function getIngredient()
 {
-    include("../../database/connect_database/index.php");
+    include ("../../database/connect_database/index.php");
     $smtc = $conn->prepare("SELECT * FROM ingredients");
     $smtc->execute();
     $result = $smtc->get_result();
@@ -77,7 +77,7 @@ function getIngredient()
 
 function getProductWithPagination($offset, $limit)
 {
-    include("../../database/connect_database/index.php");
+    include ("../../database/connect_database/index.php");
     $smtc = $conn->prepare("SELECT 
         qs.quick_snack_id,
         qs.name,
@@ -119,7 +119,7 @@ function getProductWithPagination($offset, $limit)
 
 function getTotalProducts()
 {
-    include("../../database/connect_database/index.php");
+    include ("../../database/connect_database/index.php");
     $result = $conn->query("SELECT COUNT(*) AS total FROM quick_snack");
     $row = $result->fetch_assoc();
     $conn->close();
@@ -128,7 +128,7 @@ function getTotalProducts()
 
 function getImage($param)
 {
-    include("../../database/connect_database/index.php");
+    include ("../../database/connect_database/index.php");
     $smtc = $conn->prepare("SELECT * FROM image_quick_snack WHERE quick_snack_id = ?");
     $smtc->bind_param("i", $param);
     $smtc->execute();
@@ -140,7 +140,7 @@ function getImage($param)
 
 function addProductToUserCategory($quickSnackId, $userCategoryId)
 {
-    include("../../database/connect_database/index.php");
+    include ("../../database/connect_database/index.php");
     $sql = "INSERT INTO quick_snack_to_user_category (quick_snack_id, user_category_id) 
     VALUES ('$quickSnackId', '$userCategoryId')";
     $conn->query($sql);
@@ -150,7 +150,7 @@ function addProductToUserCategory($quickSnackId, $userCategoryId)
 
 function createUserCategory($userCategoryName, $userId)
 {
-    include("../../database/connect_database/index.php");
+    include ("../../database/connect_database/index.php");
     $sql = "INSERT INTO user_category (user_category_name, user_id) 
     VALUES (?, ?)";
     $stmt_insert = $conn->prepare($sql);
