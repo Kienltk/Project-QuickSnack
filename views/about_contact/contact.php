@@ -13,11 +13,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Contact Us</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&display=swap">
-  
+
   <link rel="stylesheet" href="../../public/css/style.css">
+  <link rel="stylesheet" href="../../public/css/header.css">
   <link rel="stylesheet" href="../../public/css/contact.css">
   <link rel="stylesheet" href="../../public/css/footer.css">
   <style>
@@ -55,55 +56,56 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <span style="color: #E37E21;">Contact Us</span>
       </h1>
     </div>
-  
+
     <!-- <div class="container"> -->
-      <div class="row">
-        <div class="col-lg-6 contact-info">
-          <h2 class="mt-3 mb-4">Let's talk with us</h2>
-          <p class="not-bold">Questions, comments, or suggestions? Simply fill in the form and we’ll be in touch shortly.</p>
-          <p><i class="fas fa-map-marker-alt" style="color: #E37E21;"></i> Aptech Le Thanh Nghi, 19 Le Thanh Nghi, Hai Ba Trung, Hanoi</p>
-          <p><i class="fas fa-phone" style="color: #E37E21;"></i> +84 399524359</p>
-          <p><i class="fas fa-envelope" style="color: #E37E21;"></i> vidu@gmail.com</p>
-        </div>
-        <div class="col-lg-6 mt-4">
-          <div class="card rounded-lg shadow-lg">
-            <div class="card-body">
-              <form class="contact-form">
-                <div class="row">
-                  <div class="col">
-                    <input type="text" class="form-control contact-input" id="firstName" required placeholder="First Name *">
-                  </div>
-                  <div class="col">
-                    <input type="text" class="form-control contact-input" id="lastName" required placeholder="Last Name *">
-                  </div>
+    <div class="row">
+      <div class="col-lg-6 contact-info">
+        <h2 class="mt-3 mb-4">Let's talk with us</h2>
+        <p class="not-bold">Questions, comments, or suggestions? Simply fill in the form and we’ll be in touch shortly.</p>
+        <p><i class="fas fa-map-marker-alt" style="color: #E37E21;"></i> Aptech Le Thanh Nghi, 19 Le Thanh Nghi, Hai Ba Trung, Hanoi</p>
+        <p><i class="fas fa-phone" style="color: #E37E21;"></i> +84 399524359</p>
+        <p><i class="fas fa-envelope" style="color: #E37E21;"></i> vidu@gmail.com</p>
+      </div>
+      <div class="col-lg-6 mt-4">
+        <div class="card rounded-lg shadow-lg">
+          <div class="card-body">
+            <form class="contact-form">
+              <div class="row">
+                <div class="col">
+                  <input type="text" class="form-control contact-input" id="firstName" required placeholder="First Name *">
                 </div>
-                <div class="form-group">
-                  <input type="email" class="form-control contact-input" id="email" required placeholder="Email *">
+                <div class="col">
+                  <input type="text" class="form-control contact-input" id="lastName" required placeholder="Last Name *">
                 </div>
-                <div class="form-group">
-                  <input type="tel" class="form-control contact-input" id="phone" required placeholder="Phone Number *">
-                </div>
-                <div class="form-group">
-                  <textarea class="form-control contact-input" id="message" rows="4" placeholder="Your message..."></textarea>
-                </div>
-                <button type="submit" class="btn btn-primary">Send Message</button>
-                <div id="success-message" class="alert alert-success mt-3 d-none" role="alert">
-                  Your message has been sent successfully!
-                </div>
-              </form>
-            </div>
+              </div>
+              <div class="form-group">
+                <input type="email" class="form-control contact-input" id="email" required placeholder="Email *">
+              </div>
+              <div class="form-group">
+                <input type="tel" class="form-control contact-input" id="phone" required placeholder="Phone Number *">
+              </div>
+              <div class="form-group">
+                <textarea class="form-control contact-input" id="message" rows="4" placeholder="Your message..."></textarea>
+              </div>
+              <button type="submit" class="btn btn-primary">Send Message</button>
+              <div id="success-message" class="alert alert-success mt-3 d-none" role="alert">
+                Your message has been sent successfully!
+              </div>
+            </form>
           </div>
         </div>
       </div>
+    </div>
     <!-- </div> -->
   </div>
-  
+
 
   <?php
   include '..\includes\footer.php';
   ?>
 
   <script src="../../public/js/contact.js"></script>
+  <script src="https://kit.fontawesome.com/54dbfefd83.js" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 
 </body>

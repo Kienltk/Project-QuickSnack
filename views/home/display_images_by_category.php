@@ -33,4 +33,3 @@ if (isset($_GET['category_id'])) {
         echo '<p>No images found for this category</p>';
     }
 }
-?>

@@ -1,10 +1,4 @@
 .hero-image {
-<<<<<<< Updated upstream
-    background-image: url('../image/background.jpg');
-    background-size: cover;
-    background-position: center;
-    height: 25vh;
-=======
   background-image: url('../image/background.jpg');
   background-size: cover;
   background-position: center;
@@ -103,7 +97,6 @@
 @media (max-width: 768px) {
   .hero-image {
       height: 15vh;
->>>>>>> Stashed changes
   }
   
   .heart-icon {

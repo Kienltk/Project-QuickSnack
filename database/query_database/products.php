@@ -19,62 +19,6 @@ function getIngredient()
     return $result;
 }
 
-// function getProductBottomTable() {
-//     include ("../../database/connect_database/index.php");
-//     $smtc = $conn->prepare("SELECT quick_snack.quick_snack_id, name, level, quick_snack.time, yield, created_at, quick_snack.user_id, category_to_quick_snack.category_id, 
-//     category_name, ROUND(AVG(review.rating), 1) as avg_rating FROM quick_snack 
-//     JOIN category_to_quick_snack ON quick_snack.quick_snack_id = category_to_quick_snack.quick_snack_id 
-//     JOIN category ON category_to_quick_snack.category_id = category.category_id
-//     JOIN review ON review.quick_snack_id = quick_snack.quick_snack_id
-//     GROUP BY quick_snack.quick_snack_id
-//     ORDER BY RAND()");
-//     $smtc->execute();
-//     $result = $smtc->get_result();
-//     $conn->close();
-//     return $result;
-// }
-
-// function getProduct()
-// {
-//     include("../../database/connect_database/index.php");
-//     $smtc = $conn->prepare("SELECT 
-//     qs.quick_snack_id,
-//     qs.name,
-//     qs.level,
-//     qs.time,
-//     qs.yield,
-//     qs.created_at,
-//     qs.user_id,
-//     MAX(iqs.address_img) AS image_address,
-//     GROUP_CONCAT(DISTINCT c.category_name ORDER BY c.category_id SEPARATOR ', ') AS categories,
-//     ROUND(AVG(r.rating), 1) AS average_rating
-// FROM 
-//     quick_snack qs
-// LEFT JOIN 
-//     image_quick_snack iqs ON qs.quick_snack_id = iqs.quick_snack_id
-// LEFT JOIN 
-//     category_to_quick_snack ctqs ON qs.quick_snack_id = ctqs.quick_snack_id
-// LEFT JOIN 
-//     category c ON ctqs.category_id = c.category_id AND c.category_id IS NOT NULL
-// LEFT JOIN 
-//     review r ON qs.quick_snack_id = r.quick_snack_id
-// GROUP BY 
-//     qs.quick_snack_id,
-//     qs.name,
-//     qs.level,
-//     qs.time,
-//     qs.yield,
-//     qs.created_at,
-//     qs.user_id
-// ORDER BY 
-//     qs.quick_snack_id;
-// ");
-//     $smtc->execute();
-//     $result = $smtc->get_result();
-//     $conn->close();
-//     return $result;
-// }
-
 function getProductWithPagination($offset, $limit)
 {
     include("../../database/connect_database/index.php");
@@ -160,4 +104,20 @@ function createUserCategory($userCategoryName, $userId)
     } else {
         return false;
     }
+}
+
+function isInWishlist($quick_snack_id, $conn, $user_id)
+{
+    $query = "SELECT qs.user_id, qsuc.quick_snack_id, qsuc.user_category_id
+    FROM quick_snack qs
+    JOIN quick_snack_to_user_category qsuc ON qs.quick_snack_id = qsuc.quick_snack_id
+    JOIN user_category uc ON qsuc.user_category_id = uc.user_category_id
+    WHERE uc.user_id = ?
+    AND qs.quick_snack_id = ?;
+    ";
+    $stmt = $conn->prepare($query);
+    $stmt->bind_param("si", $user_id, $quick_snack_id);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    return $result->num_rows > 0;
 }

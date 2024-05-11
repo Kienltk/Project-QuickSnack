@@ -1,12 +1,9 @@
 .container-box {
     max-width: 80%;
-    /* Adjust width as needed */
     margin: 50px auto;
-    /* Adjust margin as needed */
     background-color: #ffffff;
     border-radius: 10px;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-    /* Add shadow */
     padding: 20px;
   }
   
@@ -36,7 +33,6 @@
   
   .col-right {
     padding: 20px;
-    /* Adjust padding as needed */
   }
   
   .form-control {
@@ -108,7 +104,6 @@
     color: #f46b0a;
   }
   
-  /* Make the container-box full-width on small screens */
   @media (max-width: 768px) {
     .container-box {
       width: 100%;
@@ -116,11 +111,9 @@
   
     .col-left {
       display: none;
-      /* Hide the left column on small screens */
     }
   
     .col-right {
       padding: 20px 10px;
-      /* Adjust padding as needed */
     }
   }

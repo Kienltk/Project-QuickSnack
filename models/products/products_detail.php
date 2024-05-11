@@ -2,6 +2,11 @@
 include("../../database/connect_database/index.php");
 require_once('../../database/query_database/products.php');
 
+$previous = "javascript:history.go(-1)";
+if (isset($_SERVER['HTTP_REFERER'])) {
+    $previous = $_SERVER['HTTP_REFERER'];
+}
+
 if (isset($_GET['product_id'])) {
     $product_id = $_GET['product_id'];
     $user_id = $_COOKIE["userID"];
@@ -19,7 +24,7 @@ if (isset($_GET['product_id'])) {
     $add = addProductToUserCategory($product_id, $userCategoryId);
 
     if ($add == true) {
-        header("Location: ../../views/products/product_detail.php?quick_snack_id=$product_id");
+        header("Location: $previous");
         exit();
     } else {
         echo "Lỗi";

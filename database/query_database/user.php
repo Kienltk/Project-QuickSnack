@@ -14,7 +14,6 @@ function userExistence($username, $email)
 }
 
 
-
 function insertUser($fullname, $username, $email, $gender, $password)
 {
     include('../../database/connect_database/index.php');

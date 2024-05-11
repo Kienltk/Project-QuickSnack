@@ -1,25 +1,10 @@
 <?php
-include ('../../database/connect_database/index.php');
-
-function isInWishlist($quick_snack_id, $conn, $user_id)
-{
-    $query = "SELECT qs.user_id, qsuc.quick_snack_id, qsuc.user_category_id
-    FROM quick_snack qs
-    JOIN quick_snack_to_user_category qsuc ON qs.quick_snack_id = qsuc.quick_snack_id
-    JOIN user_category uc ON qsuc.user_category_id = uc.user_category_id
-    WHERE qs.user_id = ?
-    AND qs.quick_snack_id = ?;
-    ";
-    $stmt = $conn->prepare($query);
-    $stmt->bind_param("si", $user_id, $quick_snack_id);
-    $stmt->execute();
-    $result = $stmt->get_result();
-    return $result->num_rows > 0;
-}
+include('../../database/connect_database/index.php');
+include('../../database/query_database/products.php');
 
 function getDetailProduct()
 {
-    include ('../../database/connect_database/index.php');
+    include('../../database/connect_database/index.php');
     $id = $_GET['quick_snack_id'];
     $query = "SELECT * FROM quick_snack where quick_snack_id=$id";
     $result = $conn->query($query);
@@ -30,7 +15,7 @@ $detailRow = $detailResult->fetch_assoc();
 
 function getNutrition()
 {
-    include ('../../database/connect_database/index.php');
+    include('../../database/connect_database/index.php');
     $id = $_GET['quick_snack_id'];
     $query = "SELECT * FROM nutrition WHERE quick_snack_id=$id";
     $result = $conn->query($query);
@@ -41,7 +26,7 @@ $data = getNutrition();
 
 function getIngredients()
 {
-    include ('../../database/connect_database/index.php');
+    include('../../database/connect_database/index.php');
     $id = $_GET['quick_snack_id'];
     $query = 'SELECT i.quick_snack_id, i.ingredient_id, i.quantity, s.ingredient_name
     FROM ingredient_to_quick_snack AS i 
@@ -53,7 +38,7 @@ function getIngredients()
 
 function getRecipes()
 {
-    include ('../../database/connect_database/index.php');
+    include('../../database/connect_database/index.php');
     $id = $_GET['quick_snack_id'];
     $query = "SELECT * FROM recipe WHERE quick_snack_id=$id";
     $result = $conn->query($query);
@@ -62,7 +47,7 @@ function getRecipes()
 
 function getComment()
 {
-    include ('../../database/connect_database/index.php');
+    include('../../database/connect_database/index.php');
     $id = $_GET['quick_snack_id'];
     $query = "SELECT r.user_id, r.comment, r.rating, u.fullname, u.username, u.email, u.gender, r.time
     FROM review AS r
@@ -106,21 +91,20 @@ $result = $conn->query($query);
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title><?php echo $detailRow['name']; ?></title> <!--PHP Product Name-->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
-        crossorigin="anonymous" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel="stylesheet" href="https://unpkg.com/ionicons@5.1.2/dist/ionicons.min.css" />
-    <link rel="stylesheet" href="../../public/css/product-detail.css" />
+
+    <link rel="stylesheet" href="../../public/css/style.css">
     <link rel="stylesheet" href="../../public/css/header.css">
+    <link rel="stylesheet" href="../../public/css/product-detail.css" />
+    <link rel="stylesheet" href="../../public/css/footer.css" />
     <style>
         .wishlist-link {
             color: #ff9a62;
         }
 
-        .wishlist-link.wished {
+        .wishlist-link-wished {
             color: #ff9a62;
-            background-color: #ff9a62;
         }
 
         .comment-count {
@@ -144,15 +128,14 @@ $result = $conn->query($query);
                     $user_id = $_COOKIE['userID'];
                     $isInWishlist = isInWishlist($detailRow['quick_snack_id'], $conn, $user_id);
 
-                    ?>
-                    <a href="../../models/products/products_detail.php?product_id=<?php echo $detailRow['quick_snack_id'] ?>"
-                        class=" wishlist-link <?php ($isInWishlist ? '.wished' : '') ?>"><i class="far fa-bookmark"
-                            id="favoriteIcon"></i></a>
-                    <?php
+                ?>
+                    <a href="../../models/products/products_detail.php?product_id=<?php echo $detailRow['quick_snack_id'] ?>"><?php echo ($isInWishlist ? '<i class="fa-solid fa-bookmark wishlist-link-wished" id="favoriteIcon"></i>' : '<i class="far fa-bookmark wishlist-link"
+                            id="favoriteIcon"></i>') ?></a>
+                <?php
                 } else {
-                    ?>
+                ?>
                     <a href="../../views//auth/SignIn.html" class="wishlist-link">Login to add to wishlist</a>
-                    <?php
+                <?php
                 }
                 ?>
                 <!-- <a href="" id="favoriteButton">
@@ -314,7 +297,7 @@ $result = $conn->query($query);
             $commentResult = getComment();
             if ($commentResult->num_rows > 0) {
                 while ($commentRow = $commentResult->fetch_assoc()) {
-                    ?>
+            ?>
                     <div class="comment mt-4">
                         <div class="comment-header">
                             <div class="comment-avatar">
@@ -348,7 +331,7 @@ $result = $conn->query($query);
                             <i class="fas fa-reply" style="color: #ff9a62"></i>
                         </div>
                     </div>
-                    <?php
+            <?php
                 }
             } else {
                 echo "<p>No comments available.</p>";
@@ -367,16 +350,11 @@ $result = $conn->query($query);
                     </div>
                     <div class="rating mt-2">
                         <!-- Lựa chọn đánh giá -->
-                        <input type="radio" id="star5" name="rating" value="5" /><label for="star5" title="5 stars"><i
-                                class="fas fa-star"></i></label>
-                        <input type="radio" id="star4" name="rating" value="4" /><label for="star4" title="4 stars"><i
-                                class="fas fa-star"></i></label>
-                        <input type="radio" id="star3" name="rating" value="3" /><label for="star3" title="3 stars"><i
-                                class="fas fa-star"></i></label>
-                        <input type="radio" id="star2" name="rating" value="2" /><label for="star2" title="2 stars"><i
-                                class="fas fa-star"></i></label>
-                        <input type="radio" id="star1" name="rating" value="1" /><label for="star1" title="1 star"><i
-                                class="fas fa-star"></i></label>
+                        <input type="radio" id="star5" name="rating" value="5" /><label for="star5" title="5 stars"><i class="fas fa-star"></i></label>
+                        <input type="radio" id="star4" name="rating" value="4" /><label for="star4" title="4 stars"><i class="fas fa-star"></i></label>
+                        <input type="radio" id="star3" name="rating" value="3" /><label for="star3" title="3 stars"><i class="fas fa-star"></i></label>
+                        <input type="radio" id="star2" name="rating" value="2" /><label for="star2" title="2 stars"><i class="fas fa-star"></i></label>
+                        <input type="radio" id="star1" name="rating" value="1" /><label for="star1" title="1 star"><i class="fas fa-star"></i></label>
                     </div>
                     <div class="mb-3 text-start">
                         <button class="btn_comment" type="submit">Send</button>
@@ -396,20 +374,20 @@ $result = $conn->query($query);
     </footer>
     <script src="https://kit.fontawesome.com/54dbfefd83.js" crossorigin="anonymous"></script>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
-        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     <!-- Trong phần JavaScript -->
     <script>
-        document.addEventListener('DOMContentLoaded', function () {
+        document.addEventListener('DOMContentLoaded', function() {
             // Lấy phần tử chứa số lượng comment
             var commentCount = document.querySelector('.comment-count');
 
             // Thêm sự kiện click cho phần tử chứa số lượng comment
-            commentCount.addEventListener('click', function () {
+            commentCount.addEventListener('click', function() {
                 // Di chuyển màn hình xuống phần comment
                 var commentBox = document.querySelector('.comment-box');
-                commentBox.scrollIntoView({ behavior: 'smooth' });
+                commentBox.scrollIntoView({
+                    behavior: 'smooth'
+                });
             });
         });
     </script>

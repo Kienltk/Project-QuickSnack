@@ -1,44 +1,3 @@
-<!-- <!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <link rel="stylesheet" href="../../public/css/header.css"> -->
-    <!-- <style>
-        /* .navbar {
-            background-color: #ffffff;
-            padding-top: 10px;
-            padding-bottom: 10px;
-            padding-left: 30px;
-            padding-right: 30px;
-        }
-
-        #search_bar {
-            width: 30% !important;
-        } */
-
-        /* .navbar_text {
-            transition: transform 0.3s;
-        } */
-
-        /* .navbar_text:hover {
-            color: #ffa500 !important;
-            transform: scale(1.1);
-        } */
-/* 
-        .active {
-            color: #ffa500 !important;
-            font-weight: bolder;
-        } */
-    </style> -->
-
-<!-- </head>
-
-<body> -->
 <?php
 $current_page = $_SERVER['PHP_SELF'];
 
@@ -116,12 +75,12 @@ foreach ($pages_to_highlight as $page) {
             if (isset($_COOKIE["userID"])) {
             ?>
                 <div class="dropdown">
-                    <button class="btn  dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                         <i class="fa-solid fa-user fs-4"></i>
                     </button>
-                    <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="#">Profile</a></li>
-                        <li><a class="dropdown-item" href="../../models/user/logout.php">Logout</a></li>
+                    <ul class="dropdown-menu" style="width:max-content">
+                        <li style="width:max-content"><a class="dropdown-item" href="#">Profile</a></li>
+                        <li style="width:max-content"><a class="dropdown-item" href="../../models/user/logout.php">Logout</a></li>
                     </ul>
                 </div>
             <?php } else { ?>
@@ -134,23 +93,3 @@ foreach ($pages_to_highlight as $page) {
         </div>
     </div>
 </nav>
-
-<!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script> -->
-
-<!-- <script>
-    document.addEventListener("DOMContentLoaded", function() {
-        window.addEventListener('scroll', function() {
-            if (window.scrollY > 50) {
-                document.querySelector('nav').classList.add('fixed-top');
-                navbar_height = document.querySelector('nav').offsetHeight;
-                document.body.style.paddingTop = navbar_height + 'px';
-            } else {
-                document.querySelector('nav').classList.remove('fixed-top');
-                document.body.style.paddingTop = '0';
-            }
-        });
-    });
-</script> -->
-<!-- </body>
-
-</html> -->

@@ -56,4 +56,3 @@ function addCategory($param) {
     $smtc->execute();
     $conn->close();
 }
-?>
