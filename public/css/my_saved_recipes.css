@@ -24,3 +24,63 @@
     font-size: 70%;
     color: #A1A1A1;
 }
+
+a {
+    text-decoration: none;
+}
+.modal-content {
+    background-color: white;
+    border: 2px solid orange;
+}
+
+
+.btn-close {
+    color: orange;
+}
+
+.btn-primary {
+    background-color: orange;
+    border-color: orange;
+    color: white;
+    margin-bottom: 10px;
+}
+
+.btn-primary:hover {
+    background-color: white;
+    border: 3px solid;
+    border-color: orange;
+    color: orange;
+    transform: scale(1.05);
+    font-weight: bold;
+    margin-bottom: 6px;
+}
+
+.form-control {
+    background-color: white;
+    color: orange;
+    border-color: orange;
+}
+
+.modal-title {
+    color: orange;
+}
+
+
+.form-control:focus {
+    border-color: darkorange;
+    box-shadow: 0 0 0 0.25rem rgba(255, 140, 0, 0.25);
+}
+.edit-delete-button {
+background-color: orange; 
+color: white; 
+border: 2px solid orange;
+margin-right: 5px; 
+padding: 5px 10px; 
+border-radius: 5px;
+}
+
+
+.edit-delete-button:hover {
+background-color: white; 
+color: orange; 
+}
