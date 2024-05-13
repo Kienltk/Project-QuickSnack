@@ -68,7 +68,7 @@ function countComments($conn, $quick_snack_id)
 }
 function averageRating($conn, $quick_snack_id)
 {
-    $query = "SELECT AVG(rating) AS avg_rating FROM review WHERE quick_snack_id = ?";
+    $query = "SELECT ROUND(AVG(rating),1) AS avg_rating FROM review WHERE quick_snack_id = ?";
     $stmt = $conn->prepare($query);
     $stmt->bind_param("i", $quick_snack_id);
     $stmt->execute();

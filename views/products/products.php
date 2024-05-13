@@ -1,4 +1,5 @@
-<?php include("../../database/connect_database/index.php");
+<?php 
+include("../../database/connect_database/index.php");
 include("../../database/query_database/products.php");
 
 $category = getCategory();
@@ -28,7 +29,7 @@ $total_pages = $result['total_pages'];
 <html lang="en">
 
 <head>
-    <title>Products</title>
+    <title>Food</title>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 
@@ -593,7 +594,7 @@ $total_pages = $result['total_pages'];
         minSlider.oninput = function() {
 
             outputMin.innerHTML = this.value;
-        };
+        };t
 
         maxSlider.oninput = function() {
 

@@ -6,7 +6,7 @@
 }
 
 .directory:hover {
-  color: #e37e21;
+  color: #e37e21 !important;
 }
 
 .title-directory,
