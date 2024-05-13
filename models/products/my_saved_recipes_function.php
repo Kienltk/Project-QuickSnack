@@ -9,6 +9,16 @@ function getUserCategory($param) {
     return $result;
 }
 
+function getUserCategoryByCategoryId($param) {
+    include ("../../database/connect_database/index.php");
+    $smtc = $conn->prepare("SELECT * FROM user_category WHERE user_category_id = ?");
+    $smtc->bind_param('i', $param);
+    $smtc->execute();
+    $result = $smtc->get_result();
+    $conn->close();
+    return $result;
+}
+
 function getProductFromUserCategory($param) {
     include ("../../database/connect_database/index.php");
     $smtc = $conn->prepare("SELECT * FROM user_category
@@ -37,6 +47,7 @@ function getProductByUserCategoryByCategoryId($param) {
     $conn->close();
     return $result;
 }
+
 function getImage($param) {
     include ("../../database/connect_database/index.php");
     $smtc = $conn->prepare("SELECT * FROM image_quick_snack WHERE quick_snack_id = ?");
@@ -53,6 +64,30 @@ function addCategory($param) {
     $string = "New Category";
     $smtc = $conn->prepare("INSERT INTO user_category (user_category_name, user_id) VALUES (?, ?)");
     $smtc->bind_param("si", $string, $param);
+    $smtc->execute();
+    $conn->close();
+}
+
+function deleteCategory($param) {
+    include ("../../database/connect_database/index.php");
+    $smtc = $conn->prepare("DELETE FROM user_category WHERE user_category_id = ?");
+    $smtc->bind_param("i", $param);
+    $smtc->execute();
+    $conn->close();
+}
+
+function renameUserCategory($name, $id) {
+    include ("../../database/connect_database/index.php");
+    $smtc = $conn->prepare("UPDATE user_category SET user_category_name = ? WHERE user_category_id = ?");
+    $smtc->bind_param("si", $name, $id);
+    $smtc->execute();
+    $conn->close();
+}
+
+function deleteProductFromUserCategory($quick_snack_id, $user_category_id) {
+    include ("../../database/connect_database/index.php");
+    $smtc = $conn->prepare("DELETE FROM quick_snack_to_user_category WHERE quick_snack_id = ? AND user_category_id = ?");
+    $smtc->bind_param("ii", $quick_snack_id, $user_category_id);
     $smtc->execute();
     $conn->close();
 }
