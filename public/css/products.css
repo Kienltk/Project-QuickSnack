@@ -1,3 +1,7 @@
 .results_search{
     color: #DC582A;
 }
+
+.sort:focus {
+   box-shadow: 2px 0px 12px 3px #DC582A !important;
+}
