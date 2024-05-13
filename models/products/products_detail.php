@@ -1,6 +1,6 @@
 <?php
-include("../../database/connect_database/index.php");
-require_once('../../database/query_database/products.php');
+include ("../../database/connect_database/index.php");
+require_once ('../../database/query_database/products.php');
 
 $previous = "javascript:history.go(-1)";
 if (isset($_SERVER['HTTP_REFERER'])) {

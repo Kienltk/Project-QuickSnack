@@ -1,88 +1,5 @@
 <?php
-include('../../database/connect_database/index.php');
-include('../../database/query_database/products.php');
-
-function getDetailProduct()
-{
-    include('../../database/connect_database/index.php');
-    $id = $_GET['quick_snack_id'];
-    $query = "SELECT * FROM quick_snack where quick_snack_id=$id";
-    $result = $conn->query($query);
-    return $result;
-}
-$detailResult = getDetailProduct();
-$detailRow = $detailResult->fetch_assoc();
-
-function getNutrition()
-{
-    include('../../database/connect_database/index.php');
-    $id = $_GET['quick_snack_id'];
-    $query = "SELECT * FROM nutrition WHERE quick_snack_id=$id";
-    $result = $conn->query($query);
-    return $result->fetch_assoc();
-}
-
-$data = getNutrition();
-
-function getIngredients()
-{
-    include('../../database/connect_database/index.php');
-    $id = $_GET['quick_snack_id'];
-    $query = 'SELECT i.quick_snack_id, i.ingredient_id, i.quantity, s.ingredient_name
-    FROM ingredient_to_quick_snack AS i 
-    INNER JOIN ingredients AS s ON i.ingredient_id = s.ingredient_id 
-    WHERE i.quick_snack_id = ' . $id;
-    $result = $conn->query($query);
-    return $result;
-}
-
-function getRecipes()
-{
-    include('../../database/connect_database/index.php');
-    $id = $_GET['quick_snack_id'];
-    $query = "SELECT * FROM recipe WHERE quick_snack_id=$id";
-    $result = $conn->query($query);
-    return $result;
-}
-
-function getComment()
-{
-    include('../../database/connect_database/index.php');
-    $id = $_GET['quick_snack_id'];
-    $query = "SELECT r.user_id, r.comment, r.rating, u.fullname, u.username, u.email, u.gender, r.time
-    FROM review AS r
-    INNER JOIN user AS u ON r.user_id = u.user_id 
-    WHERE r.quick_snack_id = $id";
-    $result = $conn->query($query);
-    return $result;
-}
-function countComments($conn, $quick_snack_id)
-{
-    $query = "SELECT COUNT(*) AS total_comments FROM review WHERE quick_snack_id = ?";
-    $stmt = $conn->prepare($query);
-    $stmt->bind_param("i", $quick_snack_id);
-    $stmt->execute();
-    $result = $stmt->get_result();
-    $row = $result->fetch_assoc();
-    return $row['total_comments'];
-}
-function averageRating($conn, $quick_snack_id)
-{
-    $query = "SELECT AVG(rating) AS avg_rating FROM review WHERE quick_snack_id = ?";
-    $stmt = $conn->prepare($query);
-    $stmt->bind_param("i", $quick_snack_id);
-    $stmt->execute();
-    $result = $stmt->get_result();
-    $row = $result->fetch_assoc();
-    // Làm tròn số lượng rating trung bình
-    $avg_rating = ($row['avg_rating']);
-    return $avg_rating;
-}
-
-$id = $_GET['quick_snack_id'];
-$query = 'SELECT * FROM image_quick_snack WHERE quick_snack_id= ' . $id . ' AND kind = 1 LIMIT 1';
-$result = $conn->query($query);
-
+include ('../../database/query_database/function_detail.php');
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -91,24 +8,51 @@ $result = $conn->query($query);
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title><?php echo $detailRow['name']; ?></title> <!--PHP Product Name-->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel="stylesheet" href="https://unpkg.com/ionicons@5.1.2/dist/ionicons.min.css" />
-
+    <link rel="shortcut icon" href="../../public/image/logo.png" type="image/x-icon">
     <link rel="stylesheet" href="../../public/css/style.css">
     <link rel="stylesheet" href="../../public/css/header.css">
-    <link rel="stylesheet" href="../../public/css/product-detail.css" />
+    <link rel="stylesheet" href="../../public/css/product-detail.css">
     <link rel="stylesheet" href="../../public/css/footer.css" />
     <style>
+        .carousel-inner .carousel-item img {
+            max-height: 450px;
+            /* Điều chỉnh chiều cao tối đa của ảnh */
+            width: auto;
+            margin: 0 auto;
+        }
+
+        /* Tùy chỉnh kích thước của carousel */
+        #carouselExampleIndicators {
+            width: 100%;
+            /* Đảm bảo rộng 100% của carousel */
+        }
+
+        /* Tùy chỉnh kích thước của carousel control */
+        .carousel-control-prev,
+        .carousel-control-next {
+            width: 5%;
+            /* Điều chỉnh chiều rộng của nút điều khiển */
+        }
+
+        .carousel-control-prev-icon,
+        .carousel-control-next-icon {
+            width: 30px;
+            /* Điều chỉnh chiều rộng của biểu tượng điều khiển */
+            height: 30px;
+            /* Điều chỉnh chiều cao của biểu tượng điều khiển */
+            background-size: 100%, 100%;
+            background-repeat: no-repeat;
+        }
+
         .wishlist-link {
             color: #ff9a62;
         }
 
         .wishlist-link-wished {
             color: #ff9a62;
-        }
-
-        .comment-count {
-            cursor: pointer;
         }
     </style>
 </head>
@@ -127,27 +71,38 @@ $result = $conn->query($query);
                 if (isset($_COOKIE['userID'])) {
                     $user_id = $_COOKIE['userID'];
                     $isInWishlist = isInWishlist($detailRow['quick_snack_id'], $conn, $user_id);
-
-                ?>
-                    <a href="../../models/products/products_detail.php?product_id=<?php echo $detailRow['quick_snack_id'] ?>"><?php echo ($isInWishlist ? '<i class="fa-solid fa-bookmark wishlist-link-wished" id="favoriteIcon"></i>' : '<i class="far fa-bookmark wishlist-link"
+                    ?>
+                    <a
+                        href="../../models/products/products_detail.php?product_id=<?php echo $detailRow['quick_snack_id'] ?>"><?php echo ($isInWishlist ? '<i class="fa-solid fa-bookmark wishlist-link-wished" id="favoriteIcon"></i>' : '<i class="far fa-bookmark wishlist-link"
                             id="favoriteIcon"></i>') ?></a>
-                <?php
+                    <?php
                 } else {
-                ?>
+                    ?>
                     <a href="../../views//auth/SignIn.html" class="wishlist-link">Login to add to wishlist</a>
-                <?php
+                    <?php
                 }
                 ?>
-                <!-- <a href="" id="favoriteButton">
-                    <i class="far fa-bookmark" id="favoriteIcon" style='color:#ff9a62'></i>
-                </a> -->
+
             </p>
             <h3><?php echo $detailRow['name']; ?></h3>
         </div>
         <div class="icon align-items-center">
             <div class="d-flex d-sm-inline">
                 <span class="pt-1 fw-bold">
-                    <i class="fas fa-user" style="color: #ff9a62"></i> Author
+                    <i class="fas fa-user" style="color: #ff9a62"></i> <?php
+                    // Lấy tên tác giả từ cơ sở dữ liệu
+                    $query = "SELECT u.fullname 
+                          FROM user u 
+                          INNER JOIN quick_snack q ON u.user_id = q.user_id 
+                          WHERE q.quick_snack_id = $id";
+                    $author_result = $conn->query($query);
+                    if ($author_result && $author_result->num_rows > 0) {
+                        $author_row = $author_result->fetch_assoc();
+                        echo $author_row['fullname'];
+                    } else {
+                        echo "Unknown";
+                    }
+                    ?>
                 </span>
                 <span class="pt-1 fw-bold comment-count">
                     <i class="fas fa-comment " style="color: #ff9a62"></i>
@@ -171,22 +126,34 @@ $result = $conn->query($query);
                 </span>
             </span>
         </div>
-
-
         <div class="row pt-4">
             <div class="col-12 col-md-8 pb-0">
-
-                <div class="text-center">
-                    <?php
-                    if ($result->num_rows > 0) {
-                        while ($row = $result->fetch_assoc()) {
-                            echo '<img src="' . $row['address_img'] . '" alt="Product Image" class="img-fluid w-full rounded-2">';
+                <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+                    <div class="carousel-inner">
+                        <?php
+                        $active = true;
+                        if ($result->num_rows > 0) {
+                            while ($row = $result->fetch_assoc()) {
+                                $activeClass = $active ? 'active' : ''; // Chỉ định lớp active cho ảnh đầu tiên
+                                echo '<div class="carousel-item ' . $activeClass . '">';
+                                echo '<img src="' . $row['address_img'] . '" class="d-block w-100" alt="Product Image">';
+                                echo '</div>';
+                                $active = false;
+                            }
                         }
-                    }
-                    ?>
-
+                        ?>
+                    </div>
+                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators"
+                        data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Previous</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators"
+                        data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Next</span>
+                    </button>
                 </div>
-
                 <div class="pt-5 d-flex justify-content-center align-items-center">
                     <span class="text-muted mx-3">
                         <i class="far fa-clock fs-3" style="color: #ff9a62"></i> <?php echo $detailRow['time']; ?>
@@ -283,7 +250,6 @@ $result = $conn->query($query);
                     ?>
                 </ol>
             </div>
-
         </div>
         <div class="comment-box mt-5">
             <h4 class="fs-4 text-center">
@@ -292,12 +258,11 @@ $result = $conn->query($query);
             <div class="center-text">
                 <hr style="border-top: 1px solid #ff9a62" />
             </div>
-
             <?php
             $commentResult = getComment();
             if ($commentResult->num_rows > 0) {
                 while ($commentRow = $commentResult->fetch_assoc()) {
-            ?>
+                    ?>
                     <div class="comment mt-4">
                         <div class="comment-header">
                             <div class="comment-avatar">
@@ -313,7 +278,6 @@ $result = $conn->query($query);
                             <?php
                             // Lấy giá trị rating từ cơ sở dữ liệu
                             $rating = $commentRow['rating'];
-
                             // Vòng lặp để render số lượng ngôi sao tương ứng
                             for ($i = 0; $i < 5; $i++) {
                                 if ($i < $rating) {
@@ -331,7 +295,7 @@ $result = $conn->query($query);
                             <i class="fas fa-reply" style="color: #ff9a62"></i>
                         </div>
                     </div>
-            <?php
+                    <?php
                 }
             } else {
                 echo "<p>No comments available.</p>";
@@ -350,39 +314,41 @@ $result = $conn->query($query);
                     </div>
                     <div class="rating mt-2">
                         <!-- Lựa chọn đánh giá -->
-                        <input type="radio" id="star5" name="rating" value="5" /><label for="star5" title="5 stars"><i class="fas fa-star"></i></label>
-                        <input type="radio" id="star4" name="rating" value="4" /><label for="star4" title="4 stars"><i class="fas fa-star"></i></label>
-                        <input type="radio" id="star3" name="rating" value="3" /><label for="star3" title="3 stars"><i class="fas fa-star"></i></label>
-                        <input type="radio" id="star2" name="rating" value="2" /><label for="star2" title="2 stars"><i class="fas fa-star"></i></label>
-                        <input type="radio" id="star1" name="rating" value="1" /><label for="star1" title="1 star"><i class="fas fa-star"></i></label>
+                        <input type="radio" id="star5" name="rating" value="5" /><label for="star5" title="5 stars"><i
+                                class="fas fa-star"></i></label>
+                        <input type="radio" id="star4" name="rating" value="4" /><label for="star4" title="4 stars"><i
+                                class="fas fa-star"></i></label>
+                        <input type="radio" id="star3" name="rating" value="3" /><label for="star3" title="3 stars"><i
+                                class="fas fa-star"></i></label>
+                        <input type="radio" id="star2" name="rating" value="2" /><label for="star2" title="2 stars"><i
+                                class="fas fa-star"></i></label>
+                        <input type="radio" id="star1" name="rating" value="1" /><label for="star1" title="1 star"><i
+                                class="fas fa-star"></i></label>
                     </div>
                     <div class="mb-3 text-start">
                         <button class="btn_comment" type="submit">Send</button>
                     </div>
                 </form>
             </div>
-
         </div>
-
     </div>
-
-
     <footer>
         <?php
         include '..\includes\footer.php';
         ?>
     </footer>
     <script src="https://kit.fontawesome.com/54dbfefd83.js" crossorigin="anonymous"></script>
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossorigin="anonymous"></script>
     <!-- Trong phần JavaScript -->
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', function () {
             // Lấy phần tử chứa số lượng comment
             var commentCount = document.querySelector('.comment-count');
 
             // Thêm sự kiện click cho phần tử chứa số lượng comment
-            commentCount.addEventListener('click', function() {
+            commentCount.addEventListener('click', function () {
                 // Di chuyển màn hình xuống phần comment
                 var commentBox = document.querySelector('.comment-box');
                 commentBox.scrollIntoView({
@@ -391,9 +357,6 @@ $result = $conn->query($query);
             });
         });
     </script>
-
-
-
 </body>
 
 </html>

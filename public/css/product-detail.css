@@ -128,3 +128,8 @@
 .rating > input:checked ~ label ~ label:before {
   color: #ffc107;
 }
+
+
+.comment-count {
+  cursor: pointer;
+}

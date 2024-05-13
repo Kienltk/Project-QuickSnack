@@ -146,6 +146,11 @@ VALUES
 ('Daniel Young', 'daniely', 'daniel@example.com', 'o', 'hashed_password_18'),
 ('Grace Harris', 'graceh', 'grace@example.com', 'F', 'hashed_password_19'),
 ('Logan Jackson', 'loganj', 'logan@example.com', 'M', 'hashed_password_20');
+('Roger Federer', 'Roger', 'roger@gmail.com', 'M', 'hashed_password_21'),
+('Novak Djokovic', 'jokovic98', 'jokovic@gmail.com', 'M', 'hashed_password_22'),
+('Lionel Messi', 'messi10', 'messi@gmail.com', 'M', 'hashed_password_23'),
+('Mason Mount', 'mountmu', 'mount@gmail.com', 'M', 'hashed_password_24'),
+('Ronaldo', 'ronaldo', 'ronaldo@gmail.com', 'M', 'hashed_password_25');
 	-- category
 INSERT INTO category (category_name)
 VALUES
@@ -283,30 +288,30 @@ VALUES
 INSERT INTO quick_snack (name, level, time, yield, created_at, user_id)
 VALUES 
 ('Vietnamese Stir-Fried Mixed Vegetables', 'Easy', '17 mins', '3 to 4 servings', curdate(), 1),
-('Savory Cheese Cornbread Muffins', 'Easy', '27 mins', '12 servings', curdate(), 1),
-('Japanese Vegetable Miso Soup', 'Easy', '22 mins', '6 servings', CURDATE(), 1),
-('Thai Pad Thai', 'Medium', '35 mins', '2 to 3 servings', curdate(), 1),
-('Pizza Wrap Sandwiches', 'Easy', '17 mins', '2 servings', CURDATE(), 1),
-('Fried Rice Recipe With Chinese Sausage', 'Easy', '15 mins', '4 to 6 servings', curdate(), 1),
-('Longan Fruit Juice', 'Easy', '5 mins', '1 serving', CURDATE(), 1),
-('Bagel Bites', 'Easy', '20 mins', '6 to 10 servings', CURDATE(), 1),
-('High Protein Quinoa Energy Bars', 'Easy', '30 mins', '18 servings', CURDATE(), 1),
-('Ham and Cheese Pinwheels', 'Easy', '25 mins', '9 servings', CURDATE(), 1),
-('Pizza Crostini Appetizer', 'Easy', '25 mins', '24 servings', CURDATE(), 1),
-('Gluten-Free Apple Oat Muffins', 'Easy', '26 mins', '12 servings', CURDATE(), 1),
-('Russian Salad', 'Easy', '10 min', '2 peo', curdate(), 1),
-('French Fries', 'Easy', '10 min', '2 people', curdate(), 1),
-('Bruschetta', 'Medium', '30 min', '1 people', curdate(), 1),
-('Chiken Wings', 'Easy', '20 min', '2 people', curdate(), 1),
-('Samosas', 'Medium', '25 min', '2 people', curdate(), 1),
-('Fried Calamari', 'Medium', '20 min', '2 people', curdate(), 1),
-('Cheese Platter', 'Easy', '10 min', '2 people', curdate(), 1),
-('Potato Skins', 'Medium', '20 min', '2 people', curdate(), 1),
-('Onion Rings', 'Easy', '10 min', '2 people', curdate(), 1),
-('Mozzarella Sticks', 'Easy', '15 min', '2 people', curdate(), 1),
-('Stuffed Mushrooms', 'Medium', '20 min', '1 people', curdate(), 1),
-('Caprese', 'Easy', '15 min', '4 servings', curdate(), 1),
-('Greek Yogurt Parfait', 'Medium', '12 min', '2 people', curdate(), 1);
+('Savory Cheese Cornbread Muffins', 'Easy', '27 mins', '12 servings', curdate(), 2),
+('Japanese Vegetable Miso Soup', 'Easy', '22 mins', '6 servings', CURDATE(), 3),
+('Thai Pad Thai', 'Medium', '35 mins', '2 to 3 servings', curdate(), 4),
+('Pizza Wrap Sandwiches', 'Easy', '17 mins', '2 servings', CURDATE(), 5),
+('Fried Rice Recipe With Chinese Sausage', 'Easy', '15 mins', '4 to 6 servings', curdate(), 6),
+('Longan Fruit Juice', 'Easy', '5 mins', '1 serving', CURDATE(), 7),
+('Bagel Bites', 'Easy', '20 mins', '6 to 10 servings', CURDATE(), 8),
+('High Protein Quinoa Energy Bars', 'Easy', '30 mins', '18 servings', CURDATE(), 9),
+('Ham and Cheese Pinwheels', 'Easy', '25 mins', '9 servings', CURDATE(), 10),
+('Pizza Crostini Appetizer', 'Easy', '25 mins', '24 servings', CURDATE(), 11),
+('Gluten-Free Apple Oat Muffins', 'Easy', '26 mins', '12 servings', CURDATE(), 12),
+('Russian Salad', 'Easy', '10 min', '2 peo', curdate(), 13),
+('French Fries', 'Easy', '10 min', '2 people', curdate(), 14),
+('Bruschetta', 'Medium', '30 min', '1 people', curdate(), 15),
+('Chiken Wings', 'Easy', '20 min', '2 people', curdate(), 16),
+('Samosas', 'Medium', '25 min', '2 people', curdate(), 17),
+('Fried Calamari', 'Medium', '20 min', '2 people', curdate(), 18),
+('Cheese Platter', 'Easy', '10 min', '2 people', curdate(), 19),
+('Potato Skins', 'Medium', '20 min', '2 people', curdate(), 20),
+('Onion Rings', 'Easy', '10 min', '2 people', curdate(), 21),
+('Mozzarella Sticks', 'Easy', '15 min', '2 people', curdate(),22),
+('Stuffed Mushrooms', 'Medium', '20 min', '1 people', curdate(), 23),
+('Caprese', 'Easy', '15 min', '4 servings', curdate(), 24),
+('Greek Yogurt Parfait', 'Medium', '12 min', '2 people', curdate(), 25);
 	-- Nutrition
 INSERT INTO nutrition (quick_snack_id, calories, fat, protein, carbs, fiber, net_crabs, sodium, cholesterol)
 VALUES 
@@ -533,208 +538,208 @@ VALUES
 (25, 6, 'Serve immediately, or cover and refrigerate until ready to eat.'),
 (25, 7, 'Enjoy your delicious Greek yogurt parfait!');
 	-- Ingredient to quick snack
-INSERT INTO ingredient_to_quick_snack (quick_snack_id, ingredient_id, quantity)
-VALUES 
-(1, 1, '0'),
-(1, 2, '1/2 cup'),
-(1, 3, '1/2 cup)',
-(1, 4, '1/2 cup'),
-(1, 5, '1/2 cup sliced'),
-(1, 6, '1/2 cup'),
-(1, 7, '2'),
-(1, 8, '2 cloves'),
-(1, 9, '1/2 cup diced'),
-(1, 10, 'A few slices'),
-(1, 11, '4 to 6'),
-(1, 12, '2 tablespoons'),
-(1, 13, '1 tablespoon'),
-(1, 14, '1/2 teaspoon'),
+	INSERT INTO ingredient_to_quick_snack (quick_snack_id, ingredient_id, quantity)
+	VALUES 
+	(1, 2, '1/2 cup'),
+	(1, 1, '0'),
+	(1, 3, '1/2 cup'),
+	(1, 4, '1/2 cup'),
+	(1, 5, '1/2 cup sliced'),
+	(1, 6, '1/2 cup'),
+	(1, 7, '2'),
+	(1, 8, '2 cloves'),
+	(1, 9, '1/2 cup diced'),
+	(1, 10, 'A few slices'),
+	(1, 11, '4 to 6'),
+	(1, 12, '2 tablespoons'),
+	(1, 13, '1 tablespoon'),
+	(1, 14, '1/2 teaspoon'),
 
-(2, 15, '3/4 cup'),
-(2, 16, '1/2 teaspoons'),
-(2, 1, '3/4 teaspoon'),
-(2, 17, '1 tablespoon'),
-(2, 18, '1/2 cup'),
-(2, 19, '1 cup shredded sharp'),
-(2, 20, '1 large'),
-(2, 21, '3/4 cup'),
-(2, 22, '2 tablespoons'),
+	(2, 15, '3/4 cup'),
+	(2, 16, '1/2 teaspoons'),
+	(2, 1, '3/4 teaspoon'),
+	(2, 17, '1 tablespoon'),
+	(2, 18, '1/2 cup'),
+	(2, 19, '1 cup shredded sharp'),
+	(2, 20, '1 large'),
+	(2, 21, '3/4 cup'),
+	(2, 22, '2 tablespoons'),
 
-(3, 23, '2 cups'),       
-(3, 24, '1/4 cup'),     
-(3, 25, '1'),            
-(3, 26, '1 1/2 cups'),  
-(3, 27, '6 cups'),
-(3, 28, '2 tablespoons'),
-(3, 29, '1 block'),      
-(3, 30, '1 tablespoon'), 
-(3, 31, '3 tablespoons'),
-(3, 32, '2'),
+	(3, 23, '2 cups'),       
+	(3, 24, '1/4 cup'),     
+	(3, 25, '1'),            
+	(3, 26, '1 1/2 cups'),  
+	(3, 27, '6 cups'),
+	(3, 28, '2 tablespoons'),
+	(3, 29, '1 block'),      
+	(3, 30, '1 tablespoon'), 
+	(3, 31, '3 tablespoons'),
+	(3, 32, '2'),
 
-(4, 33, '8 ounces (220 grams)'), 
-(4, 34, '1/2 pound, chopped into bite-size pieces'), 
-(4, 48, '2 tablespoons'),               
-(4, 8, '3'),         
-(4, 35, '1/4 cup'),                  
-(4, 20, '1 large'),                   
-(4, 36, '2 cups'),                     
-(4, 37, '1/3'),    
-(4, 38, '2, thinly sliced'),        
-(4, 39, '1 handful'),
+	(4, 33, '8 ounces (220 grams)'), 
+	(4, 34, '1/2 pound, chopped into bite-size pieces'), 
+	(4, 48, '2 tablespoons'),               
+	(4, 8, '3'),         
+	(4, 35, '1/4 cup'),                  
+	(4, 20, '1 large'),                   
+	(4, 36, '2 cups'),                     
+	(4, 37, '1/3'),    
+	(4, 38, '2, thinly sliced'),        
+	(4, 39, '1 handful'),
 
-(5, 40, '2 large'),
-(5, 41, 'As needed'),
-(5, 42, '3 tablespoons'),
-(5, 43, '1 cup'),
-(5, 44, '1 teaspoon'), 
+	(5, 40, '2 large'),
+	(5, 41, 'As needed'),
+	(5, 42, '3 tablespoons'),
+	(5, 43, '1 cup'),
+	(5, 44, '1 teaspoon'), 
 
-(6, 20, '2'),
-(6, 1, '1 teaspoon'),
-(6, 46, '0'),
-(6, 47, '5 tablespoons'),
-(6, 49, '1 tablespoon minced'),
-(6, 45, '1 to 2'),
-(6, 50, '1/4 cup'),
-(6, 51, '1/2 cup'),
-(6, 53, '4 cups'),
-(6, 52, '1 teaspoon'),
-(6, 30, '1 teaspoon'),
-(6, 38, '1'), 
+	(6, 20, '2'),
+	(6, 1, '1 teaspoon'),
+	(6, 46, '0'),
+	(6, 47, '5 tablespoons'),
+	(6, 49, '1 tablespoon minced'),
+	(6, 45, '1 to 2'),
+	(6, 50, '1/4 cup'),
+	(6, 51, '1/2 cup'),
+	(6, 53, '4 cups'),
+	(6, 52, '1 teaspoon'),
+	(6, 30, '1 teaspoon'),
+	(6, 38, '1'), 
 
-(7, 54, '5'),
-(7, 55, '1 cup'),
-(7, 56, '1'),
+	(7, 54, '5'),
+	(7, 55, '1 cup'),
+	(7, 56, '1'),
 
-(8, 57, '10'),
-(8, 58, '1 can'),
-(8, 43, '3 cups'),
-(8, 59, '20 slices'), 
+	(8, 57, '10'),
+	(8, 58, '1 can'),
+	(8, 43, '3 cups'),
+	(8, 59, '20 slices'), 
 
-(9, 60, '2 cups'),
-(9, 61, '1 cup'),
-(9, 62, '1/2 cup'),
-(9, 63, '1/2 cup'),
-(9, 64, '1/2 cup'),
-(9, 48, '1/4 cup'),
-(9, 65, '1/3 cup'),
-(9, 37, '3 tablespoons'),
-(9, 66, '1/4 cup'),
-(9, 67, '1 teaspoon'),
-(9, 1, '1/2 teaspoon'),
+	(9, 60, '2 cups'),
+	(9, 61, '1 cup'),
+	(9, 62, '1/2 cup'),
+	(9, 63, '1/2 cup'),
+	(9, 64, '1/2 cup'),
+	(9, 48, '1/4 cup'),
+	(9, 65, '1/3 cup'),
+	(9, 37, '3 tablespoons'),
+	(9, 66, '1/4 cup'),
+	(9, 67, '1 teaspoon'),
+	(9, 1, '1/2 teaspoon'),
 
-(10, 68, '1 (11-ounce) can'),
-(10, 8, '2 cloves, chopped'),
-(10, 41, '2 tablespoons'),
-(10, 44, '1 teaspoon'),
-(10, 69, '1/4 cup'),
-(10, 70, '1 cup'),
-(10, 71, '1/2 pound, deli sliced'),
-(10, 20, '1'), 
+	(10, 68, '1 (11-ounce) can'),
+	(10, 8, '2 cloves, chopped'),
+	(10, 41, '2 tablespoons'),
+	(10, 44, '1 teaspoon'),
+	(10, 69, '1/4 cup'),
+	(10, 70, '1 cup'),
+	(10, 71, '1/2 pound, deli sliced'),
+	(10, 20, '1'), 
 
-(11, 72, '1 loaf'),
-(11, 41, '2 tablespoons'),
-(11, 8, '2'),
-(11, 23, '2'),
-(11, 59, '1/3 cup'),
-(11, 73, '1 tablespoon'),
-(11, 74, '2 to 3 tablespoons'),
-(11, 70, '4 ounces'),
-(11, 39, '2 tablespoons'),
+	(11, 72, '1 loaf'),
+	(11, 41, '2 tablespoons'),
+	(11, 8, '2'),
+	(11, 23, '2'),
+	(11, 59, '1/3 cup'),
+	(11, 73, '1 tablespoon'),
+	(11, 74, '2 to 3 tablespoons'),
+	(11, 70, '4 ounces'),
+	(11, 39, '2 tablespoons'),
 
-(12, 60, '2 cups'),        
-(12, 16, '2 teaspoons'),      
-(12, 75, '1/4 teaspoon'),     
-(12, 76, '1/2 teaspoons'),  
-(12, 77, '1/4 cup'),         
-(12, 78, '1/4 cup'),         
-(12, 79, '1/2 cup'),         
-(12, 20, '2 large'),         
-(12, 80, '2 large'),          
-(12, 41, '1/4 cup'),         
-(12, 67, '1/2 teaspoon'),   
-(12, 81, '1 large'),          
-(12, 82, '1/2 cup'),        
-(12, 17, '1 tablespoon'),     
-(12, 76, '1/2 teaspoon'),
+	(12, 60, '2 cups'),        
+	(12, 16, '2 teaspoons'),      
+	(12, 75, '1/4 teaspoon'),     
+	(12, 76, '1/2 teaspoons'),  
+	(12, 77, '1/4 cup'),         
+	(12, 78, '1/4 cup'),         
+	(12, 79, '1/2 cup'),         
+	(12, 20, '2 large'),         
+	(12, 80, '2 large'),          
+	(12, 41, '1/4 cup'),         
+	(12, 67, '1/2 teaspoon'),   
+	(12, 81, '1 large'),          
+	(12, 82, '1/2 cup'),        
+	(12, 17, '1 tablespoon'),     
+	(12, 76, '1/2 teaspoon'),
 
-(13, 70, 'To taste'),
-(13, 71, '1 large potato'),
-(13, 72, '2 tablespoons olive oil'),
-(13, 1, 'To taste'),
-(13, 7, 'To taste'),
+	(13, 70, 'To taste'),
+	(13, 71, '1 large potato'),
+	(13, 72, '2 tablespoons olive oil'),
+	(13, 1, 'To taste'),
+	(13, 7, 'To taste'),
 
-(14, 15, '3/4 cup'),
-(14, 16, '1/2 teaspoon'),
-(14, 1, '3/4 teaspoon'),
-(14, 17, '1 tablespoon'),
-(14, 18, '1/2 cup'),
+	(14, 15, '3/4 cup'),
+	(14, 16, '1/2 teaspoon'),
+	(14, 1, '3/4 teaspoon'),
+	(14, 17, '1 tablespoon'),
+	(14, 18, '1/2 cup'),
 
-(15, 40, '4 slices baguette'),
-(15, 8, '2 cloves garlic'),
-(15, 23, '2 large ripe tomatoes'),
-(15, 39, '1/4 cup chopped fresh basil leaves'),
-(15, 41, '2 tablespoons olive oil'),
+	(15, 40, '4 slices baguette'),
+	(15, 8, '2 cloves garlic'),
+	(15, 23, '2 large ripe tomatoes'),
+	(15, 39, '1/4 cup chopped fresh basil leaves'),
+	(15, 41, '2 tablespoons olive oil'),
 
-(16, 34, '12 chicken wings'),
-(16, 32, '1/4 cup hot sauce'),
-(16, 8, '2 tablespoons butter'),
-(16, 90, 'Salt and pepper to taste'),
+	(16, 34, '12 chicken wings'),
+	(16, 32, '1/4 cup hot sauce'),
+	(16, 8, '2 tablespoons butter'),
+	(16, 90, 'Salt and pepper to taste'),
 
-(17, 32, '5'), -- Scallions (5)
-(17, 15, '1 cup'), -- All-purpose flour (1 cup)
-(17, 52, '1 teaspoon'), -- Oyster Sauce (1 teaspoon)
-(17, 53, '1 tablespoon'), -- Leftover cooked rice (1 tablespoon)
-(17, 54, '1/2 cup'), -- Longan (1/2 cup)
-(17, 41, '1 teaspoon'), -- Olive oil (1 teaspoon)
-(17, 56, '1 tablespoon'),
+	(17, 32, '5'), -- Scallions (5)
+	(17, 15, '1 cup'), -- All-purpose flour (1 cup)
+	(17, 52, '1 teaspoon'), -- Oyster Sauce (1 teaspoon)
+	(17, 53, '1 tablespoon'), -- Leftover cooked rice (1 tablespoon)
+	(17, 54, '1/2 cup'), -- Longan (1/2 cup)
+	(17, 41, '1 teaspoon'), -- Olive oil (1 teaspoon)
+	(17, 56, '1 tablespoon'),
 
-(18, 40, '1 pound calamari rings'),
-(18, 15, '1/2 cup all-purpose flour'),
-(18, 1, '1/2 teaspoon salt'),
-(18, 7, 'Vegetable oil for frying'),
+	(18, 40, '1 pound calamari rings'),
+	(18, 15, '1/2 cup all-purpose flour'),
+	(18, 1, '1/2 teaspoon salt'),
+	(18, 7, 'Vegetable oil for frying'),
 
-(19, 19, ' 1/2 cup Assorted cheeses'),
-(19, 98, 'a few slices Crackers or bread slices'),
-(19, 96, '1/2 cup Grapes'),
-(19, 62, '1/2 cup Nuts'),
-(19, 97, '1 tea spoon Honey or fruit preserves'),
+	(19, 19, ' 1/2 cup Assorted cheeses'),
+	(19, 98, 'a few slices Crackers or bread slices'),
+	(19, 96, '1/2 cup Grapes'),
+	(19, 62, '1/2 cup Nuts'),
+	(19, 97, '1 tea spoon Honey or fruit preserves'),
 
-(20, 50, '4  slice of potatoes'),
-(20, 41, '2 tablespoons olive oil'),
-(20, 90, 'Salt and pepper to taste'),
-(20, 82, '1/2 cup shredded cheddar cheese'),
-(20, 78, '2 tablespoons sour cream'),
+	(20, 50, '4  slice of potatoes'),
+	(20, 41, '2 tablespoons olive oil'),
+	(20, 90, 'Salt and pepper to taste'),
+	(20, 82, '1/2 cup shredded cheddar cheese'),
+	(20, 78, '2 tablespoons sour cream'),
 
-(21, 5, '2 cups sliced onions'), -- Hành tây (2 chén lát)
-(21, 15, '1 cup all-purpose flour'), -- Bột mỳ đa dụng (1 chén)
-(21, 20, '2 eggs'), -- Trứng (2 quả)
-(21, 57, '1 cup bread crumbs'), -- Bột bánh mì (1 chén)
-(21, 90, 'Salt and pepper to taste'), -- Muối và tiêu tùy khẩu vị
-(21, 48, 'Vegetable oil for frying'),
+	(21, 5, '2 cups sliced onions'), -- Hành tây (2 chén lát)
+	(21, 15, '1 cup all-purpose flour'), -- Bột mỳ đa dụng (1 chén)
+	(21, 20, '2 eggs'), -- Trứng (2 quả)
+	(21, 57, '1 cup bread crumbs'), -- Bột bánh mì (1 chén)
+	(21, 90, 'Salt and pepper to taste'), -- Muối và tiêu tùy khẩu vị
+	(21, 48, 'Vegetable oil for frying'),
 
-(22, 70, '12 mozzarella cheese sticks'),
-(22, 15, '1 cup all-purpose flour'),
-(22, 20, '2 eggs, beaten'),
-(22, 95, '1 cup Italian-style breadcrumbs'),
-(22, 48, 'Vegetable oil for frying'),
+	(22, 70, '12 mozzarella cheese sticks'),
+	(22, 15, '1 cup all-purpose flour'),
+	(22, 20, '2 eggs, beaten'),
+	(22, 95, '1 cup Italian-style breadcrumbs'),
+	(22, 48, 'Vegetable oil for frying'),
 
-(23, 11, '12 large mushrooms'),
-(23, 69, '1/4 cup grated Parmesan cheese'),
-(23, 16, '1/4 cup bread crumbs'),
-(23, 8, '2 cloves garlic, minced'),
-(23, 41, '2 tablespoons olive oil'),
+	(23, 11, '12 large mushrooms'),
+	(23, 69, '1/4 cup grated Parmesan cheese'),
+	(23, 16, '1/4 cup bread crumbs'),
+	(23, 8, '2 cloves garlic, minced'),
+	(23, 41, '2 tablespoons olive oil'),
 
-(24, 23, '2 large ripe tomatoes'), -- Cà chua chín (2 quả to)
-(24, 70, '1/2 cup fresh mozzarella cheese, sliced'), -- Phô mai mozzarella tươi, lát mỏng (1/2 chén)
-(24, 39, '1/4 cup fresh basil leaves'), -- Lá húng quế tươi (1/4 chén)
-(24, 41, '2 tablespoons olive oil'), -- Dầu oliu (2 thìa canh)
-(24, 90, 'Salt and pepper to taste'), -- Muối và tiêu theo khẩu vị
+	(24, 23, '2 large ripe tomatoes'), -- Cà chua chín (2 quả to)
+	(24, 70, '1/2 cup fresh mozzarella cheese, sliced'), -- Phô mai mozzarella tươi, lát mỏng (1/2 chén)
+	(24, 39, '1/4 cup fresh basil leaves'), -- Lá húng quế tươi (1/4 chén)
+	(24, 41, '2 tablespoons olive oil'), -- Dầu oliu (2 thìa canh)
+	(24, 90, 'Salt and pepper to taste'), -- Muối và tiêu theo khẩu vị
 
-(25, 78, '1 cup plain yogurt'), -- Sữa chua không đường (1 chén)
-(25, 60, 'To taste granola'), -- Granola (tùy khẩu vị)
-(25, 63, 'To taste dried fruit'), -- Trái cây khô (tùy khẩu vị)
-(25, 64, 'To taste dark chocolate chips'), -- Viên socola đen (tùy khẩu vị)
-(25, 65, 'To taste maple syrup'); -- Si-rô phong (tùy khẩu vị)
+	(25, 78, '1 cup plain yogurt'), -- Sữa chua không đường (1 chén)
+	(25, 60, 'To taste granola'), -- Granola (tùy khẩu vị)
+	(25, 63, 'To taste dried fruit'), -- Trái cây khô (tùy khẩu vị)
+	(25, 64, 'To taste dark chocolate chips'), -- Viên socola đen (tùy khẩu vị)
+	(25, 65, 'To taste maple syrup'); -- Si-rô phong (tùy khẩu vị)
 
 	-- Category to quick snack
 INSERT INTO category_to_quick_snack (quick_snack_id, category_id)
