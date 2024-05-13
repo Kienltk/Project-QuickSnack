@@ -5,7 +5,7 @@ $pages_to_highlight = array(
     '/category.php',
     '/products.php',
     '/gallery.php',
-    '/login.php'
+    '/My_saved_recipes.php'
 );
 
 
@@ -28,11 +28,11 @@ foreach ($pages_to_highlight as $page) {
             case '/gallery.php':
                 $gallery_class = 'active';
                 break;
-            case '/login.php':
-                $login_class = 'active';
+            case '/My_saved_recipes.php':
+                $My_saved_recipes_class = 'active';
                 break;
         }
-    }
+    } 
 }
 
 ?>
@@ -57,7 +57,7 @@ foreach ($pages_to_highlight as $page) {
                     <a class="nav-link mx-3 navbar_text <?php echo $gallery_class; ?>" href="../products/gallery.php">Gallery</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link mx-4 navbar_text <?php echo $login_class; ?>" href="../../views/products/My_saved_recipes.php">My Saved Recipes</a>
+                    <a class="nav-link mx-4 navbar_text <?php echo $My_saved_recipes_class; ?>" href="../../views/products/My_saved_recipes.php">My Saved Recipes</a>
 
                 </li>
 

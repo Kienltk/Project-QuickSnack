@@ -19,10 +19,15 @@ function getIngredient()
     return $result;
 }
 
-function getProductWithPagination($offset, $limit)
+function getProduct($filters, $page)
 {
-    include ("../../database/connect_database/index.php");
-    $smtc = $conn->prepare("SELECT 
+    global $conn;
+
+    $results_per_page = 12;
+
+    $start_index = ($page - 1) * $results_per_page;
+
+    $query = "SELECT 
         qs.quick_snack_id,
         qs.name,
         qs.level,
@@ -40,34 +45,87 @@ function getProductWithPagination($offset, $limit)
     LEFT JOIN 
         category_to_quick_snack ctqs ON qs.quick_snack_id = ctqs.quick_snack_id
     LEFT JOIN 
-        category c ON ctqs.category_id = c.category_id AND c.category_id IS NOT NULL
+        category c ON ctqs.category_id = c.category_id
     LEFT JOIN 
-        review r ON qs.quick_snack_id = r.quick_snack_id
-    GROUP BY 
+        review r ON qs.quick_snack_id = r.quick_snack_id";
+
+    $conditions = [];
+
+    if (!empty($filters['category'])) {
+        $categoryIds = implode(',', $filters['category']);
+        $conditions[] = "qs.quick_snack_id IN (
+        SELECT quick_snack_id FROM category_to_quick_snack
+        WHERE category_id IN ($categoryIds)
+        GROUP BY quick_snack_id
+        HAVING COUNT(*) = " . count($filters['category']) . "
+    )";
+    }
+
+    if (!empty($filters['ingredient'])) {
+        $ingredientIds = implode(',', $filters['ingredient']);
+        $conditions[] = "qs.quick_snack_id IN (
+        SELECT quick_snack_id FROM ingredient_to_quick_snack
+        WHERE ingredient_id IN ($ingredientIds)
+        GROUP BY quick_snack_id
+        HAVING COUNT(*) = " . count($filters['ingredient']) . "
+    )";
+    }
+
+    if (!empty($filters['level'])) {
+        $levels = implode("','", $filters['level']);
+        $conditions[] = "qs.level IN ('$levels')";
+    }
+
+    if (!empty($filters['time_min']) && !empty($filters['time_max'])) {
+        $timeMin = $filters['time_min'];
+        $timeMax = $filters['time_max'];
+        $conditions[] = "qs.time BETWEEN '$timeMin' AND '$timeMax'";
+    }
+
+    if (!empty($conditions)) {
+        $query .= " WHERE " . implode(' AND ', $conditions);
+    }
+
+    $query .= " GROUP BY 
         qs.quick_snack_id,
         qs.name,
         qs.level,
         qs.time,
         qs.yield,
         qs.created_at,
-        qs.user_id
-    ORDER BY 
-        qs.quick_snack_id
-    LIMIT ?, ?");
-    $smtc->bind_param("ii", $offset, $limit);
-    $smtc->execute();
-    $result = $smtc->get_result();
-    $conn->close();
-    return $result;
-}
+        qs.user_id";
 
-function getTotalProducts()
-{
-    include ("../../database/connect_database/index.php");
-    $result = $conn->query("SELECT COUNT(*) AS total FROM quick_snack");
-    $row = $result->fetch_assoc();
-    $conn->close();
-    return $row['total'];
+    $sort = isset($_GET['sort']) ? $_GET['sort'] : 'default';
+    switch ($sort) {
+        case 'name':
+            $query .= " ORDER BY qs.name";
+            break;
+        case 'rating':
+            $query .= " ORDER BY average_rating DESC";
+            break;
+        case 'time':
+            $query .= " ORDER BY qs.time";
+            break;
+        default:
+            $query .= " ORDER BY qs.quick_snack_id";
+            break;
+    }
+
+    $page = 1;
+
+    $countQuery = "SELECT COUNT(*) AS total FROM ($query) AS result";
+    $countResult = $conn->query($countQuery);
+    $totalCount = $countResult->fetch_assoc()['total'];
+
+    $total_pages = ceil($totalCount / $results_per_page);
+
+    $query .= " LIMIT $start_index, $results_per_page";
+
+    $stmt = $conn->prepare($query);
+    $stmt->execute();
+    $result = $stmt->get_result();
+
+    return ['products' => $result, 'total_pages' => $total_pages, 'current_sort' => $sort];
 }
 
 function getImage($param)

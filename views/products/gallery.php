@@ -104,8 +104,6 @@ $conn->close();
 
         .pagination {
             display: flex;
-
-
             justify-content: center;
             margin-top: 20px;
         }
