@@ -35,7 +35,6 @@ function isInWishlist($quick_snack_id, $conn, $user_id)
         .card {
             box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px !important;
             margin: 15px !important;
-
         }
 
         .card-img-top {
@@ -51,6 +50,28 @@ function isInWishlist($quick_snack_id, $conn, $user_id)
             height: 50px !important;
             margin-top: 10px !important;
         }
+
+        .pagination .page-item.active .page-link {
+            background-color: #E37E21 !important;
+            border-color: #E37E21 !important;
+        }
+
+        .pagination .page-link {
+            color: #E37E21;
+        }
+
+        .pagination a {
+            margin: 0 5px;
+            padding: 5px;
+            border-radius: 5px;
+            text-decoration: none;
+            color: #333;
+        }
+
+        .pagination .page-link:hover {
+            background-color: #E37E21 !important;
+            color: white;
+        }
     </style>
 </head>
 
@@ -63,8 +84,19 @@ function isInWishlist($quick_snack_id, $conn, $user_id)
             <?php
             include ('../../database/connect_database/index.php');
 
+            // Truy vấn để lấy tổng số lượng bản ghi
+            $sql_total = "SELECT COUNT(*) as total FROM image_category";
+            $result_total = $conn->query($sql_total);
+            $row_total = $result_total->fetch_assoc();
+            $total_records = $row_total['total'];
+
+            $limit = 8; // Số bản ghi trên mỗi trang
+            $total_pages = ceil($total_records / $limit); // Số lượng trang
+            $page = isset($_GET['page']) ? $_GET['page'] : 1; // Trang hiện tại
+            $start = ($page - 1) * $limit; // Vị trí bắt đầu của bản ghi
+            
             // Truy vấn để lấy dữ liệu từ bảng image_category
-            $sql = "SELECT * FROM image_category";
+            $sql = "SELECT * FROM image_category LIMIT $start, $limit";
             $result = $conn->query($sql);
 
             // Kiểm tra nếu có dữ liệu được trả về
@@ -86,6 +118,16 @@ function isInWishlist($quick_snack_id, $conn, $user_id)
             $conn->close();
             ?>
         </div>
+        <!-- Điều hướng phân trang -->
+        <nav aria-label="Page navigation">
+            <ul class="pagination justify-content-center">
+                <?php for ($i = 1; $i <= $total_pages; $i++): ?>
+                    <li class="page-item <?= $i == $page ? 'active' : '' ?>">
+                        <a class="page-link" href="?page=<?= $i ?>"><?= $i ?></a>
+                    </li>
+                <?php endfor; ?>
+            </ul>
+        </nav>
     </div>
     <?php
     include '../../views/includes/footer.php';
@@ -98,7 +140,6 @@ function isInWishlist($quick_snack_id, $conn, $user_id)
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
         crossorigin="anonymous"></script>
-
 
 </body>
 
