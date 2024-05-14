@@ -121,6 +121,16 @@ create table quick_snack_to_user_category(
 	foreign key (user_category_id) references user_category(user_category_id)
 );
 
+ CREATE TABLE contact (
+     id INT AUTO_INCREMENT PRIMARY KEY,
+     first_name VARCHAR(50) NOT NULL,
+     last_name VARCHAR(50) NOT NULL,
+    email VARCHAR(100) NOT NULL,
+     phone VARCHAR(20) NOT NULL,
+     message TEXT,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+ );
+
 
 -- INSERT DATA DEFAULT --
 	-- user
@@ -1055,6 +1065,7 @@ VALUES
 ('Banner4', '../../public/image/banners/banner4.png'),
 ('Banner5', '../../public/image/banners/banner5.png'),
 ('Banner6', '../../public/image/banners/banner6.png');
+
 
 
 -- QUERY SELECT TABLE --

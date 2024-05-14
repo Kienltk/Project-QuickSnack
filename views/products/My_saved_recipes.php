@@ -116,7 +116,7 @@ $i = 0;
                                     $j = 0;
                                 } else {
                                 ?>
-                                    <button type="button" onclick="location.href='../../models/products/delete_category.php?id=<?php echo $row["user_category_id"]; ?>'" class="edit-delete-button" id="deleteCategoryButton">Delete</button>
+                                    <button type="button" onclick="location.href='../../models/products/delete_category.php?id=<?php echo $row['user_category_id']; ?>'" class="edit-delete-button" id="deleteCategoryButton">Delete</button>
                                 <?php
                                 }
                                 ?>
@@ -127,7 +127,7 @@ $i = 0;
                                                 <h5 class="modal-title" id="editCategoryModalLabel">Edit Category's Name</h5>
                                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                             </div>
-                                            <form action="" method="POST">
+                                            <form name="rename_form" action="" method="POST" onsubmit="return characterLimit()">
                                                 <div class="modal-body">
                                                     <input type="text" name="new_name" id="editedCategoryInput" class="form-control" placeholder="Enter new category's name ..."
                                                     value="<?php echo $row["user_category_name"]; ?>">
@@ -161,13 +161,15 @@ $i = 0;
                         ?>
                         <div class="col-lg-3">
                             <div class="container mb-4 category_tab">
-                                <img src="<?php echo getImage($row["quick_snack_id"])["address_img"] ?>" alt="" class="product_image pt-3"><br>
-                                <span class="product_category"><?php echo $row["category_name"] ?></span>
-                                <h5 class="product_name mt-1 mb-0"><?php echo $row["name"] ?></h5>
-                                <div style="text-align: left;">
-                                    <span class="product_time"><?php echo $row["time"]; ?></span>
-                                </div>
-                                <button class="edit-delete-button" type="submit" onclick="location.href='../../models/products/delete_product_from_category.php?category_id=<?php echo $row["user_category_id"]; ?>&quick_snack_id=<?php echo $row["quick_snack_id"]; ?>&redirect=<?php echo $_GET["id"]; ?>'">Delete</button>
+                                <a href="../products/product_detail.php?quick_snack_id=<?php echo $row["quick_snack_id"] ?>">
+                                    <img src="<?php echo getImage($row["quick_snack_id"])["address_img"] ?>" alt="" class="product_image pt-3"><br>
+                                    <span class="product_category"><?php echo $row["category_name"] ?></span>
+                                    <h5 class="product_name mt-1 mb-0"><?php echo $row["name"] ?></h5>
+                                    <div style="text-align: left;">
+                                        <span class="product_time"><?php echo $row["time"]; ?></span>
+                                    </div>
+                                    <button class="edit-delete-button" type="submit" onclick="location.href='../../models/products/delete_product_from_category.php?category_id=<?php echo $row["user_category_id"]; ?>&quick_snack_id=<?php echo $row["quick_snack_id"]; ?>&redirect=<?php echo $_GET["id"]; ?>'">Delete</button>
+                                </a>
                             </div>
                         </div>
             <?php
@@ -187,6 +189,20 @@ $i = 0;
         <?php include("../includes/footer.php") ?>
     </footer>
     <!-- Bootstrap JavaScript Libraries -->
+    <script>
+        document.getElementById("test").innerHTML = x;
+        function characterLimit() {
+            let x = document.forms["rename_form"]["new_name"].value;
+            if (x == "") {
+                window.alert("Category name must not be blank");
+                return false;
+            }
+            if (x.length <= 12) {
+                window.alert("Category name must be less than 13 characters");
+                return false;
+            }
+        }
+    </script>
     <script>
         document.getElementById("edit_category").addEventListener("click", function() {
             document.getElementById("popupContainer").style.display = "flex";

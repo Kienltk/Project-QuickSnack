@@ -1,3 +1,45 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="../../public/css/header.css">
+    <style>
+        /* .navbar {
+            background-color: #ffffff;
+            padding-top: 10px;
+            padding-bottom: 10px;
+            padding-left: 30px;
+            padding-right: 30px;
+        }
+
+        #search_bar {
+            width: 30% !important;
+        } */
+
+        /* .navbar_text {
+            transition: transform 0.3s;
+        } */
+
+        /* .navbar_text:hover {
+            color: #ffa500 !important;
+            transform: scale(1.1);
+        } */
+/* 
+        .active {
+            color: #ffa500 !important;
+            font-weight: bolder;
+        } */
+    </style>
+
+</head>
+
+<body> -->
+
 <?php
 $current_page = $_SERVER['PHP_SELF'];
 
@@ -29,10 +71,22 @@ foreach ($pages_to_highlight as $page) {
                 $gallery_class = 'active';
                 break;
             case '/My_saved_recipes.php':
-                $My_saved_recipes_class = 'active';
+                $login_class = 'active';
                 break;
         }
-    } 
+    }
+}
+include("../../database/connect_database/index.php");
+
+$user_id = isset($_COOKIE["userID"]) ? $_COOKIE["userID"] : null;
+if ($user_id) {
+    $sql = "SELECT fullname FROM user WHERE user_id = $user_id";
+    $result = $conn->query($sql);
+
+    if ($result->num_rows > 0) {
+        $row = $result->fetch_assoc();
+        $user_fullname = $row["fullname"];
+    }
 }
 
 ?>
@@ -57,7 +111,7 @@ foreach ($pages_to_highlight as $page) {
                     <a class="nav-link mx-3 navbar_text <?php echo $gallery_class; ?>" href="../products/gallery.php">Gallery</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link mx-4 navbar_text <?php echo $My_saved_recipes_class; ?>" href="../../views/products/My_saved_recipes.php">My Saved Recipes</a>
+                    <a class="nav-link mx-4 navbar_text <?php echo $login_class; ?>" href="../../views/products/My_saved_recipes.php">My Saved Recipes</a>
 
                 </li>
 
@@ -70,17 +124,23 @@ foreach ($pages_to_highlight as $page) {
                     </div>
                 </div>
             </form>
+            <div id="search_results"></div>
+
+
 
             <?php
             if (isset($_COOKIE["userID"])) {
             ?>
                 <div class="dropdown">
-                    <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    <button class="btn  dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                         <i class="fa-solid fa-user fs-4"></i>
                     </button>
-                    <ul class="dropdown-menu" style="width:max-content">
-                        <li style="width:max-content"><a class="dropdown-item" href="#">Profile</a></li>
-                        <li style="width:max-content"><a class="dropdown-item" href="../../models/user/logout.php">Logout</a></li>
+                    <ul class="dropdown-menu dropdownUser">
+                        <li style="font-weight: bold;
+                                    color: #ffa500;
+                                    padding-left: 10px ;">Hello : <?php echo $user_fullname; ?></li>
+                        <li><a class="dropdown-item" href="#">Profile</a></li>
+                        <li><a class="dropdown-item" href="../../models/user/logout.php">Logout</a></li>
                     </ul>
                 </div>
             <?php } else { ?>
@@ -93,3 +153,82 @@ foreach ($pages_to_highlight as $page) {
         </div>
     </div>
 </nav>
+
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const searchBar = document.getElementById('search_bar');
+        const searchResults = document.getElementById('search_results');
+        searchResults.style.display = 'none';
+        searchBar.addEventListener('input', function() {
+            const searchTerm = searchBar.value.trim(); // Get the value of the search input
+            if (searchTerm !== '') {
+                // Send AJAX request to fetch search results
+                const xhr = new XMLHttpRequest();
+                xhr.open('POST', '../includes/search.php', true);
+                xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+                xhr.onreadystatechange = function() {
+                    if (xhr.readyState == 4 && xhr.status == 200) {
+                        // Handle the response and display search results
+                        searchResults.innerHTML = xhr.responseText;
+                        searchResults.style.display = 'block';
+                    }
+                };
+                xhr.send('action=search_term&data=' + searchTerm);
+            } else {
+                // If search term is empty, clear search results
+                searchResults.innerHTML = '';
+                searchResults.style.display = 'none';
+            }
+        });
+        const searchIcon = document.getElementById('search_icon');
+        searchIcon.addEventListener('click', function() {
+            const searchTerm = searchBar.value.trim();
+            if (searchTerm !== '') {
+                window.location.href = '../products/products.php?q=' + encodeURIComponent(searchTerm);
+            }else {
+                window.location.href = '../products/products.php';
+            }
+        });
+
+    });
+
+    window.addEventListener('scroll', function() {
+        if (window.scrollY > 50) {
+            document.querySelector('nav').classList.add('fixed-top');
+            navbar_height = document.querySelector('nav').offsetHeight;
+            document.body.style.paddingTop = navbar_height + 'px';
+        } else {
+            document.querySelector('nav').classList.remove('fixed-top');
+            document.body.style.paddingTop = '0';
+        }
+    });
+</script>
+<?php
+if (isset($_GET['q'])) {
+    $search_term = $_GET['q'];
+    echo $search_term;
+}
+?>
+
+<!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script> -->
+
+<!-- <script>
+    document.addEventListener("DOMContentLoaded", function() {
+        window.addEventListener('scroll', function() {
+            if (window.scrollY > 50) {
+                document.querySelector('nav').classList.add('fixed-top');
+                navbar_height = document.querySelector('nav').offsetHeight;
+                document.body.style.paddingTop = navbar_height + 'px';
+            } else {
+                document.querySelector('nav').classList.remove('fixed-top');
+                document.body.style.paddingTop = '0';
+            }
+        });
+    });
+</script> -->
+<!-- </body>
+
+</html> -->
+
+<!-- code này thêm vô products.php để lấy thông tin này -->
