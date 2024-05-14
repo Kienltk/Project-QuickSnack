@@ -29,6 +29,7 @@ $(document).ready(function () {
         autoplaySpeed: 1000,
     });
 
+<<<<<<< Updated upstream
     $(".category_list").slick({
         slidesToShow: 5,
         slidesToScroll: 1,
@@ -58,4 +59,6 @@ $(document).ready(function () {
     });
 
 
+=======
+>>>>>>> Stashed changes
 });

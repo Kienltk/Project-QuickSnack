@@ -153,3 +153,76 @@ body {
 .navbar-nav .nav-item:nth-last-child(2) {
   margin-right: auto;
 } */
+<<<<<<< Updated upstream
+=======
+@media (max-width: 768px) {
+  #search_bar {
+    display: none !important;
+  }
+  .input-group-text {
+    border-bottom-left-radius: 15px !important;
+    border-top-left-radius :15px !important;
+    border-left:2px !important;
+    margin-left: 10px !important;
+  }
+}
+    .dropdown-menu {
+        background-color: #ffffff; 
+        border: 1px solid #ffa500;  
+        text-align: center;
+        margin-top: 5px !important;
+    }
+
+    .dropdown-item  {
+        padding: 10px;
+ 
+    }
+
+    .dropdown-item :hover {
+        background-color: #ffa500; /* Màu nền cam khi di chuột */
+        color: #ffffff; /* Màu chữ trắng khi di chuột */
+    }
+    #search_results {
+      position: absolute;
+      top: 100%; 
+      left: 69%;
+      width: 25%; 
+      background-color: #fff; 
+      border: 1px solid #ccc; 
+      border-radius: 5px; 
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      z-index: 1000; 
+      display: block;
+  }
+  
+  #search_results ul {
+      list-style: none;
+      padding: 0; 
+      margin: 0; 
+  }
+  
+  #search_results li {
+      padding: 10px; 
+      cursor: pointer; 
+      transition: background-color 0.3s; 
+  }
+  
+  #search_results li:hover {
+      background-color: #f0f0f0; 
+  }
+  
+  #search_results a {
+      color: #333; 
+      text-decoration: none; 
+      font-size: 16px; 
+  }
+  
+  #search_results a:hover {
+      text-decoration: underline; 
+  }
+  @media (max-width: 990px) {
+    #search_results{
+      left: 5%;
+    }
+  }
+>>>>>>> Stashed changes

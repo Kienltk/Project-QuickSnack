@@ -3,7 +3,11 @@
 include "../../database/connect_database/index.php";
 
 // Kiểm tra nếu category_id được gửi từ yêu cầu GET
+<<<<<<< Updated upstream
 if(isset($_GET['category_id'])) {
+=======
+if (isset($_GET['category_id'])) {
+>>>>>>> Stashed changes
     // Lấy category_id từ yêu cầu
     $categoryId = $_GET['category_id'];
 
@@ -17,9 +21,15 @@ if(isset($_GET['category_id'])) {
     $result = $stmt->get_result();
 
     // Kiểm tra nếu có hình ảnh được tìm thấy
+<<<<<<< Updated upstream
     if($result->num_rows > 0) {
         // Hiển thị các hình ảnh tương ứng
         while($row = $result->fetch_assoc()) {
+=======
+    if ($result->num_rows > 0) {
+        // Hiển thị các hình ảnh tương ứng
+        while ($row = $result->fetch_assoc()) {
+>>>>>>> Stashed changes
             $imageUrl = $row['address_img'];
             $quickSnackId = $row['quick_snack_id'];
             echo '<div class="image">';
@@ -33,4 +43,8 @@ if(isset($_GET['category_id'])) {
         echo '<p>No images found for this category</p>';
     }
 }
+<<<<<<< Updated upstream
 ?>
+=======
+?>
+>>>>>>> Stashed changes

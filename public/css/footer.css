@@ -1,3 +1,4 @@
+<<<<<<< Updated upstream
 body,
 html {
   margin: 0;
@@ -112,5 +113,25 @@ ul li a:hover {
   .footer_col {
     flex: 0 0 100%;
     margin-bottom: 20px;
+=======
+.directory, 
+.copyright {
+  color: #000;
+  font-weight: 500;
+  transition: color 0.3s;
+}
+
+.directory:hover {
+  color: #e37e21;
+}
+
+.title-directory,
+.social-icon {
+  color: #e37e21;
+}
+@media (max-width: 1100px) {
+  text-center {
+      width: 100px !important;
+>>>>>>> Stashed changes
   }
 }

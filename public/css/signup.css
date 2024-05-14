@@ -25,6 +25,10 @@
   
   .col-left {
     padding: 0;
+<<<<<<< Updated upstream
+=======
+    height: 100vh;
+>>>>>>> Stashed changes
     display: flex;
     justify-content: center;
     align-items: center;

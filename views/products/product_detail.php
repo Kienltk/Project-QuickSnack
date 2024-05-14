@@ -71,6 +71,31 @@ function getComment()
     $result = $conn->query($query);
     return $result;
 }
+<<<<<<< Updated upstream
+=======
+function countComments($conn, $quick_snack_id)
+{
+    $query = "SELECT COUNT(*) AS total_comments FROM review WHERE quick_snack_id = ?";
+    $stmt = $conn->prepare($query);
+    $stmt->bind_param("i", $quick_snack_id);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $row = $result->fetch_assoc();
+    return $row['total_comments'];
+}
+function averageRating($conn, $quick_snack_id)
+{
+    $query = "SELECT AVG(rating) AS avg_rating FROM review WHERE quick_snack_id = ?";
+    $stmt = $conn->prepare($query);
+    $stmt->bind_param("i", $quick_snack_id);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $row = $result->fetch_assoc();
+    // Làm tròn số lượng rating trung bình
+    $avg_rating = ($row['avg_rating']);
+    return $avg_rating;
+}
+>>>>>>> Stashed changes
 
 $id = $_GET['quick_snack_id'];
 $query = 'SELECT * FROM image_quick_snack WHERE quick_snack_id= ' . $id . ' AND kind = 1 LIMIT 1';
@@ -83,7 +108,11 @@ $result = $conn->query($query);
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<<<<<<< Updated upstream
     <title>Russian Salad</title> <!--PHP Product Name-->
+=======
+    <title><?php echo $detailRow['name']; ?></title> <!--PHP Product Name-->
+>>>>>>> Stashed changes
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
@@ -100,6 +129,13 @@ $result = $conn->query($query);
             color: #ff9a62;
             background-color: #ff9a62;
         }
+<<<<<<< Updated upstream
+=======
+
+        .comment-count {
+            cursor: pointer;
+        }
+>>>>>>> Stashed changes
     </style>
 </head>
 
@@ -109,7 +145,10 @@ $result = $conn->query($query);
         include '..\includes\header.php';
         ?>
     </header>
+<<<<<<< Updated upstream
 
+=======
+>>>>>>> Stashed changes
     <div class="container">
         <div class="head">
             <p class="product-detail pt-5">
@@ -141,8 +180,14 @@ $result = $conn->query($query);
                 <span class="pt-1 fw-bold">
                     <i class="fas fa-user" style="color: #ff9a62"></i> Author
                 </span>
+<<<<<<< Updated upstream
                 <span class="pt-1 fw-bold">
                     <i class="fas fa-comment" style="color: #ff9a62"></i> Comment
+=======
+                <span class="pt-1 fw-bold comment-count">
+                    <i class="fas fa-comment " style="color: #ff9a62"></i>
+                    <?php echo countComments($conn, $id); ?> Comment
+>>>>>>> Stashed changes
                 </span>
                 <span class="pt-1 fw-bold">
                     <i class="fas fa-heart" style="color: #ff9a62"></i> Like
@@ -157,7 +202,13 @@ $result = $conn->query($query);
                 <i class="fas fa-star star-icon" style="color: #ff9a62"></i>
                 <i class="fas fa-star star-icon" style="color: #ff9a62"></i>
                 <i class="fas fa-star-half-alt star-icon" style="color: #ff9a62"></i>
+<<<<<<< Updated upstream
                 <span style="color: #8c8c8c;font-size: small;"> 4.5/5 Review </span>
+=======
+                <span style="color: #8c8c8c;font-size: small;">
+                    <?php echo averageRating($conn, $id); ?>/5 Review
+                </span>
+>>>>>>> Stashed changes
             </span>
         </div>
 
@@ -332,7 +383,11 @@ $result = $conn->query($query);
             <div class="comment-form mt-4">
                 <form id="comment-form" action="../../database/query_database/comment_handler.php" method="post">
                     <input type="hidden" name="quick_snack_id" value="<?php echo $id; ?>">
+<<<<<<< Updated upstream
                     <input type="hidden" name="user_id" value="<?php echo $row4['user_id']; ?>">
+=======
+                    <input type="hidden" name="user_id" value="<?php echo $user_id; ?>">
+>>>>>>> Stashed changes
                     <div>
                         <label for="comment" class="form-label">Comment</label>
                         <textarea class="form-control" id="comment" name="comment" rows="3" required></textarea>
@@ -366,12 +421,17 @@ $result = $conn->query($query);
         include '..\includes\footer.php';
         ?>
     </footer>
+<<<<<<< Updated upstream
+=======
+    <script src="https://kit.fontawesome.com/54dbfefd83.js" crossorigin="anonymous"></script>
+>>>>>>> Stashed changes
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
         crossorigin="anonymous"></script>
     <!-- Trong phần JavaScript -->
     <script>
+<<<<<<< Updated upstream
         // Trong phần JavaScript của trang product_detail.php
         document.getElementById("favoriteButton").addEventListener("click", function () {
             // Đảo lớp của biểu tượng bookmark giữa "far" và "fas" để thay đổi giữa trống và fill
@@ -398,6 +458,23 @@ $result = $conn->query($query);
         });
     </script>
 
+=======
+        document.addEventListener('DOMContentLoaded', function () {
+            // Lấy phần tử chứa số lượng comment
+            var commentCount = document.querySelector('.comment-count');
+
+            // Thêm sự kiện click cho phần tử chứa số lượng comment
+            commentCount.addEventListener('click', function () {
+                // Di chuyển màn hình xuống phần comment
+                var commentBox = document.querySelector('.comment-box');
+                commentBox.scrollIntoView({ behavior: 'smooth' });
+            });
+        });
+    </script>
+
+
+
+>>>>>>> Stashed changes
 </body>
 
 </html>

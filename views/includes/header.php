@@ -1,4 +1,8 @@
+<<<<<<< Updated upstream
 <!DOCTYPE html>
+=======
+<!-- <!DOCTYPE html>
+>>>>>>> Stashed changes
 <html lang="en">
 
 <head>
@@ -7,7 +11,11 @@
     <title>Document</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+<<<<<<< Updated upstream
     <link rel="stylesheet" href="../../public/css/header.css">
+=======
+    <link rel="stylesheet" href="../../public/css/header.css"> -->
+>>>>>>> Stashed changes
     <!-- <style>
         /* .navbar {
             background-color: #ffffff;
@@ -36,9 +44,15 @@
         } */
     </style> -->
 
+<<<<<<< Updated upstream
 </head>
 
 <body>
+=======
+<!-- </head>
+
+<body> -->
+>>>>>>> Stashed changes
 <?php
 $current_page = $_SERVER['PHP_SELF'];
 
@@ -75,6 +89,21 @@ foreach ($pages_to_highlight as $page) {
         }
     }
 }
+<<<<<<< Updated upstream
+=======
+include("../../database/connect_database/index.php");
+
+$user_id = isset($_COOKIE["userID"]) ? $_COOKIE["userID"] : null;
+if ($user_id) {
+    $sql = "SELECT fullname FROM user WHERE user_id = $user_id";
+    $result = $conn->query($sql);
+
+    if ($result->num_rows > 0) {
+        $row = $result->fetch_assoc();
+        $user_fullname = $row["fullname"];
+    }
+}
+>>>>>>> Stashed changes
 
 ?>
 
@@ -98,11 +127,16 @@ foreach ($pages_to_highlight as $page) {
                     <a class="nav-link mx-3 navbar_text <?php echo $gallery_class; ?>" href="../products/gallery.php">Gallery</a>
                 </li>
                 <li class="nav-item">
+<<<<<<< Updated upstream
                     <a class="nav-link mx-4 navbar_text <?php echo $login_class; ?>" href="../products/My_saved_recipes.php">My Saved Recipes</a>
+=======
+                    <a class="nav-link mx-4 navbar_text <?php echo $login_class; ?>" href="../../views/products/My_saved_recipes.php">My Saved Recipes</a>
+>>>>>>> Stashed changes
 
                 </li>
 
             </ul>
+<<<<<<< Updated upstream
             <form id="search_form" class="d-flex" role="search" style="width: 30%;">
     <div class="input-group me-1">
         <input class="form-control" type="search" placeholder="Search" aria-label="Search" id="search_bar">
@@ -113,6 +147,19 @@ foreach ($pages_to_highlight as $page) {
 </form>
 
 <div id="search_results" class="dropdown-menu"></div>
+=======
+            <form class="d-flex" role="search" style="width: 30%;">
+                <div class="input-group me-1">
+                    <input class="form-control" type="search" placeholder="Search" aria-label="Search" id="search_bar">
+                    <div class="input-group-text">
+                        <button class="btn" type="submit" id="search_icon"><i class="fas fa-search"></i></button>
+                    </div>
+                </div>
+            </form>
+            <div id="search_results"></div> 
+           
+
+>>>>>>> Stashed changes
 
             <?php
             if (isset($_COOKIE["userID"])) {
@@ -121,7 +168,14 @@ foreach ($pages_to_highlight as $page) {
                     <button class="btn  dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                         <i class="fa-solid fa-user fs-4"></i>
                     </button>
+<<<<<<< Updated upstream
                     <ul class="dropdown-menu">
+=======
+                    <ul class="dropdown-menu" style="left :-90%;">
+                        <li style="font-weight: bold;
+                                    color: #ffa500;
+                                    padding-left: 10px ;">Hello : <?php echo $user_fullname; ?></li>
+>>>>>>> Stashed changes
                         <li><a class="dropdown-item" href="#">Profile</a></li>
                         <li><a class="dropdown-item" href="../../models/user/logout.php">Logout</a></li>
                     </ul>
@@ -136,6 +190,7 @@ foreach ($pages_to_highlight as $page) {
         </div>
     </div>
 </nav>
+<<<<<<< Updated upstream
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
     $(document).ready(function() {
@@ -159,6 +214,42 @@ foreach ($pages_to_highlight as $page) {
     });
 });
 
+=======
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    const searchBar = document.getElementById('search_bar');
+    const searchResults = document.getElementById('search_results');
+    searchResults.style.display = 'none';
+    searchBar.addEventListener('input', function() {
+        const searchTerm = searchBar.value.trim(); // Get the value of the search input
+        if (searchTerm !== '') {
+            // Send AJAX request to fetch search results
+            const xhr = new XMLHttpRequest();
+            xhr.open('POST', '../includes/search.php', true);
+            xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState == 4 && xhr.status == 200) {
+                    // Handle the response and display search results
+                    searchResults.innerHTML = xhr.responseText;
+                    searchResults.style.display = 'block'; 
+                }
+            };
+            xhr.send('action=search_term&data=' + searchTerm);
+        } else {
+            // If search term is empty, clear search results
+            searchResults.innerHTML = '';
+            searchResults.style.display = 'none';
+        }
+    });
+    const searchIcon = document.getElementById('search_icon');
+    searchIcon.addEventListener('click', function() {
+        const searchTerm = searchBar.value.trim();
+        if (searchTerm !== '') {
+            window.location.href = '../products/products.php?q=' + encodeURIComponent(searchTerm);
+        }
+    });
+});
+>>>>>>> Stashed changes
 </script>
 
 <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script> -->
@@ -177,6 +268,23 @@ foreach ($pages_to_highlight as $page) {
         });
     });
 </script> -->
+<<<<<<< Updated upstream
 </body>
 
 </html>
+=======
+<!-- </body>
+
+</html> -->
+
+<!-- code này thêm vô products.php để lấy thông tin này 
+
+
+
+// <?php
+// if (isset($_GET['q'])) {
+//     $search_term = $_GET['q'];
+//     echo $search_term ;
+// }
+// ?> 
+>>>>>>> Stashed changes

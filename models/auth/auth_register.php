@@ -4,7 +4,11 @@ require_once('../../database/query_database/user.php');
 require_once('../../database/query_database/products.php');
 
 if (isset($_COOKIE['username'])) {
+<<<<<<< Updated upstream
     header("Location: ../../view/home");
+=======
+    header("Location: ../../views/home/home.php");
+>>>>>>> Stashed changes
     exit();
 }
 

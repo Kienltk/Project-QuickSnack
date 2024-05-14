@@ -13,7 +13,11 @@ create table user (
 );
 
 create table category(
+<<<<<<< Updated upstream
 	category_id  int primary key auto_increment,
+=======
+	category_id int primary key auto_increment,
+>>>>>>> Stashed changes
 	category_name varchar(100)
 );
 
@@ -256,7 +260,31 @@ VALUES
 ('Egg white'),
 ('Apple'),
 ('Walnuts'),
+<<<<<<< Updated upstream
 ('Ground cinnamon');
+=======
+('Coriander leaves'),
+('Cumin seeds'), 
+('Turmeric powder'), 
+('Garam masala'), 
+('Lemon juice'), -- 87
+('Baguette slices'),
+('Hot sauce'),
+('Salt and pepper'),
+('Curry powder'),
+('Green peas'),
+('Spring roll wrappers'),
+('Crackers or bread slices'),
+('Grapes'),
+('Honey or fruit preserves'),
+('Bread crumbs'),
+('Italian-style breadcrumbs'),
+('Granola'),
+('Fresh fruit'),
+('Tomato'),
+('Fresh mozzarella cheese'), 
+('Balsamic vinegar'); 
+>>>>>>> Stashed changes
 
 
 	-- Quick Snack
@@ -273,7 +301,24 @@ VALUES
 ('High Protein Quinoa Energy Bars', 'Easy', '30 mins', '18 servings', CURDATE(), 1),
 ('Ham and Cheese Pinwheels', 'Easy', '25 mins', '9 servings', CURDATE(), 1),
 ('Pizza Crostini Appetizer', 'Easy', '25 mins', '24 servings', CURDATE(), 1),
+<<<<<<< Updated upstream
 ('Gluten-Free Apple Oat Muffins', 'Easy', '26 mins', '12 servings', CURDATE(), 1);
+=======
+('Gluten-Free Apple Oat Muffins', 'Easy', '26 mins', '12 servings', CURDATE(), 1),
+('Russian Salad', 'Easy', '10 min', '2 peo', curdate(), 1),
+('French Fries', 'Easy', '10 min', '2 people', curdate(), 1),
+('Bruschetta', 'Medium', '30 min', '1 people', curdate(), 1),
+('Chiken Wings', 'Easy', '20 min', '2 people', curdate(), 1),
+('Samosas', 'Medium', '25 min', '2 people', curdate(), 1),
+('Fried Calamari', 'Medium', '20 min', '2 people', curdate(), 1),
+('Cheese Platter', 'Easy', '10 min', '2 people', curdate(), 1),
+('Potato Skins', 'Medium', '20 min', '2 people', curdate(), 1),
+('Onion Rings', 'Easy', '10 min', '2 people', curdate(), 1),
+('Mozzarella Sticks', 'Easy', '15 min', '2 people', curdate(), 1),
+('Stuffed Mushrooms', 'Medium', '20 min', '1 people', curdate(), 1),
+('Caprese', 'Easy', '15 min', '4 servings', curdate(), 1),
+('Greek Yogurt Parfait', 'Medium', '12 min', '2 people', curdate(), 1);
+>>>>>>> Stashed changes
 	-- Nutrition
 INSERT INTO nutrition (quick_snack_id, calories, fat, protein, carbs, fiber, net_crabs, sodium, cholesterol)
 VALUES 
@@ -288,7 +333,24 @@ VALUES
 (9, '250', '12g', '5g', '32g', '3g', '16g', '100mg', '0mg'),
 (10, '250', '12g', '5g', '32g', '3g', '16g', '100mg', '0mg'),
 (11, '180', '8g', '7g', '21g', '2g', '19g', '360mg', '15mg'),
+<<<<<<< Updated upstream
 (12, '180', '9g', '4g', '21g', '2g', '19g', '150mg', '30mg');
+=======
+(12, '180', '9g', '4g', '21g', '2g', '19g', '150mg', '30mg'),
+(13, '150', '10g', '5g', '15', '3', '12', '200', '20'),
+(14, '200', '12g', '3g', '20g', '2', '18', '250', '0'),
+(15, '180', '8g', '4g', '22g', '4', '18', '180', '10'),
+(16, '250', '15g', '10g', '18g', '1g', '17g', '300mg', '25mg'),
+(17, '220', '12g', '8g', '20g', '2g', '18g', '220mg', '15mg'),
+(18, '300', '18g', '15g', '25g', '3g', '22g', '350mg', '30mg'),
+(19, '180', '10g', '8g', '15g', '1g', '14g', '200mg', '15mg'),
+(20, '230', '13g', '6g', '22g', '2g', '20g', '250mg', '20mg'),
+(21, '190', '11g', '5g', '18g', '1g', '17g', '220mg', '10mg'),
+(22, '160', '9g', '7g', '12g', '1g', '11g', '180mg', '5mg'),
+(23, '200', '12g', '6g', '18g', '3g', '15g', '210mg', '10mg'),
+(24, '180', '8g', '5g', '18g', '2g', '16g', '220mg', '10mg'),
+(25, '150', '7g', '3g', '14g', '2g', '12g', '180mg', '5mg');
+>>>>>>> Stashed changes
 	-- Recipe
 INSERT INTO recipe (quick_snack_id, step, derection)
 VALUES 
@@ -379,7 +441,117 @@ VALUES
 (12, 4, 'Fold in shredded apple and walnuts. Stir just until blended.'),
 (12, 5, 'Line muffin pan with paper liners, or lightly grease pan and fill each muffin cup about 3/4 full.'),
 (12, 6, 'Bake for 16 minutes or until a toothpick inserted in the center of a muffin comes out clean.'),
+<<<<<<< Updated upstream
 (12, 7, 'Sprinkle hot muffins with cinnamon-sugar mixture and allow muffins to cool for about 10 to 15 minutes before serving.');
+=======
+(12, 7, 'Sprinkle hot muffins with cinnamon-sugar mixture and allow muffins to cool for about 10 to 15 minutes before serving.'),
+
+(13, 1, 'In a pot or wok, bring 10 cups of water to a boil and add a teaspoon of salt.'),
+(13, 2, 'Blanch the broccoli, cauliflower, green beans, carrots, and baby corn for 30 seconds.'),
+(13, 3, 'Remove and submerge these vegetables for ten seconds in cold water so that they do not get overcooked. Drain the vegetables.'),
+(13, 4, 'Heat the oil in a wok or large pan over low heat. Fry the garlic until golden brown, about 20 seconds.'),
+(13, 5, 'Turn up the heat to high and add the blanched vegetables along with the red pepper, zucchini, and mushrooms. Stir for 20 seconds to mix the vegetables well.'),
+(13, 6, 'Add the fish sauce, rice wine, white pepper, and salt to taste. Stir well and continue cooking until the vegetables are crisp-tender and the mushrooms are soft and cooked through.'),
+(13, 7, 'Serve the stir-fried mixed vegetables with plain boiled rice and any other Southeast Asian meat or seafood dish.'),
+
+(14, 1, 'Preheat the oven to 400 F. Grease a muffin tin or spray with baking spray.'),
+(14, 2, 'In a medium mixing bowl combine the flour, baking powder, table salt, sugar, and cornmeal. Blend well. Stir the shredded cheese into the flour mixture.'),
+(14, 3, 'In a separate bowl, whisk the egg. Add the milk and the melted butter or shortening and whisk to blend.'),
+(14, 4, 'When the oven has completely preheated, stir the egg and milk mixture into the flour mixture just until blended.'),
+(14, 5, 'Immediately fill the prepared muffin cups about two-thirds full and bake in the preheated oven for 17 to 22 minutes, or until golden brown.'),
+(14, 6, 'If desired, brush more melted butter over the tops of the hot muffins as soon as they come out of the oven.'),
+(14, 7, 'Enjoy!'),
+
+(15, 1, 'In a large pot, sauté the tomatoes, leek, and mushroom for 1 to 3 minutes.'),
+(15, 2, 'Add the vegetable broth and seaweed and bring to a slow simmer.'),
+(15, 3, 'Add the tofu, soy sauce, and miso. Reduce the heat to low.'),
+(15, 4, 'Stir well to dissolve and mix the miso.'),
+(15, 5, 'Allow to cook for at least 8 more minutes over low heat.'),
+
+(16, 1, 'Boil rice noodles until firm but soft enough to eat (al dente). Drain and rinse with cold water to prevent sticking.'),
+(16, 2, 'Combine all stir-fry sauce ingredients in a cup. Toss 2 tablespoons of sauce with chopped chicken.'),
+(16, 3, 'Heat oil in a wok or large non-stick pan over medium-high heat. Add garlic and stir-fry for 1 minute.'),
+(16, 4, 'Add chicken and stir-fry for 2 minutes. Add grated carrot or shredded cabbage and more stir-fry sauce if needed.'),
+(16, 5, 'Push ingredients to the side and crack the egg into the middle. Scramble quickly and mix with other ingredients.'),
+(16, 6, 'Add noodles and 1/4 of the stir-fry sauce. Stir-fry for 30 seconds, then add more sauce gradually until most of it is used up.'),
+(16, 7, 'Add bean sprouts and continue stir-frying for another 2 to 3 minutes.'),
+(16, 8, 'Taste and add remaining sauce or fish sauce for more flavor if desired.'),
+(16, 9, 'Serve topped with crushed nuts, sliced green onions, and fresh basil. Garnish with lime wedges.'),
+
+(17, 1, 'Preheat oven to 400 F. Spray tortilla wraps with olive oil cooking spray.'),
+(17, 2, 'Place tortillas on a cookie sheet on the center rack of the oven. Bake 5 minutes, to toast the tortillas slightly.'),
+(17, 3, 'Spread 1 1/2 tbsp. spaghetti sauce on each tortilla. Top with cheese and Italian seasoning. Return tortilla wraps to the oven. Bake 5 to 7 minutes, until cheese, is melted, golden and bubbly.'),
+(17, 4, 'Remove tortillas from the oven. Let cool 2 minutes, then fold over edges to form wrap sandwiches.'),
+
+(18, 1, 'Beat the eggs in a small bowl with the salt and pepper.'),
+(18, 2, 'Heat a wok or frying pan and add 2 tablespoons oil. When the oil is hot, add the eggs. Cook, stirring, on medium heat, until they are lightly scrambled but not too dry. Remove the eggs and clean out the pan.'),
+(18, 3, 'Heat 1 tablespoon oil in the pan or wok. When the oil is hot, add the minced ginger. Stir-fry for a few seconds.'),
+(18, 4, 'Then add the Chinese sausage. Stir-fry the sausage for a minute.'),
+(18, 5, 'Then add the shredded carrot and the green peas. Stir-fry for up to 2 more minutes and remove from the pan. Clean out the pan.'),
+(18, 6, 'Heat 2 tablespoons oil in the wok. Reduce the heat to medium and add the rice, stirring with chopsticks to break up any clumps. Stir in the remainder of the soy sauce and oyster sauce. Season with salt and pepper if desired.'),
+(18, 7, 'Add the sausage and vegetables back into the pan. Stir in the scrambled egg.'),
+(18, 8, 'Heat through and stir in the green onion if using. Serve hot.'),
+
+(19, 1, 'Discard the hard outer shell and seed of the longan.'),
+(19, 2, 'In a blender, make a smooth puree of the longans.'),
+(19, 3, 'Break the banana into smaller pieces and add to blender, and pour in coconut milk or water.'),
+(19, 4, 'Blend until smooth. Refrigerate, if you prefer, before serving.'),
+
+(19, 1, 'Preheat the oven to 425 F. Arrange the bagels on two baking sheets, cut-side up. Place in the oven as it preheats for about 5 minutes, or until the bagels feel toasted but aren\'t yet browned.'),
+(19, 2, 'Top each bagel with about a tablespoon of tomato sauce, spreading lightly to cover.'),
+(19, 3, 'Top each bagel with cheese followed by one pepperoni (if using).'),
+(19, 4, 'Bake in the preheated oven for 10-12 minutes, or until the edges of the bagels are toasted and the cheese is bubbly.'),
+(19, 5, 'Let cool for a few minutes before serving. Enjoy!'),
+
+(20, 1, 'Preheat the oven to 350 F. Line a 9-inch square baking pan with aluminum foil. Lightly grease the foil with vegetable oil.'),
+(20, 2, 'Place 4 tablespoons vegetable oil, maple syrup, peanut butter, and brown sugar in a microwave-proof bowl or measuring cup. Microwave gently on low heat for 30 seconds or so, or until ingredients can be whisked together easily. Whisk in the vanilla and the salt.'),
+(20, 3, 'Mix the oats and quinoa flakes together in a bowl. Coarsely chop the nuts and dried fruit, and stir them into the oat mixture. Stir in the chocolate chips.'),
+(20, 4, 'Add the liquid mixture to the oat mixture and stir until the dry ingredients are well coated. The mixture should be sticky and should start to clump together. If it doesn\'t, and it seems dry and crumbly, add more maple syrup to achieve the desired consistency.'),
+(20, 5, 'Press the mixture down firmly into a baking pan. Grease a small piece of aluminum foil and use it to compress the mixture down into the pan as smoothly and firmly as possible.'),
+(20, 6, 'Place pan in the oven and bake for 15 to 20 minutes, until grains appear toasted and smell fragrant. Remove from the oven and let cool for 10 minutes. Finish cooling pan in the refrigerator, and for best (least crumbly) results, wait until the mixture is well-chilled before cutting it into bars.'),
+
+(21, 1, 'Preheat the oven to 375 F. Add the garlic and Italian Seasoning to the olive oil.'),
+(21, 2, 'Roll out the refrigerated pizza dough into a large rectangle and cut off any uneven edges if you wish. Evenly spread the olive oil mixture over the dough.'),
+(21, 3, 'Sprinkle the Parmesan cheese and half of the mozzarella cheese over the entire surface of the dough.'),
+(21, 4, 'Cover the surface of the cheese with the deli ham.'),
+(21, 5, 'Sprinkle the surface of the ham with the rest of the shredded cheese and start to roll up the dough starting with the end facing you. Roll the dough as tightly as you can.'),
+(21, 6, 'Seal the edges of the dough together by pinching the dough together. Slice the dough into 9 rounds. Place them on a parchment-lined baking sheet.'),
+(21, 7, 'Whisk together the egg with a teaspoon of lukewarm water until it is completely blended. Brush the egg wash over the top and sides of the pinwheels. This will help to brown them while they are cooking and it helps hold the pinwheel together as it bakes so that less cheese oozes out of the sides.'),
+(21, 8, 'Bake for 15 to 20 minutes or until they are puffed and golden brown.'),
+(21, 9, 'Top the pinwheels with a little chopped parsley and serve immediately with marinara sauce on the side, if desired. They are also delicious at room temperature.'),
+
+(22, 1, 'Heat oven to 375 F. Line baking sheets with parchment paper or foil.'),
+(22, 2, 'Arrange the baguette slices on the prepared baking sheet. Brush each slice of bread with olive oil and rub them with garlic halves.'),
+(22, 3, 'Combine the finely chopped tomato, pepperoni, and onion. Sprinkle the tomato mixture onto each slice.'),
+(22, 4, 'Top with olives and basil. Then, sprinkle mozzarella cheese over each slice.'),
+(22, 5, 'Bake for about 10 minutes, until the crostini are hot and the cheese has melted.'),
+(22, 6, 'Serve the crostini with fresh grated Parmesan cheese or warm pizza sauce on the side.'),
+
+(23, 1, 'Use a clean coffee bean grinder to process 2 cups of certified gluten-free oats into oat flour. Depending on the size of your grinder, you may have to do this in batches.'),
+(23, 2, 'Place oat flour, baking powder, baking soda, brown sugar, and cinnamon in a mixing bowl. Whisk to blend.'),
+(23, 3, 'Lightly beat eggs in a separate small bowl. Add yogurt, apple juice, oil, and vanilla. Whisk to blend and pour into bowl with dry ingredients. Stir to combine thoroughly.'),
+(23, 4, 'Fold in shredded apple and walnuts. Stir just until blended.'),
+(23, 5, 'Line muffin pan with paper liners, or lightly grease pan and fill each muffin cup about 3/4 full.'),
+(23, 6, 'Bake for 16 minutes or until a toothpick inserted in the center of a muffin comes out clean.'),
+(23, 7, 'Sprinkle hot muffins with cinnamon-sugar mixture and allow muffins to cool for about 10 to 15 minutes before serving.'),
+
+(24, 1, 'Preheat the oven to 375°F (190°C). Grease a muffin tin or line with paper liners.'),
+(24, 2, 'In a large mixing bowl, whisk together the flour, baking powder, salt, and sugar.'),
+(24, 3, 'In a separate bowl, whisk together the milk, melted butter, and beaten egg.'),
+(24, 4, 'Pour the wet ingredients into the dry ingredients and stir until just combined. Do not overmix; the batter should be lumpy.'),
+(24, 5, 'Gently fold in the shredded cheese and corn kernels.'),
+(24, 6, 'Divide the batter evenly among the muffin cups, filling each about 2/3 full.'),
+(24, 7, 'Bake for 20-25 minutes, or until a toothpick inserted into the center of a muffin comes out clean.'),
+(24, 8, 'Allow the muffins to cool in the pan for 5 minutes before transferring them to a wire rack to cool completely.'),
+
+(25, 1, 'Layer the bottom of each serving glass or jar with a few spoonfuls of Greek yogurt.'),
+(25, 2, 'Add a layer of granola on top of the yogurt.'),
+(25, 3, 'Drizzle a spoonful of honey over the granola layer.'),
+(25, 4, 'Add a layer of mixed berries on top of the honey.'),
+(25, 5, 'Repeat the layers until the glass or jar is filled, finishing with a final drizzle of honey on top.'),
+(25, 6, 'Serve immediately, or cover and refrigerate until ready to eat.'),
+(25, 7, 'Enjoy your delicious Greek yogurt parfait!');
+>>>>>>> Stashed changes
 	-- Ingredient to quick snack
 INSERT INTO ingredient_to_quick_snack (quick_snack_id, ingredient_id, quantity)
 VALUES 
@@ -503,7 +675,90 @@ VALUES
 (12, 81, '1 large'),          
 (12, 82, '1/2 cup'),        
 (12, 17, '1 tablespoon'),     
+<<<<<<< Updated upstream
 (12, 83, '1/2 teaspoon');
+=======
+(12, 76, '1/2 teaspoon'),
+
+(13, 70, 'To taste'),
+(13, 71, '1 large potato'),
+(13, 72, '2 tablespoons olive oil'),
+(13, 1, 'To taste'),
+(13, 7, 'To taste'),
+
+(14, 15, '3/4 cup'),
+(14, 16, '1/2 teaspoon'),
+(14, 1, '3/4 teaspoon'),
+(14, 17, '1 tablespoon'),
+(14, 18, '1/2 cup'),
+
+(15, 40, '4 slices baguette'),
+(15, 8, '2 cloves garlic'),
+(15, 23, '2 large ripe tomatoes'),
+(15, 39, '1/4 cup chopped fresh basil leaves'),
+(15, 41, '2 tablespoons olive oil'),
+
+(16, 34, '12 chicken wings'),
+(16, 32, '1/4 cup hot sauce'),
+(16, 8, '2 tablespoons butter'),
+(16, 90, 'Salt and pepper to taste'),
+
+(17, 32, '5'), -- Scallions (5)
+(17, 15, '1 cup'), -- All-purpose flour (1 cup)
+(17, 52, '1 teaspoon'), -- Oyster Sauce (1 teaspoon)
+(17, 53, '1 tablespoon'), -- Leftover cooked rice (1 tablespoon)
+(17, 54, '1/2 cup'), -- Longan (1/2 cup)
+(17, 41, '1 teaspoon'), -- Olive oil (1 teaspoon)
+(17, 56, '1 tablespoon'),
+
+(18, 40, '1 pound calamari rings'),
+(18, 15, '1/2 cup all-purpose flour'),
+(18, 1, '1/2 teaspoon salt'),
+(18, 7, 'Vegetable oil for frying'),
+
+(19, 19, ' 1/2 cup Assorted cheeses'),
+(19, 98, 'a few slices Crackers or bread slices'),
+(19, 96, '1/2 cup Grapes'),
+(19, 62, '1/2 cup Nuts'),
+(19, 97, '1 tea spoon Honey or fruit preserves'),
+
+(20, 50, '4  slice of potatoes'),
+(20, 41, '2 tablespoons olive oil'),
+(20, 90, 'Salt and pepper to taste'),
+(20, 82, '1/2 cup shredded cheddar cheese'),
+(20, 78, '2 tablespoons sour cream'),
+
+(21, 5, '2 cups sliced onions'), -- Hành tây (2 chén lát)
+(21, 15, '1 cup all-purpose flour'), -- Bột mỳ đa dụng (1 chén)
+(21, 20, '2 eggs'), -- Trứng (2 quả)
+(21, 57, '1 cup bread crumbs'), -- Bột bánh mì (1 chén)
+(21, 90, 'Salt and pepper to taste'), -- Muối và tiêu tùy khẩu vị
+(21, 48, 'Vegetable oil for frying'),
+
+(22, 70, '12 mozzarella cheese sticks'),
+(22, 15, '1 cup all-purpose flour'),
+(22, 20, '2 eggs, beaten'),
+(22, 95, '1 cup Italian-style breadcrumbs'),
+(22, 48, 'Vegetable oil for frying'),
+
+(23, 11, '12 large mushrooms'),
+(23, 69, '1/4 cup grated Parmesan cheese'),
+(23, 16, '1/4 cup bread crumbs'),
+(23, 8, '2 cloves garlic, minced'),
+(23, 41, '2 tablespoons olive oil'),
+
+(24, 23, '2 large ripe tomatoes'), -- Cà chua chín (2 quả to)
+(24, 70, '1/2 cup fresh mozzarella cheese, sliced'), -- Phô mai mozzarella tươi, lát mỏng (1/2 chén)
+(24, 39, '1/4 cup fresh basil leaves'), -- Lá húng quế tươi (1/4 chén)
+(24, 41, '2 tablespoons olive oil'), -- Dầu oliu (2 thìa canh)
+(24, 90, 'Salt and pepper to taste'), -- Muối và tiêu theo khẩu vị
+
+(25, 78, '1 cup plain yogurt'), -- Sữa chua không đường (1 chén)
+(25, 60, 'To taste granola'), -- Granola (tùy khẩu vị)
+(25, 63, 'To taste dried fruit'), -- Trái cây khô (tùy khẩu vị)
+(25, 64, 'To taste dark chocolate chips'), -- Viên socola đen (tùy khẩu vị)
+(25, 65, 'To taste maple syrup'); -- Si-rô phong (tùy khẩu vị)
+>>>>>>> Stashed changes
 
 	-- Category to quick snack
 INSERT INTO category_to_quick_snack (quick_snack_id, category_id)
@@ -536,7 +791,51 @@ VALUES
 (8, 21),
 
 (9, 4),
+<<<<<<< Updated upstream
 (9, 22);
+=======
+(9, 14),
+
+(10, 8),
+(10, 22),
+
+(11, 9),
+(11, 11),
+
+(12, 5),
+(12, 13),
+
+(13, 4),
+(13, 21),
+
+(14, 5),
+(14, 21),
+
+(15, 12),
+
+(16, 9),
+(16, 21),
+
+(17, 21),
+
+(18, 21),
+
+(19, 21),
+
+(20, 21),
+
+(21, 21),
+
+(22, 21),
+
+(23, 21),
+
+(24, 9),
+(24, 13),
+
+(25, 4),
+(25, 17);
+>>>>>>> Stashed changes
 
 	-- Review
 INSERT INTO review (quick_snack_id, user_id, rating, comment, time)
@@ -587,7 +886,46 @@ VALUES
 
 (12, 9, 4, 'Good gluten-free option.', now()),
 (12, 10, 5, 'Moist and flavorful muffins!', now()),
+<<<<<<< Updated upstream
 (12, 6, 4, 'Enjoyed these with my morning coffee.', now());
+=======
+(12, 6, 4, 'Enjoyed these with my morning coffee.', now()),
+
+(13, 2, 3, 'Not bad, but could use more flavor.', now()),
+(13, 3, 4, 'Simple yet delicious!', now()),
+
+(14, 5, 5, 'Authentic taste! Loved it.', now()),
+(14, 1, 4, 'Quick and easy to make.', now()),
+
+(15, 3, 5, 'Perfect for a quick meal.', now()),
+(15, 2, 4, 'Great combination of flavors.', now()),
+
+(16, 4, 3, 'Good, but a bit too salty for my taste.', now()),
+(16, 1, 5, 'My go-to recipe for fried rice!', now()),
+
+(17, 2, 4, 'Refreshing and healthy.', now()),
+(17, 5, 5, 'Delicious and easy to make.', now()),
+
+(18, 3, 5, 'Crunchy and satisfying.', now()),
+(18, 4, 4, 'A hit at my party!', now()),
+
+(19, 1, 5, 'Perfect for a quick snack.', now()),
+
+(20, 2, 4, 'Tasty and filling.', now()),
+
+(21, 3, 3, 'Decent flavor, could be improved.', now()),
+
+(22, 4, 5, 'Absolutely delicious!', now()),
+
+(23, 5, 4, 'Healthy and flavorful.', now()),
+
+(24, 6, 4, 'The combination of flavors was delightful!', now()),
+(24, 7, 5, 'Authentic taste! Loved it.', now()),
+(24, 8, 4, 'Simple yet delicious!', now()),
+
+(25, 9, 5, 'Perfect for a quick meal.', now()),
+(25, 10, 4, 'Great combination of flavors.', now());
+>>>>>>> Stashed changes
 	-- Image quick snack
 INSERT INTO image_quick_snack (quick_snack_id, name_image, kind, address_img)
 VALUES 
@@ -649,8 +987,64 @@ VALUES
 (12, 'Gluten-Free Apple Oat Muffins', 0, '../../public/image/product/Gluten-Free Apple Oat Muffins.jpg'),
 (12, 'Gluten-Free Apple Oat Muffins', 1, '../../public/image/product/Gluten-Free Apple Oat Muffins1.jpg'),
 (12, 'Gluten-Free Apple Oat Muffins', 1, '../../public/image/product/Gluten-Free Apple Oat Muffins2.jpg'),
+<<<<<<< Updated upstream
 (12, 'Gluten-Free Apple Oat Muffins', 1, '../../public/image/product/Gluten-Free Apple Oat Muffins3.jpg');
 
+=======
+(12, 'Gluten-Free Apple Oat Muffins', 1, '../../public/image/product/Gluten-Free Apple Oat Muffins3.jpg'),
+
+(13, 'Russian Salad', 0, '../../public/image/product/Russian Salad.jpg'),
+(13, 'Russian Salads', 1, '../../public/image/product/Russian Salad1.jpg'),
+(13, 'Russian Salad', 1, '../../public/image/product/Russian salad2.jpg'),
+
+(14, 'French Fries', 0, '../../public/image/product/French fries.jpg'),
+(14, 'French Fries', 1, '../../public/image/product/French fries1.jpg'),
+(14, 'French Fries', 1, '../../public/image/product/French fries2.jpg'),
+
+(15, 'Bruschetta', 0, '../../public/image/product/Bruschetta.jpg'),
+(15, 'Bruschetta', 1, '../../public/image/product/Bruschetta1.jpg'),
+(15, 'Bruschetta', 1, '../../public/image/product/Bruschetta2.jpg'),
+
+(16, 'Chiken Wings', 0, '../../public/image/product/Chiken Wings.jpg'),
+(16, 'Chiken Wings', 1, '../../public/image/product/Chicken Wings1.jpg'),
+(16, 'Chiken Wings', 1, '../../public/image/product/Chiken Wings2.jpg'),
+
+(17, 'Samosas', 0, '../../public/image/product/Samosas.jpg'),
+(17, 'Samosas', 1, '../../public/image/product/Samosas1.jpg'),
+(17, 'Samosas', 1, '../../public/image/product/Samosas2.jpg'),
+
+(18, 'Fried Calamari', 0, '../../public/image/product/Fried calamari.jpg'),
+(18, 'Fried Calamari', 1, '../../public/image/product/Fried calamari1.jpg'),
+(18, 'Fried Calamari', 1, '../../public/image/product/Fried calamari2.jpg'),
+
+(19, 'Cheese Platter', 0, '../../public/image/product/Cheese platter.jpg'),
+(19, 'Cheese Platter', 1, '../../public/image/product/Cheese platter1.jpg'),
+(19, 'Cheese Platter', 1, '../../public/image/product/Cheese platter2.jpg'),
+
+(20, 'Potato Skins', 0, '../../public/image/product/Potato Skins.jpg'),
+(20, 'Potato Skins', 1, '../../public/image/product/Potato skins1.jpg'),
+(20, 'Potato Skins', 1, '../../public/image/product/Potato Skins2.jpg'),
+
+(21, 'Onion Rings', 0, '../../public/image/product/Onion Rings.jpg'),
+(21, 'Onion Rings', 1, '../../public/image/product/Onion rings1.jpg'),
+(21, 'Onion Rings', 1, '../../public/image/product/Onion Rings2.jpg'),
+
+(22, 'Mozzarella Sticks', 0, '../../public/image/product/Mozzarella Sticks.jpg'),
+(22, 'Mozzarella Sticks', 1, '../../public/image/product/Mozzaralla sticks1.jpg'),
+(22, 'Mozzarella Sticks', 1, '../../public/image/product/Mozzarella Sticks2.jpg'),
+
+(23, 'Stuffed Mushrooms', 0, '../../public/image/product/Stuffed mushroom.jpg'),
+(23, 'Stuffed Mushrooms', 1, '../../public/image/product/Stuffed Mushrooms1.jpg'),
+(23, 'Stuffed Mushrooms', 1, '../../public/image/product/Stuffed Mushrooms2.jpg'),
+
+(24, 'Caprese', 0, '../../public/image/product/Caprese.jpg'),
+(24, 'Caprese', 1, '../../public/image/product/Caprese1.jpg'),
+(24, 'Caprese', 1, '../../public/image/product/Caprese2.jpg'),
+
+(25, 'Greek Yogurt Parfait', 0, '../../public/image/product/Greek Yogurt Parfait.jpg'),
+(25, 'Greek Yogurt Parfait', 1, '../../public/image/product/Greek Yogurt Parfait1.jpg'),
+(25, 'Greek Yogurt Parfait', 1, '../../public/image/product/Greek Yogurt Parfait2.jpg');
+>>>>>>> Stashed changes
 
 	-- User catefory
 INSERT INTO user_category (user_category_name, user_id)
@@ -663,6 +1057,7 @@ VALUES
 	-- Image category
 INSERT INTO image_category (category_id, name, address_img_category)
 VALUES
+<<<<<<< Updated upstream
 (1, 'Vietnamese Stir-Fried Mixed Vegetables','../../public/image/product/Vietnamese Stir-Fried Mixed Vegetables2.jpg'),
 (2, 'Savory Cheese Cornbread Muffins', '../../public/image/product/Vietnamese Stir-Fried Mixed Vegetables3.jpg'),
 (3, 'Japanese Vegetable Miso Soup',  '../../public/image/product/Japanese Vegetable Miso Soup2.jpg'),
@@ -675,6 +1070,29 @@ VALUES
 (10, 'High Protein Quinoa Energy Bars', '../../public/image/product/Ham and Cheese Pinwheels.jpg'),
 (11, 'Pizza Crostini Appetizer', '../../public/image/product/Pizza Crostini Appetizer.jpg'),
 (12, 'Gluten-Free Apple Oat Muffins',  '../../public/image/product/Gluten-Free Apple Oat Muffins.jpg');
+=======
+(1, 'Vietnam-cuisine',  '../../public/image/Vietnam cuisine.jpg'),
+(2, 'Stir-Fry',  '../../public/image/category/stir fry.jpg'),
+(3, 'Vegetable Dish',  '../../public/image/category/vegetable dish.jpg'),
+(4, 'Snack',  '../../public/image/category/snack.jpg'),
+(5, 'Bread',  '../../public/image/category/bread.jpg'),
+(6, 'Japanese Cuisine',  '../../public/image/category/japanese cuisine.jpg'),
+(7, 'Thai cuisine',  '../../public/image/category/thai cuisine.jpg'),
+(8, 'Main Dish',  '../../public/image/category/main dish.jpg'),
+(9, 'Italian cuisine',  '../../public/image/category/italianscuisine.jpg'),
+(10, 'Chinese-cuisine',  '../../public/image/category/chinesescuisine.jpg'), 
+(11, 'Sandwich',  '../../public/image/category/sandwich.jpg'),
+(12, 'Salad',  '../../public/image/category/salad.jpg'),
+(13, 'Malaysian Cuisine',  '../../public/image/category/malaysian cuisine.jpg'),
+(14, 'Korean cuisine',  '../../public/image/category/korean cuisine.jpg'),
+(15, 'American cuisine',  '../../public/image/category/american cuisine.jpg'),
+(16, 'Beverage',  '../../public/image/category/beverage.jpg'),
+(17, 'Refreshment',  '../../public/image/category/refreshment.jpg'),
+(18, 'Smoothie',  '../../public/image/category/smoothie.jpg'),
+(19, 'Juice',  '../../public/image/category/juice.jpg'),
+(20, 'Appetizer',  '../../public/image/category/appetizer.jpg'),
+(21, 'Energy Bar',  '../../public/image/category/energy bar.jpg');	
+>>>>>>> Stashed changes
 	-- Image Banner
 INSERT INTO banner (banner_name, address_banner_img)
 VALUES 
@@ -692,13 +1110,21 @@ select * from ingredients;
 select * from category;
 SELECT * FROM image_quick_snack WHERE quick_snack_id = 3 AND kind = 1 LIMIT 1;
 SELECT quick_snack_id, address_img FROM image_quick_snack WHERE kind = 1 ORDER BY RAND() LIMIT 10;
+<<<<<<< Updated upstream
 SELECT
     qs.quick_snack_id,
     qs.name AS quick_snack_name,
+=======
+
+SELECT 
+    qs.quick_snack_id,
+    qs.name,
+>>>>>>> Stashed changes
     qs.level,
     qs.time,
     qs.yield,
     qs.created_at,
+<<<<<<< Updated upstream
     c.category_name,
     img.address_img AS address_img,
     r.rating
@@ -723,9 +1149,41 @@ LEFT JOIN
 GROUP BY
     qs.quick_snack_id, c.category_id
 ORDER BY
+=======
+    qs.user_id,
+    MAX(iqs.address_img) AS image_address,
+    GROUP_CONCAT(DISTINCT c.category_name ORDER BY c.category_id SEPARATOR ', ') AS categories,
+    ROUND(AVG(r.rating), 1) AS average_rating
+FROM 
+    quick_snack qs
+LEFT JOIN 
+    image_quick_snack iqs ON qs.quick_snack_id = iqs.quick_snack_id
+LEFT JOIN 
+    category_to_quick_snack ctqs ON qs.quick_snack_id = ctqs.quick_snack_id
+LEFT JOIN 
+    category c ON ctqs.category_id = c.category_id AND c.category_id IS NOT NULL
+LEFT JOIN 
+    review r ON qs.quick_snack_id = r.quick_snack_id
+GROUP BY 
+    qs.quick_snack_id,
+    qs.name,
+    qs.level,
+    qs.time,
+    qs.yield,
+    qs.created_at,
+    qs.user_id
+ORDER BY 
+>>>>>>> Stashed changes
     qs.quick_snack_id;
 
 
 
 
 
+<<<<<<< Updated upstream
+=======
+
+
+
+
+>>>>>>> Stashed changes

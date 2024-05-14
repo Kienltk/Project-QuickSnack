@@ -1,5 +1,10 @@
+<<<<<<< Updated upstream
 /* left table */
 td {
+=======
+
+/* td {
+>>>>>>> Stashed changes
     height: 30px;
 }
 
@@ -29,8 +34,11 @@ th {
     background-color: #E37E21;
     color: white;
 }
+<<<<<<< Updated upstream
 
 /*right table */
+=======
+>>>>>>> Stashed changes
 .product_tab {
     box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
     border-radius: 12px;
@@ -60,7 +68,10 @@ th {
     justify-content: flex-end;
 }
 
+<<<<<<< Updated upstream
 /* space between 2 tab vertially */
+=======
+>>>>>>> Stashed changes
 .vertical_spacing {
     margin-top: 20px;
 }
@@ -73,4 +84,12 @@ th {
     width: 300px;
     background-color: #E37E21;
     color: white;
+<<<<<<< Updated upstream
 }
+=======
+} */
+
+.results_search{
+    color: #DC582A;
+}
+>>>>>>> Stashed changes

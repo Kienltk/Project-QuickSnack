@@ -47,4 +47,16 @@ function getImage($param) {
     $return = $result->fetch_assoc();
     return $return;
 }
+<<<<<<< Updated upstream
+=======
+
+function addCategory($param) {
+    include ("../../database/connect_database/index.php");
+    $string = "New Category";
+    $smtc = $conn->prepare("INSERT INTO user_category (user_category_name, user_id) VALUES (?, ?)");
+    $smtc->bind_param("si", $string, $param);
+    $smtc->execute();
+    $conn->close();
+}
+>>>>>>> Stashed changes
 ?>

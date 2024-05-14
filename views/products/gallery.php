@@ -1,10 +1,18 @@
 <?php
 // Include database connection file
+<<<<<<< Updated upstream
 include("../../database/connect_database/index.php");
 
 // Set pagination variables
 $limit = 20; // Number of records per page
 $page = isset($_GET['page'])? $_GET['page'] : 1;
+=======
+include ("../../database/connect_database/index.php");
+
+// Set pagination variables
+$limit = 20; // Number of records per page
+$page = isset($_GET['page']) ? $_GET['page'] : 1;
+>>>>>>> Stashed changes
 $start = ($page - 1) * $limit;
 
 // Fetch records from database
@@ -38,10 +46,15 @@ $conn->close();
 
 <!DOCTYPE html>
 <html lang="en">
+<<<<<<< Updated upstream
+=======
+
+>>>>>>> Stashed changes
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gallery</title>
+<<<<<<< Updated upstream
     <link rel="stylesheet" href="styles.css">
     <style>
         .title {
@@ -132,10 +145,114 @@ $conn->close();
                 <p><?php echo $image['name'];?></p>
             </div>
         <?php }?>
+=======
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="../../public/css/style.css">
+    <link rel="stylesheet" href="../../public/css/header.css">
+    <link rel="stylesheet" href="../../public/css/footer.css">
+    <style>
+        .title {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            font-family: sans-serif;
+            color: #E37E21;
+        }
+
+        .grid-container {
+            columns: 5 200px;
+            column-gap: 1.5rem;
+            width: 90%;
+            margin: 0 auto;
+        }
+
+        .grid-container div {
+            width: 150px;
+            margin: 0 1.5rem 1.5rem 0;
+            display: inline-block;
+            width: 100%;
+            border: solid 2px black;
+            padding: 5px;
+            box-shadow: 5px 5px 5px rgba(0, 0,
+                    0, 0.5);
+            border-radius: 5px;
+            transition: all.25s ease-in-out;
+        }
+
+        .grid-container div:hover img {
+            filter: grayscale(0);
+        }
+
+        .grid-container div:hover {
+            border-color: coral;
+            transform: scale(1.1);
+        }
+
+        .grid-container img {
+            width: 100%;
+            /* filter: grayscale(1); */
+            border-radius: 5px;
+        }
+
+        .grid-container p {
+            font-family: sans-serif;
+            color: #333;
+            margin-top: 10px;
+            text-align: center;
+        }
+
+        .pagination {
+            display: flex;
+
+
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .pagination a {
+            margin: 0 5px;
+            padding: 5px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            text-decoration: none;
+            color: #333;
+        }
+
+        .pagination a:hover {
+            background-color: #f2f2f2;
+        }
+
+        .pagination .active {
+            background-color: #E37E21;
+            color: #fff;
+        }
+    </style>
+</head>
+
+<body>
+
+    <?php include '../../views/includes/header.php'; ?>
+
+    <div class="title">
+        <h1>Gallery</h1>
+    </div>
+
+    <div class="grid-container">
+        <?php foreach ($images as $image) { ?>
+            <div>
+                <img src="<?php echo $image['address']; ?>" alt="">
+                <p><?php echo $image['name']; ?></p>
+            </div>
+        <?php } ?>
+>>>>>>> Stashed changes
     </div>
 
     <!-- Pagination -->
     <div class="pagination">
+<<<<<<< Updated upstream
         <?php for ($i = 1; $i <= $total_pages; $i++) {?>
             <a href="?page=<?php echo $i;?>"><?php echo $i;?></a>
         <?php }?>
@@ -146,4 +263,20 @@ $conn->close();
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLeSaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 
 </body>
+=======
+        <?php for ($i = 1; $i <= $total_pages; $i++) { ?>
+            <a href="?page=<?php echo $i; ?>"><?php echo $i; ?></a>
+        <?php } ?>
+    </div>
+
+    <?php include '../../views/includes/footer.php'; ?>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossorigin="anonymous"></script>
+    <script src="https://kit.fontawesome.com/54dbfefd83.js" crossorigin="anonymous"></script>
+
+</body>
+
+>>>>>>> Stashed changes
 </html>
