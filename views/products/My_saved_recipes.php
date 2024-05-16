@@ -62,6 +62,7 @@ $i = 0;
         ?>
     </header>
     <main>
+
         <!--Title-->
         <div class="container">
             <h1>
@@ -127,9 +128,9 @@ $i = 0;
                                                 <h5 class="modal-title" id="editCategoryModalLabel">Edit Category's Name</h5>
                                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                             </div>
-                                            <form name="rename_form" action="" method="POST" onsubmit="return characterLimit()">
+                                            <form name="rename_form" action="" method="POST" onsubmit="return characterLimit(<?php echo $row["user_category_id"]; ?>)">
                                                 <div class="modal-body">
-                                                    <input type="text" name="new_name" id="editedCategoryInput" class="form-control" placeholder="Enter new category's name ..."
+                                                    <input type="text" name="new_name" id="editedCategoryInput<?php echo $row["user_category_id"]; ?>" class="form-control" placeholder="Enter new category's name ..."
                                                     value="<?php echo $row["user_category_name"]; ?>">
                                                 </div>
                                                 <div class="modal-footer">
@@ -168,8 +169,8 @@ $i = 0;
                                     <div style="text-align: left;">
                                         <span class="product_time"><?php echo $row["time"]; ?></span>
                                     </div>
-                                    <button class="edit-delete-button" type="submit" onclick="location.href='../../models/products/delete_product_from_category.php?category_id=<?php echo $row["user_category_id"]; ?>&quick_snack_id=<?php echo $row["quick_snack_id"]; ?>&redirect=<?php echo $_GET["id"]; ?>'">Delete</button>
                                 </a>
+                                    <button class="edit-delete-button" type="submit" onclick="location.href='../../models/products/delete_product_from_category.php?category_id=<?php echo $row["user_category_id"]; ?>&quick_snack_id=<?php echo $row["quick_snack_id"]; ?>&redirect=<?php echo $_GET["id"]; ?>'">Delete</button>
                             </div>
                         </div>
             <?php
@@ -190,14 +191,14 @@ $i = 0;
     </footer>
     <!-- Bootstrap JavaScript Libraries -->
     <script>
-        document.getElementById("test").innerHTML = x;
-        function characterLimit() {
-            let x = document.forms["rename_form"]["new_name"].value;
+        function characterLimit(id) {
+            let field_id = "editedCategoryInput" + id;
+            let x = document.getElementById(field_id).value;
             if (x == "") {
                 window.alert("Category name must not be blank");
                 return false;
             }
-            if (x.length <= 12) {
+            if (x.length > 13) {
                 window.alert("Category name must be less than 13 characters");
                 return false;
             }

@@ -50,7 +50,7 @@
   margin-top: 50px;
 }
 
-.contact-input {
+.contactform-input {
   margin-bottom: 5px; 
   border-radius: 10px;
   height: 50px; 
@@ -59,7 +59,7 @@
   border: 2px solid #E37E21;
 }
 
-.contact-input:focus {
+.contactform-input:focus {
   outline: none;
   border-color: #FFA270; 
 }
@@ -72,7 +72,7 @@
   margin-top: 5% !important;
 }
 
-.contact-input::placeholder {
+.contactform-input::placeholder {
   color: #000000; 
 }
 
@@ -166,7 +166,7 @@
     margin-top: 5% !important;
   }
   
-  .contact-input::placeholder {
+  .contactform-input::placeholder {
     color: #000000; 
   }
   

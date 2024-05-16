@@ -36,7 +36,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&display=swap">
-  
+  <link rel="stylesheet" href="../../public/css/header.css">
   <link rel="stylesheet" href="../../public/css/style.css">
   <link rel="stylesheet" href="../../public/css/contact.css">
   <link rel="stylesheet" href="../../public/css/footer.css">
@@ -91,20 +91,20 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
               <form class="contact-form">
                 <div class="row">
                   <div class="col">
-                    <input type="text" class="form-control contact-input" id="firstName" required placeholder="First Name *">
+                    <input type="text" class="form-control " id="firstName" required placeholder="First Name *">
                   </div>
                   <div class="col">
-                    <input type="text" class="form-control contact-input" id="lastName" required placeholder="Last Name *">
+                    <input type="text" class="form-control contactform-input" id="lastName" required placeholder="Last Name *">
                   </div>
                 </div>
                 <div class="form-group">
-                  <input type="email" class="form-control contact-input" id="email" required placeholder="Email *">
+                  <input type="email" class="form-control contactform-input" id="email" required placeholder="Email *">
                 </div>
                 <div class="form-group">
-                  <input type="tel" class="form-control contact-input" id="phone" required placeholder="Phone Number *">
+                  <input type="tel" class="form-control contactform-input" id="phone" required placeholder="Phone Number *">
                 </div>
                 <div class="form-group">
-                  <textarea class="form-control contact-input" id="message" rows="4" placeholder="Your message..."></textarea>
+                  <textarea class="form-control contactform-input" id="message" rows="4" placeholder="Your message..."></textarea>
                 </div>
                 <button type="submit" class="btn btn-primary">Send Message</button>
                 <div id="success-message" class="alert alert-success mt-3 d-none" role="alert">
@@ -123,8 +123,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   include '..\includes\footer.php';
   ?>
 
-  <script src="../../public/js/contact.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+  <!-- <script src="../../public/js/contact.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script> -->
 
 </body>
 
