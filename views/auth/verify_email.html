@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Email Verification</title>
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background-color: #f8f9fa;
+    }
+    .verification-box {
+      border: 2px solid orange;
+      box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.75);
+      padding: 40px;
+      text-align: center;
+      max-width: 500px;
+      background-color: white;
+    }
+    .verification-box img {
+      max-width: 150px;
+      margin-bottom: 30px;
+    }
+    h2 {
+      color: #000;
+      font-size: 32px;
+      margin-bottom: 10%;
+    }
+    .brand-name {
+      color: red;
+      font-size: 32px;
+    }
+    p {
+      margin-bottom: 30px;
+      font-size: 20px;
+    }
+    .btn-send-mail, .btn-resend, .btn-verify, .btn-signin, .btn-signup {
+      margin: 10px;
+      width: 150px;
+      background-color: orange;
+      border-color: orange;
+      color: white;
+    }
+    .btn-send-mail:hover, .btn-resend:hover, .btn-verify:hover, .btn-signin:hover, .btn-signup:hover {
+      background-color: #f68d2e;
+      border-color: #f68d2e;
+    }
+    .expired-message, .verified-message {
+      color: orange;
+    }
+    .hidden {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+
+<div class="verification-box">
+  <img id="verificationImage" src="../../public/image/sendmail.png" alt="Verification Image">
+  <h2>Welcome <span class="brand-name">QuickSnacks</span></h2>
+  <p class="expired-message hidden">Your email verification link has expired.</p>
+  <p class="verified-message hidden">Your email is successfully verified.</p>
+  <button id="sendMailBtn" class="btn btn-send-mail">Send Email</button>
+  <div id="verificationForm" class="hidden">
+    <p>Your email verification link has expired </p>
+    <p>Please input the number you received:</p>
+    <input type="text" id="verificationCode" class="form-control mb-3">
+    <button id="resendBtn" class="btn btn-resend">Resend</button>
+    <button id="verifyBtn" class="btn btn-verify">Verify</button>
+  </div>
+  <div id="verificationSuccess" class="hidden">
+    <button id="signInBtn" class="btn btn-signin">Sign In</button>
+    <button id="signUpBtn" class="btn btn-signup">Sign Up</button>
+  </div>
+</div>
+
+<script>
+  document.getElementById("sendMailBtn").addEventListener("click", function() {
+    document.getElementById("verificationForm").style.display = "block";
+    document.getElementById("sendMailBtn").style.display = "none";
+  });
+
+  document.getElementById("verifyBtn").addEventListener("click", function() {
+    var verificationCode = document.getElementById("verificationCode").value;
+    alert("Verifying email with code: " + verificationCode);
+    document.getElementById("verificationForm").style.display = "none";
+    document.getElementById("verificationSuccess").style.display = "block";
+    document.getElementById("verificationImage").src = "../../public/image/verifysuccessfully.png";
+    document.querySelector(".verified-message").classList.remove("hidden");
+  });
+
+  document.getElementById("signInBtn").addEventListener("click", function() {
+    alert("Sign In");
+  });
+
+  document.getElementById("signUpBtn").addEventListener("click", function() {
+    alert("Sign Up");
+  });
+</script>
+
+</body>
+</html>

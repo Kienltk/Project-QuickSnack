@@ -143,7 +143,12 @@ $total_pages = $result['total_pages'];
     <main class="container my-4">
         <div class="fs-3">
             <span class="fw-bold">Search results: </span>
-            <span class="results_search">balls</span>
+            <span class="results_search"><?php
+if (isset($_GET['q'])) {
+    $search_term = $_GET['q'];
+    echo $search_term;
+}
+?></span>
         </div>
 
         <div class="row my-3">

@@ -87,14 +87,14 @@
 }
 
 /* Icon search */
-#search_icon {
+#search_icon,#search_icon_mb {
   font-size: 16px;
   transition: all 0.3s ease;
   color: #ffa500;
 }
 
 /* Khi di chuột vào biểu tượng tìm kiếm */
-#search_icon:hover {
+#search_icon:hover,#search_icon_mb:hover {
   transform: scale(1.1);
   color: #fff;
 }
@@ -158,8 +158,8 @@ body {
     display: none !important;
   }
   .input-group-text {
-    border-bottom-left-radius: 15px !important;
-    border-top-left-radius :15px !important;
+    border-radius: 15px !important;
+    border: 2px solid #ff8800 !important;
     border-left:2px !important;
     margin-left: 10px !important;
   }
@@ -231,3 +231,66 @@ body {
 
     }
   }
+/* CSS for Popup Search */
+#popupSearch {
+  display: none;
+  position: fixed;
+  width: 80% !important;
+  height: 90% !important;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 9999;
+  background-color: white;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+.search-bar-popup {
+  width: 150% !important;
+  height: 35px;
+  border-radius: 15px !important;
+  padding: 5px 15px;
+  background-color: #fff;
+  border: 2px solid #ffa500;
+}
+
+.search-icon-popup {
+  font-size: 16px;
+  transition: all 0.3s ease;
+  color: #ffa500;
+}
+
+.search-icon-popup:hover {
+  transform: scale(1.1);
+  color: #fff;
+}
+
+
+
+#search-results-popup ul {
+  list-style: none;
+  padding: 0; 
+  margin: 0; 
+}
+
+#search-results-popup li {
+  padding: 6px ; 
+  cursor: pointer; 
+  transition: background-color 0.3s; 
+}
+
+#search-results-popup li:hover {
+  background-color: #f0f0f0; 
+}
+
+#search-results-popup a {
+  color: #333; 
+  text-decoration: none; 
+  font-size: 16px; 
+}
+
+#search-results-popup a:hover {
+  text-decoration: underline; 
+}

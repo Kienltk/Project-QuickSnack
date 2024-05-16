@@ -125,6 +125,21 @@ if ($user_id) {
                 </div>
             </form>
             <div id="search_results"></div>
+            <div id="popupSearch" class="popup">
+    <div class="popup-content">
+        <span class="close" id="closePopup">&times;</span>
+        <form class="d-flex" role="search" style="width: 100%;">
+            <div class="input-group me-1">
+                <input class="form-control search-bar-popup" type="search" placeholder="Search" aria-label="Search" id="search-bar-popup">
+                <div class="input-group-text" style="border: 2px solid #ff8800 !important;">
+                    <button class="btn search-icon-popup"><i class="fas fa-search"></i></button>
+                </div>
+            </div>
+        </form>
+        <div id="search-results-popup"></div>
+    </div>
+</div>
+
 
 
 
@@ -139,7 +154,7 @@ if ($user_id) {
                         <li style="font-weight: bold;
                                     color: #ffa500;
                                     padding-left: 10px ;">Hello : <?php echo $user_fullname; ?></li>
-                        <li><a class="dropdown-item" href="#">Profile</a></li>
+                        <li><a class="dropdown-item" href="../auth/user_profile.php">Profile</a></li>
                         <li><a class="dropdown-item" href="../../models/user/logout.php">Logout</a></li>
                     </ul>
                 </div>
@@ -181,17 +196,22 @@ if ($user_id) {
                 searchResults.style.display = 'none';
             }
         });
-        const searchIcon = document.getElementById('search_icon');
-        searchIcon.addEventListener('click', function() {
-            const searchTerm = searchBar.value.trim();
-            if (searchTerm !== '') {
-                window.location.href = '../products/products.php?q=' + encodeURIComponent(searchTerm);
-            }else {
-                window.location.href = '../products/products.php';
-            }
-        });
-
     });
+    document.addEventListener("DOMContentLoaded", function() {
+    const searchBar = document.getElementById('search_bar');
+    const searchIcon = document.getElementById('search_icon');
+
+    searchIcon.addEventListener('click', function(event) {
+        event.preventDefault(); 
+
+        const searchTerm = searchBar.value.trim();
+        if (searchTerm !== '') {
+            window.location.href = '../products/products.php?q=' + encodeURIComponent(searchTerm);
+        } else {
+            window.location.href = '../products/products.php';
+        }
+    });
+});
 
     window.addEventListener('scroll', function() {
         if (window.scrollY > 50) {
@@ -203,13 +223,72 @@ if ($user_id) {
             document.body.style.paddingTop = '0';
         }
     });
-</script>
-<?php
-if (isset($_GET['q'])) {
-    $search_term = $_GET['q'];
-    echo $search_term;
+    if (window.matchMedia("(max-width: 756px)").matches) {
+    document.getElementById("search_icon").id = "search_icon_mb";
 }
-?>
+window.addEventListener('resize', function() {
+    if (window.matchMedia("(max-width: 756px)").matches) {
+        document.getElementById("search_icon").id = "search_icon_mb";
+    } else {
+        if (document.getElementById("search_icon_mb")) {
+            document.getElementById("search_icon_mb").id = "search_icon";
+        }
+    }
+});
+// JavaScript for Popup Search
+document.addEventListener("DOMContentLoaded", function() {
+        const searchBarPopup = document.getElementById('search-bar-popup');
+        const searchResultsPopup = document.getElementById('search-results-popup');
+        searchResultsPopup.style.display = 'none';
+        searchBarPopup.addEventListener('input', function() {
+            const searchTerm = searchBarPopup.value.trim(); // Get the value of the search input
+            if (searchTerm !== '') {
+                // Send AJAX request to fetch search results
+                const xhr = new XMLHttpRequest();
+                xhr.open('POST', '../includes/search.php', true);
+                xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+                xhr.onreadystatechange = function() {
+                    if (xhr.readyState == 4 && xhr.status == 200) {
+                        // Handle the response and display search results
+                        searchResultsPopup.innerHTML = xhr.responseText;
+                        searchResultsPopup.style.display = 'block';
+                    }
+                };
+                xhr.send('action=search_term&data=' + searchTerm);
+            } else {
+                // If search term is empty, clear search results
+                searchResultsPopup.innerHTML = '';
+                searchResultsPopup.style.display = 'none';
+            }
+        });
+    });
+document.getElementById("search_icon_mb").addEventListener("click", function() {
+    event.preventDefault(); 
+    document.getElementById("popupSearch").style.display = "flex";
+});
+
+document.getElementById("closePopup").addEventListener("click", function() {
+    document.getElementById("popupSearch").style.display = "none";
+});
+
+document.addEventListener("DOMContentLoaded", function() {
+    const searchBarPopup = document.querySelector('.search-bar-popup');
+    const searchIconPopup = document.querySelector('.search-icon-popup');
+    const searchResultsPopup = document.querySelector('.search-results-popup');
+
+    searchIconPopup.addEventListener('click', function(event) {
+        event.preventDefault();
+        const searchTerm = searchBarPopup.value.trim();
+        if (searchTerm !== '') {
+            // Handle search action here, e.g., redirect to search results page
+            // Replace the following line with your desired action
+            window.location.href = '../products/products.php?q=' + encodeURIComponent(searchTerm);
+        }
+    });
+});
+
+</script>
+
 
 <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script> -->
 
@@ -230,5 +309,3 @@ if (isset($_GET['q'])) {
 <!-- </body>
 
 </html> -->
-
-<!-- code này thêm vô products.php để lấy thông tin này -->
