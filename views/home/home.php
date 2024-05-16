@@ -82,84 +82,152 @@ $num_slides = ceil($num_categories / $categories_per_slide);
             border-color: initial;
             box-shadow: none;
         }
+        .loader-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  z-index: 9999;
+}
+.loader {
+    position: relative;
+    margin: auto;
+    box-sizing: border-box;
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    border: 4px solid rgba(255, 255, 255, 0.1);
+    transform-origin: 50% 50%;
+    transform: perspective(200px) rotateX(66deg);
+    animation: spinner-wiggle 1.2s infinite;
+  }
+  .loader:before,
+  .loader:after {
+    content: "";
+    position: absolute;
+    inset: -4px;
+    border-radius: 50%;
+    box-sizing: border-box;
+    border: 4px solid #0000;
+    animation: spinner-spin 1.2s cubic-bezier(0.6, 0.2, 0, 0.8) infinite,
+      spinner-fade 1.2s linear infinite;
+  }
+  .loader:before {
+    border-top-color: #fff;
+  }
+  .loader:after {
+    border-top-color: #ff3d00;
+    animation-delay: 0.4s;
+  }
+
+  @keyframes spinner-spin {
+    100% { transform: rotate(360deg)}
+  }
+  @keyframes spinner-fade {
+    25%, 75% { opacity: 0.1}
+    50% { opacity: 1 }
+  }
+      
+.content {
+    opacity: 0 ;
+    z-index: 0;
+}
+
     </style>
 </head>
 
-<body>
-    <header>
-        <?php
-        include '..\includes\header.php';
-        ?>
-    </header>
-
-    <section class="container my-5">
-        <div>
+<body">
+<header>
             <?php
-            $randomImage = getBanner($conn);
-            if ($randomImage) {
-                echo '<img src="' . $randomImage['address_banner_img'] . '" class="img-fluid" alt="Random Image">';
-            } else {
-                echo '<img src="" class="img-fluid" alt="Random Image">';
-            }
+            include '..\includes\header.php';
             ?>
-        </div>
-        <div class="mt-5">
-            <p class="text-center fs-1 fw-bold">QuickSnacks based on preferences</p>
-        </div>
-        <div class="position-relative" style="height: 35px;">
-            <hr style="color: #E37E21; width: 30%; height: 5px; background-color: #E37E21; border-radius: 5px; opacity: 1;"
-                class="position-absolute top-0 start-50 translate-middle-x">
-        </div>
-
-        <div class="carousel slide" data-bs-ride="carousel" id="categoryCarousel">
-            <div class="carousel-inner">
-                <?php for ($i = 0; $i < $num_slides; $i++): ?>
-                    <div class="carousel-item <?= $i == 0 ? 'active' : '' ?>">
-                        <div class="d-flex justify-content-center">
-                            <?php for ($j = $i * $categories_per_slide; $j < min(($i + 1) * $categories_per_slide, $num_categories); $j++): ?>
-                                <button
-                                    class="category-item btn btn-outline-primary btn-sm mb-2 me-1 <?= isset($_GET['category']) && $_GET['category'] == $categories[$j]['category_id'] ? 'active' : '' ?>"
-                                    data-category-id="<?= $categories[$j]['category_id'] ?>">
-                                    <?= $categories[$j]['category_name'] ?>
-                                </button>
-                            <?php endfor; ?>
-                        </div>
-                    </div>
-                <?php endfor; ?>
-            </div>
-            <button class="carousel-control-prev" type="button" data-bs-target="#categoryCarousel" data-bs-slide="prev">
-                <span class="carousel-control-prev-icon" aria-hidden="true" style="background-color: #E37E21;"></span>
-                <span class="visually-hidden">Previous</span>
-            </button>
-            <button class="carousel-control-next" type="button" data-bs-target="#categoryCarousel" data-bs-slide="next">
-                <span class="carousel-control-next-icon" aria-hidden="true" style="background-color: #E37E21;"></span>
-                <span class="visually-hidden">Next</span>
-            </button>
-        </div>
-
-        <div class="image-slider my-5">
-            <?php
-            $sql = "SELECT * FROM image_quick_snack WHERE kind = 0";
-            $result = mysqli_query($conn, $sql);
-            if ($result->num_rows > 0) {
-                while ($row = $result->fetch_assoc()) {
-                    echo '<div class="image">';
-                    echo '<a href="../products/product_detail.php?quick_snack_id=' . $row['quick_snack_id'] . '">';
-                    echo '<img src="' . $row['address_img'] . '" class="img-fluid" alt="Random Image"  style = "border: 2px solid #f57c0c;">';
-                    echo '</a>';
-                    echo '</div>';
+        </header>
+<div class="loader-wrapper">
+    <div class="loader"></div>
+  </div>
+    <div class="content">
+        
+        
+        <section class="container my-5">
+            <div>
+                <?php
+                $randomImage = getBanner($conn);
+                if ($randomImage) {
+                    echo '<img src="' . $randomImage['address_banner_img'] . '" class="img-fluid" alt="Random Image">';
+                } else {
+                    echo '<img src="" class="img-fluid" alt="Random Image">';
                 }
-            }
+                ?>
+            </div>
+            <div class="mt-5">
+                <p class="text-center fs-1 fw-bold">QuickSnacks based on preferences</p>
+            </div>
+            <div class="position-relative" style="height: 35px;">
+                <hr style="color: #E37E21; width: 30%; height: 5px; background-color: #E37E21; border-radius: 5px; opacity: 1;"
+                    class="position-absolute top-0 start-50 translate-middle-x">
+            </div>
+        
+            <div class="carousel slide" data-bs-ride="carousel" id="categoryCarousel">
+                <div class="carousel-inner">
+                    <?php for ($i = 0; $i < $num_slides; $i++): ?>
+                        <div class="carousel-item <?= $i == 0 ? 'active' : '' ?>">
+                            <div class="d-flex justify-content-center">
+                                <?php for ($j = $i * $categories_per_slide; $j < min(($i + 1) * $categories_per_slide, $num_categories); $j++): ?>
+                                    <button
+                                        class="category-item btn btn-outline-primary btn-sm mb-2 me-1 <?= isset($_GET['category']) && $_GET['category'] == $categories[$j]['category_id'] ? 'active' : '' ?>"
+                                        data-category-id="<?= $categories[$j]['category_id'] ?>">
+                                        <?= $categories[$j]['category_name'] ?>
+                                    </button>
+                                <?php endfor; ?>
+                            </div>
+                        </div>
+                    <?php endfor; ?>
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#categoryCarousel" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true" style="background-color: #E37E21;"></span>
+                    <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#categoryCarousel" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true" style="background-color: #E37E21;"></span>
+                    <span class="visually-hidden">Next</span>
+                </button>
+            </div>
+        
+            <div class="image-slider my-5">
+                <?php
+                $sql = "SELECT * FROM image_quick_snack WHERE kind = 0";
+                $result = mysqli_query($conn, $sql);
+                if ($result->num_rows > 0) {
+                    while ($row = $result->fetch_assoc()) {
+                        echo '<div class="image">';
+                        echo '<a href="../products/product_detail.php?quick_snack_id=' . $row['quick_snack_id'] . '">';
+                        echo '<img src="' . $row['address_img'] . '" class="img-fluid" alt="Random Image"  style = "border: 2px solid #f57c0c;">';
+                        echo '</a>';
+                        echo '</div>';
+                    }
+                }
+                ?>
+            </div>
+            </div>
+        </section>
+        
+        <footer>
+            <?php
+            include '..\includes\footer.php';
             ?>
-        </div>
-        </div>
-    </section>
+        </footer>
+    </div class="content">
+    
 
-    <footer>
-        <?php
-        include '..\includes\footer.php';
-        ?>
-    </footer>
+    </body>
+    <script>
+    document.addEventListener("DOMContentLoaded", function() {
+  setTimeout(function() {
+    document.querySelector('.content').style.opacity  = '1';
+    document.querySelector('.loader-wrapper').style.display = 'none';
+  }, 1500); 
+});
+</script>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
         integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
@@ -171,6 +239,7 @@ $num_slides = ceil($num_categories / $categories_per_slide);
         integrity="sha512-HGOnQO9+SP1V92SrtZfjqxxtLmVzqZpjFFekvzZVWoiASSQgSr4cw9Kqd2+l8Llp4Gm0G8GIFJ4ddwZilcdb8A=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="https://kit.fontawesome.com/54dbfefd83.js" crossorigin="anonymous"></script>
+    
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
         crossorigin="anonymous"></script>
@@ -216,7 +285,5 @@ $num_slides = ceil($num_categories / $categories_per_slide);
         });
 
     </script>
-
-    </body>
 
 </html>

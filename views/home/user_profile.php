@@ -1,9 +1,7 @@
 <?php
 include("../../database/connect_database/index.php");
 
-
 if (!isset($_COOKIE["userID"])) {
-
     header("Location: login.php");
     exit();
 }
@@ -16,34 +14,47 @@ $gender_mapping = array(
 
 $user_id = $_COOKIE["userID"];
 
-
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $new_fullname = $_POST['new_fullname'];
     $new_email = $_POST['new_email'];
     $new_gender_id = $_POST['new_gender'];
-    $new_gender = $gender_mapping[$new_gender_id];
-    if ($new_gender == 'male') {
-        $new_gender_id = 1;
-    } elseif ($new_gender == 'female') {
-        $new_gender_id = 2;
-    } elseif ($new_gender == 'other') {
-        $new_gender_id = 3;
-    }
     $new_password = $_POST['new_password'];
-    $password_hash = password_hash($new_password, PASSWORD_BCRYPT);
+    $password_hash = null;
+
+    if (!empty($new_password)) {
+        $password_hash = password_hash($new_password, PASSWORD_BCRYPT);
+    }
 
     $profile_image_path = null;
 
     if (isset($_FILES['new_profile_image']) && $_FILES['new_profile_image']['error'] == UPLOAD_ERR_OK) {
-
         $upload_dir = '../../public/image/uploads/';
         $profile_image_path = $upload_dir . basename($_FILES['new_profile_image']['name']);
         move_uploaded_file($_FILES['new_profile_image']['tmp_name'], $profile_image_path);
     }
 
-    $sql_update = "UPDATE user SET fullname = ?, email = ?, gender = ?, password_hash = ?, profile_image = ? WHERE user_id = ?";
+    $sql_update = "UPDATE user SET fullname = ?, email = ?, gender = ?";
+    $params = [$new_fullname, $new_email, $new_gender_id];
+    $types = "ssi";
+
+    if ($password_hash) {
+        $sql_update .= ", password_hash = ?";
+        $params[] = $password_hash;
+        $types .= "s";
+    }
+
+    if ($profile_image_path) {
+        $sql_update .= ", profile_image = ?";
+        $params[] = $profile_image_path;
+        $types .= "s";
+    }
+
+    $sql_update .= " WHERE user_id = ?";
+    $params[] = $user_id;
+    $types .= "i";
+
     $stmt_update = $conn->prepare($sql_update);
-    $stmt_update->bind_param("sssisi", $new_fullname, $new_email, $new_gender_id, $password_hash, $profile_image_path, $user_id);
+    $stmt_update->bind_param($types, ...$params);
 
     if ($stmt_update->execute()) {
         header("Location: user_profile.php");
@@ -54,6 +65,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     $stmt_update->close();
 }
+
 $sql = "SELECT fullname, username, email, gender, profile_image FROM user WHERE user_id = ?";
 $stmt = $conn->prepare($sql);
 $stmt->bind_param("i", $user_id);
@@ -66,9 +78,7 @@ $conn->close();
 
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
+<meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>User Profile</title>
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
@@ -134,12 +144,9 @@ $conn->close();
 
 
 </head>
-
 <body>
     <header>
-        <?php
-        include '..\includes\header.php';
-        ?>
+        <?php include '../includes/header.php'; ?>
     </header>
     <div class="container mt-5" style="min-width: 450px !important;">
         <div class="row justify-content-center">
@@ -147,67 +154,54 @@ $conn->close();
                 <div class="card">
                     <div class="card-body">
                         <div class="row">
-                        <div class="col-md-4 text-center">
-    <!-- Avatar and Fullname -->
-    <?php
-    $profile_image = !empty($user['profile_image']) ? $user['profile_image'] : '../../public/image/user_profile.png';
-    ?>
-    <img src="<?php echo $profile_image; ?>" alt="Avatar" class="img-fluid rounded-circle mb-3" style="margin-top: 20% !important; height:150px !important; width :150px  !important; border: 4px solid orange !important; border-radius: 50% !important;">
-
-<h5 class="card-title" style=" margin-top: 25% !important;"><?php echo $user['fullname']; ?></h5>
-</div>
-                            <div class=" col-md-8">
-                                    <!-- Information -->
-                                    <h1 class="card-title">Information</h1>
-                                    <table class="table">
-                                        <tbody>
-                                            <tr>
-                                                <th scope="row">
-                                                    <div class="profile_information">Username:</div>
-                                                </th>
-                                                <td>
-                                                    <div class="profile_view">
-                                                        <?php echo $user['username']; ?>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <th scope="row">
-                                                    <div class="profile_information">Email:</div>
-                                                </th>
-                                                <td>
-                                                    <div class="profile_view">
-                                                        <?php echo $user['email']; ?>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <th scope="row">
-                                                    <div class="profile_information">Gender:</div>
-                                                </th>
-                                                <td>
-                                                    <div class="profile_view">
-                                                        <?php echo $gender_mapping[$user['gender']]; ?>
-                                                    </div class="profile_view">
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <th scope="row">
-                                                    <div class="profile_information">Password:</div>
-                                                </th>
-                                                <td>
-
-                                                    <div class="profile_view">
-                                                        *********
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
+                            <div class="col-md-4 text-center">
+                                <?php
+                                $profile_image = !empty($user['profile_image']) ? $user['profile_image'] : '../../public/image/user_profile.jpg';
+                                ?>
+                                <img src="<?php echo $profile_image; ?>" alt="Avatar" class="img-fluid rounded-circle mb-3" style="margin-top: 20% !important; height:150px !important; width:150px !important; border: 4px solid orange !important; border-radius: 50% !important;">
+                                <h5 class="card-title" style="margin-top: 25% !important;"><?php echo $user['fullname']; ?></h5>
+                            </div>
+                            <div class="col-md-8">
+                                <h1 class="card-title">Information</h1>
+                                <table class="table">
+                                    <tbody>
+                                        <tr>
+                                            <th scope="row">
+                                                <div class="profile_information">Username:</div>
+                                            </th>
+                                            <td>
+                                                <div class="profile_view"><?php echo $user['username']; ?></div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">
+                                                <div class="profile_information">Email:</div>
+                                            </th>
+                                            <td>
+                                                <div class="profile_view"><?php echo $user['email']; ?></div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">
+                                                <div class="profile_information">Gender:</div>
+                                            </th>
+                                            <td>
+                                                <div class="profile_view"><?php echo $gender_mapping[$user['gender']]; ?></div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">
+                                                <div class="profile_information">Password:</div>
+                                            </th>
+                                            <td>
+                                                <div class="profile_view">*********</div>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
                             </div>
                         </div>
-                        <!-- Edit Button -->
-                        <button type="button" class="btn btn-outline-primary position-absolute top-0 end-0" data-bs-toggle="modal" data-bs-target="#editModal" style="">
+                        <button type="button" class="btn btn-outline-primary position-absolute top-0 end-0" data-bs-toggle="modal" data-bs-target="#editModal">
                             <i class="fa-solid fa-pen-to-square" style="color: #f08138;"></i>
                         </button>
                     </div>
@@ -216,7 +210,6 @@ $conn->close();
         </div>
     </div>
 
-    <!-- Edit Modal -->
     <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -226,11 +219,10 @@ $conn->close();
                 </div>
                 <div class="modal-body">
                     <form method="post" enctype="multipart/form-data">
-    <div class="mb-3">
-        <label for="new_profile_image" class="form-label">Upload Profile Image:</label>
-        <input type="file" class="form-control" id="new_profile_image" name="new_profile_image" accept="image/*">
-    </div>
-
+                        <div class="mb-3">
+                            <label for="new_profile_image" class="form-label">Upload Profile Image:</label>
+                            <input type="file" class="form-control" id="new_profile_image" name="new_profile_image" accept="image/*">
+                        </div>
                         <div class="mb-3">
                             <label for="new_fullname" class="form-label">New Full Name:</label>
                             <input type="text" class="form-control" id="new_fullname" name="new_fullname" value="<?php echo $user['fullname']; ?>">
@@ -258,21 +250,15 @@ $conn->close();
         </div>
     </div>
 
-
     <script src="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css"></script>
-
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-migrate/3.4.1/jquery-migrate.min.js" integrity="sha512-KgffulL3mxrOsDicgQWA11O6q6oKeWcV00VxgfJw4TcM8XRQT8Df9EsrYxDf7tpVpfl3qcYD96BpyPvA4d1FDQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.js" integrity="sha512-HGOnQO9+SP1V92SrtZfjqxxtLmVzqZpjFFekvzZVWoiASSQgSr4cw9Kqd2+l8Llp4Gm0G8GIFJ4ddwZilcdb8A==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="https://kit.fontawesome.com/54dbfefd83.js" crossorigin="anonymous"></script>
-
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 
     <footer>
-        <?php
-        include '..\includes\footer.php';
-        ?>
+        <?php include '../includes/footer.php'; ?>
     </footer>
 </body>
-
 </html>

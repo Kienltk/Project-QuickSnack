@@ -1,7 +1,33 @@
-.results_search{
-    color: #DC582A;
+.results_search {
+  color: #dc582a;
+}
+
+.sort, .filter_checked{
+  border-color: #e37e21 !important;
 }
 
 .sort:focus {
-   box-shadow: 2px 0px 12px 3px #DC582A !important;
+  border-color: #e37e21 !important;
+  box-shadow: 1px 1px 12px 3px #dc582a !important;
+}
+
+.filter_:checked:checked {
+    background-color: #dc582a !important;
+}
+
+.filter_btn {
+    background-color: #e37e21 !important;
+    color: white !important;
+}
+.filter_btn:hover {
+    background-color: #dc582a !important;
+    color: white !important;
+}
+
+.more {
+    color: #dc582a !important;
+}
+
+.more:hover {
+    color: red !important;
 }

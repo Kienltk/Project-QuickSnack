@@ -50,28 +50,10 @@ $total_pages = $result['total_pages'];
     <link rel="stylesheet" href="../../public/css/style.css">
     <link rel="stylesheet" href="../../public/css/footer.css">
     <style>
-        .min-max label {
-            float: left;
-            margin-right: 5px;
-        }
-
-        .min {
-            float: left;
-        }
-
-        .max {
-            float: right;
-        }
-
         .min-max span {
             text-align: center;
-            display: inline-block;
-            width: 50px;
-            border: 1px solid #dedede;
-        }
-
-        .min-max-range {
-            padding: 30px 0px 20px 0px;
+            border: 1px solid #E37E21;
+            padding: 8px;
         }
 
         .range {
@@ -83,6 +65,7 @@ $total_pages = $result['total_pages'];
             background-color: #dedede;
             outline: none;
             float: left;
+            
         }
 
         #min {
@@ -151,18 +134,25 @@ $total_pages = $result['total_pages'];
     </header>
 
     <main class="container my-4">
-        <div class="fs-3">
-            <span class="fw-bold">Search results: </span>
-            <span class="results_search"><?php echo $search ?></span>
-        </div>
+        <?php
+        if (isset($search)) {
+        ?>
+
+            <div class="fs-3">
+                <span class="fw-bold">Search results: </span>
+                <span class="results_search"><?php echo $search ?></span>
+            </div>
+        <?php
+        }
+        ?>
 
         <div class="row my-3">
             <div class="col-12 col-md-3 py-3">
                 <div class="row">
-                    <div class="col-6 text-center fs-5 fw-semibold">
+                    <div class="col-12 col-lg-6 text-center fs-5 fw-semibold">
                         <span>Filter the food</span>
                     </div>
-                    <div class="col-6">
+                    <div class="col-12 col-lg-6">
                         <select id="sortDropdown" class="form-select form-select-md mx-auto sort" style="width: fit-content;" onchange="sortProducts(this.value)">
                             <option selected value="default" class="option">Sort</option>
                             <option value="name" class="option">Name</option>
@@ -192,12 +182,14 @@ $total_pages = $result['total_pages'];
                     <hr class="my-3">
                 </div>
 
-                <button class="btn btn-primary d-lg-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasResponsive" aria-controls="offcanvasResponsive">Filter</button>
+                <div class="row d-lg-none justify-content-center">
+                    <button class="btn filter_btn" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasResponsive" aria-controls="offcanvasResponsive" style="width: fit-content">Filter</button>
+                </div>
 
                 <div class="offcanvas-lg offcanvas-end" tabindex="-1" id="offcanvasResponsive" aria-labelledby="offcanvasResponsiveLabel">
                     <div class="offcanvas-header">
                         <h5 class="offcanvas-title" id="offcanvasResponsiveLabel">Filter</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#offcanvasResponsive" aria-label="Close"></button>
+                        <button type="button" class="btn-close text-end" data-bs-dismiss="offcanvas" data-bs-target="#offcanvasResponsive" aria-label="Close"></button>
                     </div>
 
                     <div class="offcanvas-body">
@@ -208,7 +200,7 @@ $total_pages = $result['total_pages'];
                                 </div>
                                 <div class="col-6">
                                     <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" name="category[]" value="all" id="category-all" onchange="toggleCategory(this)" <?php if (!isset($_GET['category']) && $category_id === null) echo 'checked'; ?>>
+                                        <input class="form-check-input filter_checked" type="checkbox" name="category[]" value="all" id="category-all" onchange="toggleCategory(this)" <?php if (!isset($_GET['category']) && $category_id === null) echo 'checked'; ?>>
                                         <label class="form-check-label" for="checkboxAll">
                                             All
                                         </label>
@@ -228,8 +220,8 @@ $total_pages = $result['total_pages'];
                                 ?>
                                             <div class="col-6">
                                                 <div class="form-check">
-                                                    <input class="form-check-input" type="checkbox" name="category[]" value="<?php echo $row["category_id"]; ?>" onchange="toggleCategory(this)" <?php if ($isChecked)
-                                                                                                                                                                                                        echo 'checked'; ?>>
+                                                    <input class="form-check-input filter_checked" type="checkbox" name="category[]" value="<?php echo $row["category_id"]; ?>" onchange="toggleCategory(this)" <?php if ($isChecked)
+                                                                                                                                                                                                            echo 'checked'; ?>>
                                                     <label class="form-check-label text-wrap" for="category_<?php echo $row["category_id"]; ?>">
                                                         <?php echo $row["category_name"]; ?>
                                                     </label>
@@ -241,8 +233,8 @@ $total_pages = $result['total_pages'];
                                             <div class="col-6">
                                                 <div class="collapse" id="category">
                                                     <div class="form-check">
-                                                        <input class="form-check-input" type="checkbox" name="category[]" value="<?php echo $row["category_id"]; ?>" onchange="toggleCategory(this)" <?php if ($isChecked)
-                                                                                                                                                                                                            echo 'checked'; ?>>
+                                                        <input class="form-check-input filter_checked" type="checkbox" name="category[]" value="<?php echo $row["category_id"]; ?>" onchange="toggleCategory(this)" <?php if ($isChecked)
+                                                                                                                                                                                                                echo 'checked'; ?>>
                                                         <label class="form-check-label text-wrap" for="category_<?php echo $row["category_id"]; ?>">
                                                             <?php echo $row["category_name"]; ?>
                                                         </label>
@@ -254,7 +246,7 @@ $total_pages = $result['total_pages'];
                                     }
                                     ?>
                                     <div class="col-12 text-center">
-                                        <a class="" data-bs-toggle="collapse" href="#category" role="button" aria-expanded="false" aria-controls="collapseExample">
+                                        <a class="more" data-bs-toggle="collapse" href="#category" role="button" aria-expanded="false" aria-controls="collapseExample">
                                             See more
                                         </a>
                                     </div>
@@ -270,7 +262,7 @@ $total_pages = $result['total_pages'];
                                 </div>
                                 <div class="col-6 ">
                                     <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" name="ingredient[]" value="all" id="ingredient-all" onchange="toggleIngredient(this)" <?php if (!isset($_GET['ingredient'])) echo 'checked'; ?>>
+                                        <input class="form-check-input filter_checked" type="checkbox" name="ingredient[]" value="all" id="ingredient-all" onchange="toggleIngredient(this)" <?php if (!isset($_GET['ingredient'])) echo 'checked'; ?>>
                                         <label class="form-check-label" for="flexCheckChecked">
                                             All
                                         </label>
@@ -287,8 +279,8 @@ $total_pages = $result['total_pages'];
                                 ?>
                                             <div class="col-6">
                                                 <div class="form-check">
-                                                    <input class="form-check-input" type="checkbox" name="ingredient[]" value="<?php echo $row["ingredient_id"]; ?>" onchange="toggleIngredient(this)" <?php if ($isChecked)
-                                                                                                                                                                                                            echo 'checked'; ?>>
+                                                    <input class="form-check-input filter_checked" type="checkbox" name="ingredient[]" value="<?php echo $row["ingredient_id"]; ?>" onchange="toggleIngredient(this)" <?php if ($isChecked)
+                                                                                                                                                                                                                    echo 'checked'; ?>>
                                                     <label class="form-check-label text-wrap" for="ingredient_<?php echo $row["ingredient_id"]; ?>">
                                                         <?php echo $row["ingredient_name"]; ?>
                                                     </label>
@@ -300,8 +292,8 @@ $total_pages = $result['total_pages'];
                                             <div class="col-6 ">
                                                 <div class="collapse" id="ingredient">
                                                     <div class="form-check">
-                                                        <input class="form-check-input" type="checkbox" name="ingredient[]" value="<?php echo $row["ingredient_id"]; ?>" onchange="toggleIngredient(this)" <?php if ($isChecked)
-                                                                                                                                                                                                                echo 'checked'; ?>>
+                                                        <input class="form-check-input filter_checked" type="checkbox" name="ingredient[]" value="<?php echo $row["ingredient_id"]; ?>" onchange="toggleIngredient(this)" <?php if ($isChecked)
+                                                                                                                                                                                                                        echo 'checked'; ?>>
                                                         <label class="form-check-label text-wrap" for="ingredient_<?php echo $row["ingredient_id"]; ?>">
                                                             <?php echo $row["ingredient_name"]; ?>
                                                         </label>
@@ -313,7 +305,7 @@ $total_pages = $result['total_pages'];
                                     }
                                     ?>
                                     <div class="col-12 text-center">
-                                        <a class="" data-bs-toggle="collapse" href="#ingredient" role="button" aria-expanded="false" aria-controls="collapseExample">
+                                        <a class="more" data-bs-toggle="collapse" href="#ingredient" role="button" aria-expanded="false" aria-controls="collapseExample">
                                             See more
                                         </a>
                                     </div>
@@ -335,8 +327,8 @@ $total_pages = $result['total_pages'];
                                 ?>
                                     <div class="col-4">
                                         <div class="form-check">
-                                            <input class="form-check-input" type="radio" name="level[]" value="<?php echo $level; ?>" id="level_<?php echo strtolower($level); ?>" <?php if ($isChecked)
-                                                                                                                                                                                        echo 'checked'; ?>>
+                                            <input class="form-check-input filter_checked" type="radio" name="level[]" value="<?php echo $level; ?>" id="level_<?php echo strtolower($level); ?>" <?php if ($isChecked)
+                                                                                                                                                                                                echo 'checked'; ?>>
                                             <label class="form-check-label" for="level_<?php echo strtolower($level); ?>">
                                                 <?php echo $level; ?>
                                             </label>
@@ -345,6 +337,7 @@ $total_pages = $result['total_pages'];
                                 <?php
                                 }
                                 ?>
+                                <hr class="my-3">
                             </div>
 
                             <div class="row">
@@ -353,8 +346,8 @@ $total_pages = $result['total_pages'];
                                 </div>
                                 <div class="col-4">
                                     <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="time_min" value="5" id="time_min_0" <?php if (isset($_GET['time_min']) && $_GET['time_min'] == '5')
-                                                                                                                                    echo 'checked'; ?>>
+                                        <input class="form-check-input filter_checked" type="radio" name="time_min" value="5" id="time_min_0" <?php if (isset($_GET['time_min']) && $_GET['time_min'] == '5')
+                                                                                                                                            echo 'checked'; ?>>
                                         <label class="form-check-label" for="time_min_0">
                                             5 minutes
                                         </label>
@@ -362,8 +355,8 @@ $total_pages = $result['total_pages'];
                                 </div>
                                 <div class="col-4">
                                     <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="time_min" value="15" id="time_min_5" <?php if (isset($_GET['time_min']) && $_GET['time_min'] == '15')
-                                                                                                                                    echo 'checked'; ?>>
+                                        <input class="form-check-input filter_checked" type="radio" name="time_min" value="15" id="time_min_5" <?php if (isset($_GET['time_min']) && $_GET['time_min'] == '15')
+                                                                                                                                            echo 'checked'; ?>>
                                         <label class="form-check-label" for="time_min_5">
                                             15 minutes
                                         </label>
@@ -371,21 +364,21 @@ $total_pages = $result['total_pages'];
                                 </div>
                                 <div class="col-4">
                                     <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="time_min" value="30" id="time_min_15" <?php if (isset($_GET['time_min']) && $_GET['time_min'] == '30')
-                                                                                                                                        echo 'checked'; ?>>
+                                        <input class="form-check-input filter_checked" type="radio" name="time_min" value="30" id="time_min_15" <?php if (isset($_GET['time_min']) && $_GET['time_min'] == '30')
+                                                                                                                                            echo 'checked'; ?>>
                                         <label class="form-check-label" for="time_min_15">
                                             30 minutes
                                         </label>
                                     </div>
                                 </div>
-                                <input type="hidden" name="filter" value="true">
+                                <input type="hidden" name="filter_checked" value="true">
                                 <div class="col-12 my-3">
-                                    <div class="row min-max justify-content-center">
-                                        <div class="min col-5">
+                                    <div class="row min-max mb-3">
+                                        <div class="min col-6">
                                             <label class="fs-4">Min</label>
                                             <span id="min-value" class="fs-5"></span>
                                         </div>
-                                        <div class="max col-5">
+                                        <div class="max col-6 text-end">
                                             <label class="fs-4">Max</label>
                                             <span id="max-value" class="fs-5"></span>
                                         </div>
@@ -402,7 +395,7 @@ $total_pages = $result['total_pages'];
                             <input type="hidden" name="filter" value="true">
                             <input type="hidden" name="sort" value="<?php echo isset($_GET['sort']) ? $_GET['sort'] : 'default'; ?>">
                             <div class="row">
-                                <button type="submit" class="btn btn-primary">Filter</button>
+                                <button type="submit" class="btn filter_btn mx-auto" style="width:fit-content">Filter</button>
                             </div>
                         </form>
 
@@ -423,8 +416,8 @@ $total_pages = $result['total_pages'];
                 ?>
                     <div class="col-12 col-md-6 col-xxl-3 mt-2">
                         <a href="../products/product_detail.php?quick_snack_id=<?php echo $row['quick_snack_id']; ?>">
-                            <div class="card" style="height: 100%;">
-                                <img src="<?php echo $row['image_address']; ?>" class="card-img-top" height="160px">
+                            <div class="card" style="height: 100%; background-color: #f3eae5">
+                                <img src="<?php echo $row['image_address']; ?>" class="rounded img-fluid my-3 px-3" height="160px">
                                 <div class="card-body">
                                     <div style="height: 50px">
                                         <h6 class="card-subtitle mb-2 text-body-secondary" style="font-size: small;">
@@ -456,7 +449,7 @@ $total_pages = $result['total_pages'];
                                         <?php
                                         } else {
                                         ?>
-                                            <a href="../../views/auth/SignIn.html" class="wishlist-link">Login to add to wishlist</a>
+                                            <a href="../../views/auth/SignIn.html" class="wishlist-link"><i class="far fa-bookmark wishlist-link" id="favoriteIcon"></i></a>
                                         <?php
                                         }
                                         ?>
@@ -492,7 +485,7 @@ $total_pages = $result['total_pages'];
 
 
         <div class="my-5">
-            <h1>Recomment</h1>
+            <h1>Recommended</h1>
             <div class="row">
                 <div class="col-12 col-md-6 col-xxl-3 my-2">
                     <div class="card">
