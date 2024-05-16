@@ -116,7 +116,7 @@ $i = 0;
                                     $j = 0;
                                 } else {
                                 ?>
-                                    <button type="button" onclick="location.href='../../models/products/delete_category.php?id=<?php echo $row['user_category_id']; ?>'" class="edit-delete-button" id="deleteCategoryButton">Delete</button>
+                                    <button type="button" onclick="location.href='../../models/products/delete_category.php?id=<?php echo $row["user_category_id"]; ?>'" class="edit-delete-button" id="deleteCategoryButton">Delete</button>
                                 <?php
                                 }
                                 ?>

@@ -85,7 +85,7 @@ $num_slides = ceil($num_categories / $categories_per_slide);
     </style>
 </head>
 
-<body">
+<body>
     <header>
         <?php
         include '..\includes\header.php';
@@ -171,7 +171,6 @@ $num_slides = ceil($num_categories / $categories_per_slide);
         integrity="sha512-HGOnQO9+SP1V92SrtZfjqxxtLmVzqZpjFFekvzZVWoiASSQgSr4cw9Kqd2+l8Llp4Gm0G8GIFJ4ddwZilcdb8A=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="https://kit.fontawesome.com/54dbfefd83.js" crossorigin="anonymous"></script>
-    
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
         crossorigin="anonymous"></script>

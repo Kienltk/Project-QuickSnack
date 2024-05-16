@@ -19,7 +19,7 @@ function getIngredient()
     return $result;
 }
 
-function getProduct($filters, $page)
+function getProduct($filters, $page, $search = null)
 {
     global $conn;
 
@@ -50,6 +50,10 @@ function getProduct($filters, $page)
         review r ON qs.quick_snack_id = r.quick_snack_id";
 
     $conditions = [];
+
+    if (!empty($search)) {
+        $conditions[] = "qs.name LIKE '%" . $conn->real_escape_string($search) . "%'";
+    }
 
     if (!empty($filters['category'])) {
         $categoryIds = implode(',', $filters['category']);

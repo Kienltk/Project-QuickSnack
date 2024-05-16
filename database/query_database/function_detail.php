@@ -82,6 +82,6 @@ function averageRating($conn, $quick_snack_id)
 
 $id = $_GET['quick_snack_id'];
 $query = 'SELECT * FROM image_quick_snack WHERE quick_snack_id= ' . $id . ' AND kind = 1 LIMIT 3';
-$result = $conn->query($query);
+$result_img = $conn->query($query);
 
 ?>

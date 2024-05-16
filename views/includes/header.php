@@ -154,7 +154,7 @@ if ($user_id) {
                         <li style="font-weight: bold;
                                     color: #ffa500;
                                     padding-left: 10px ;">Hello : <?php echo $user_fullname; ?></li>
-                        <li><a class="dropdown-item" href="../auth/user_profile.php">Profile</a></li>
+                        <li><a class="dropdown-item" href="../home/user_profile.php">Profile</a></li>
                         <li><a class="dropdown-item" href="../../models/user/logout.php">Logout</a></li>
                     </ul>
                 </div>
@@ -206,7 +206,7 @@ if ($user_id) {
 
         const searchTerm = searchBar.value.trim();
         if (searchTerm !== '') {
-            window.location.href = '../products/products.php?q=' + encodeURIComponent(searchTerm);
+            window.location.href = '../products/products.php?search=' + encodeURIComponent(searchTerm);
         } else {
             window.location.href = '../products/products.php';
         }
@@ -282,7 +282,7 @@ document.addEventListener("DOMContentLoaded", function() {
         if (searchTerm !== '') {
             // Handle search action here, e.g., redirect to search results page
             // Replace the following line with your desired action
-            window.location.href = '../products/products.php?q=' + encodeURIComponent(searchTerm);
+            window.location.href = '../products/products.php?search=' + encodeURIComponent(searchTerm);
         }
     });
 });

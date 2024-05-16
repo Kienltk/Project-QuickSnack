@@ -16,11 +16,6 @@ if (isset($_GET['product_id'])) {
     $row = $result->fetch_assoc();
     $userCategoryId = $row['user_category_id'];
 
-    $sql_insert = "INSERT INTO quick_snack_to_user_category (quick_snack_id, user_category_id) 
-    VALUES ('$product_id', '$userCategoryId')";
-    $conn->query($sql_insert);
-    $conn->close();
-
     $add = addProductToUserCategory($product_id, $userCategoryId);
 
     if ($add == true) {

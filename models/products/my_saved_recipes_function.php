@@ -27,7 +27,7 @@ function getProductFromUserCategory($param) {
     JOIN category_to_quick_snack ON quick_snack.quick_snack_id = category_to_quick_snack.quick_snack_id
     JOIN category ON category.category_id = category_to_quick_snack.category_id
     WHERE quick_snack_to_user_category.user_category_id = ?
-    GROUP BY quick_snack.quick_snack_id;");
+    GROUP BY quick_snack.quick_snack_id, category.category_id;");
     $smtc->bind_param('s', $param);
     $smtc->execute();
     $result = $smtc->get_result();

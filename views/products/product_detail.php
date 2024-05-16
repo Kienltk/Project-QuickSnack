@@ -1,5 +1,8 @@
 <?php
 include ('../../database/query_database/function_detail.php');
+$id = $_GET['quick_snack_id'];
+$query = 'SELECT * FROM image_quick_snack WHERE quick_snack_id= ' . $id . ' AND kind = 1 LIMIT 3';
+$result = $conn->query($query);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -132,9 +135,9 @@ include ('../../database/query_database/function_detail.php');
                     <div class="carousel-inner">
                         <?php
                         $active = true;
-                        if ($result->num_rows > 0) {
-                            while ($row = $result->fetch_assoc()) {
-                                $activeClass = $active ? 'active' : ''; // Chỉ định lớp active cho ảnh đầu tiên
+                        if ($result_img->num_rows > 0) {
+                            while ($row = $result_img->fetch_assoc()) {
+                                $activeClass = $active ? 'active' : ''; 
                                 echo '<div class="carousel-item ' . $activeClass . '">';
                                 echo '<img src="' . $row['address_img'] . '" class="d-block w-100" alt="Product Image">';
                                 echo '</div>';

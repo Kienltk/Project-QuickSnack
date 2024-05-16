@@ -1,5 +1,5 @@
 <?php
-include ("../../database/connect_database/index.php");
+include("../../database/connect_database/index.php");
 
 function getCategory()
 {
@@ -19,14 +19,11 @@ function getIngredient()
     return $result;
 }
 
-function getProduct($filters, $page)
+function getProduct($filters, $page, $search = null)
 {
     global $conn;
 
-    // Số sản phẩm trên mỗi trang
     $results_per_page = 12;
-
-    // Tính chỉ số bắt đầu của sản phẩm trên trang hiện tại
     $start_index = ($page - 1) * $results_per_page;
 
     $query = "SELECT 
@@ -53,26 +50,31 @@ function getProduct($filters, $page)
 
     $conditions = [];
 
-    // Thêm điều kiện lọc theo danh mục (category)
+    // Thêm điều kiện tìm kiếm
+    if (!empty($search)) {
+        $conditions[] = "qs.name LIKE '%" . $conn->real_escape_string($search) . "%'";
+    }
+
+    // Thêm các điều kiện lọc khác
     if (!empty($filters['category'])) {
         $categoryIds = implode(',', $filters['category']);
         $conditions[] = "qs.quick_snack_id IN (
-        SELECT quick_snack_id FROM category_to_quick_snack
-        WHERE category_id IN ($categoryIds)
-        GROUP BY quick_snack_id
-        HAVING COUNT(*) = " . count($filters['category']) . "
-    )";
+            SELECT quick_snack_id FROM category_to_quick_snack
+            WHERE category_id IN ($categoryIds)
+            GROUP BY quick_snack_id
+            HAVING COUNT(*) = " . count($filters['category']) . "
+        )";
     }
 
     // Thêm điều kiện lọc theo thành phần (ingredient)
     if (!empty($filters['ingredient'])) {
         $ingredientIds = implode(',', $filters['ingredient']);
         $conditions[] = "qs.quick_snack_id IN (
-        SELECT quick_snack_id FROM ingredient_to_quick_snack
-        WHERE ingredient_id IN ($ingredientIds)
-        GROUP BY quick_snack_id
-        HAVING COUNT(*) = " . count($filters['ingredient']) . "
-    )";
+            SELECT quick_snack_id FROM ingredient_to_quick_snack
+            WHERE ingredient_id IN ($ingredientIds)
+            GROUP BY quick_snack_id
+            HAVING COUNT(*) = " . count($filters['ingredient']) . "
+        )";
     }
 
     // Thêm điều kiện lọc theo mức độ (level)
@@ -121,8 +123,8 @@ function getProduct($filters, $page)
             break;
     }
 
-    // Set page to 1 when sorting changes to retrieve data from the first page
-    $page = 1;
+    // Thêm LIMIT vào câu truy vấn để lấy sản phẩm của trang hiện tại
+    $query .= " LIMIT $start_index, $results_per_page";
 
     // Thực hiện truy vấn để đếm tổng số sản phẩm
     $countQuery = "SELECT COUNT(*) AS total FROM ($query) AS result";
@@ -131,9 +133,6 @@ function getProduct($filters, $page)
 
     // Tính số trang dựa trên tổng số sản phẩm và số sản phẩm trên mỗi trang
     $total_pages = ceil($totalCount / $results_per_page);
-
-    // Thêm LIMIT vào câu truy vấn để lấy sản phẩm của trang hiện tại
-    $query .= " LIMIT $start_index, $results_per_page";
 
     $stmt = $conn->prepare($query);
     $stmt->execute();
@@ -160,7 +159,12 @@ function isInWishlist($quick_snack_id, $conn, $user_id)
     return $result->num_rows > 0;
 }
 
+$category_id = isset($_GET['categoryId']) ? intval($_GET['categoryId']) : null;
+
+$search = isset($_GET['search']) ? htmlspecialchars($_GET['search']) : null;
+
 $filters = [];
+
 if (isset($_GET['filter'])) {
     $filters = [
         'category' => isset($_GET['category']) ? $_GET['category'] : [],
@@ -169,15 +173,30 @@ if (isset($_GET['filter'])) {
         'time_min' => isset($_GET['time_min']) ? $_GET['time_min'] : 0,
         'time_max' => isset($_GET['time_max']) ? $_GET['time_max'] : 60,
     ];
+
+    // Xử lý khi checkbox "All" được chọn
+    if (in_array('all', $filters['category'])) {
+        $filters['category'] = [];
+    }
+
+    if (in_array('all', $filters['ingredient'])) {
+        $filters['ingredient'] = [];
+    }
 }
 
-// Xử lý trang hiện tại (mặc định là trang 1)
-$page = isset($_GET['page']) ? intval($_GET['page']) : 1;
+if ($category_id !== null) {
+    $filters['category'] = [$category_id];
+}
 
-// Gọi hàm getProduct với filter và page
-$result = getProduct($filters, $page);
+
+// Xử lý trang hiện tại (mặc định là trang 1)
+$numberOfpage = isset($_GET['page']) ? intval($_GET['page']) : 1;
+
+$result = getProduct($filters, $numberOfpage, $search);
 $productData = $result['products'];
 $total_pages = $result['total_pages'];
+
+
 ?>
 
 <!DOCTYPE html>
@@ -229,8 +248,7 @@ $total_pages = $result['total_pages'];
 <body>
 
     <div class="col-6">
-        <select id="sortDropdown" class="form-select form-select-md mx-auto sort" style="width: fit-content;"
-            onchange="sortProducts(this.value)">
+        <select id="sortDropdown" class="form-select form-select-md mx-auto sort" style="width: fit-content;" onchange="sortProducts(this.value)">
             <option selected value="default" class="option">Sort</option>
             <option value="name" class="option">Name</option>
             <option value="rating" class="option">Rating</option>
@@ -268,24 +286,32 @@ $total_pages = $result['total_pages'];
             <div class="col-12 fs-5 fw-semibold">
                 <span>Category</span>
             </div>
+            <div class="col-6">
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" name="category[]" value="all" id="category-all" onchange="toggleCategory(this)">
+                    <label class="form-check-label" for="checkboxAll">
+                        All
+                    </label>
+                </div>
+            </div>
             <?php
             $category = getCategory();
             if ($category->num_rows > 0) {
                 while ($row = $category->fetch_assoc()) {
                     $isChecked = isset($_GET['category']) && in_array($row['category_id'], $_GET['category']);
-                    ?>
+                    if ($category_id !== null && $row['category_id'] === $category_id) {
+                        $isChecked = true; // Check this checkbox if its ID matches categoryId
+                    }
+            ?>
                     <div class="col-6">
                         <div class="form-check">
-                            <input class="form-check-input" type="checkbox" name="category[]"
-                                value="<?php echo $row["category_id"]; ?>" id="category_<?php echo $row["category_id"]; ?>" <?php if ($isChecked)
-                                          echo 'checked'; ?>>
+                            <input class="form-check-input" type="checkbox" name="category[]" value="<?php echo $row["category_id"]; ?>" onchange="toggleCategory(this)">
                             <label class="form-check-label text-wrap" for="category_<?php echo $row["category_id"]; ?>">
                                 <?php echo $row["category_name"]; ?>
                             </label>
                         </div>
                     </div>
-                    <?php
-                }
+            <?php                }
             }
             ?>
         </div>
@@ -294,24 +320,30 @@ $total_pages = $result['total_pages'];
             <div class="col-12 fs-5 fw-semibold">
                 <span>Ingredient</span>
             </div>
+            <div class="col-6">
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" name="ingredient[]" value="all" id="ingredient-all" onchange="toggleIngredient(this)">
+                    <label class="form-check-label" for="checkboxAllIngredients">
+                        All
+                    </label>
+                </div>
+            </div>
             <?php
             $ingredient = getIngredient();
             if ($ingredient->num_rows > 0) {
                 while ($row = $ingredient->fetch_assoc()) {
                     $isChecked = isset($_GET['ingredient']) && in_array($row['ingredient_id'], $_GET['ingredient']);
-                    ?>
+            ?>
                     <div class="col-6">
                         <div class="form-check">
-                            <input class="form-check-input" type="checkbox" name="ingredient[]"
-                                value="<?php echo $row["ingredient_id"]; ?>"
-                                id="ingredient_<?php echo $row["ingredient_id"]; ?>" <?php if ($isChecked)
-                                       echo 'checked'; ?>>
+                            <input class="form-check-input" type="checkbox" name="ingredient[]" value="<?php echo $row["ingredient_id"]; ?>" onchange="toggleIngredient(this)" <?php if ($isChecked)
+                                                                                                                                                                                    echo 'checked'; ?>>
                             <label class="form-check-label text-wrap" for="ingredient_<?php echo $row["ingredient_id"]; ?>">
                                 <?php echo $row["ingredient_name"]; ?>
                             </label>
                         </div>
                     </div>
-                    <?php
+            <?php
                 }
             }
             ?>
@@ -325,18 +357,17 @@ $total_pages = $result['total_pages'];
             $levels = ['Easy', 'Medium', 'Difficult'];
             foreach ($levels as $level) {
                 $isChecked = isset($_GET['level']) && in_array($level, $_GET['level']);
-                ?>
+            ?>
                 <div class="col-4">
                     <div class="form-check">
-                        <input class="form-check-input" type="radio" name="level[]" value="<?php echo $level; ?>"
-                            id="level_<?php echo strtolower($level); ?>" <?php if ($isChecked)
-                                   echo 'checked'; ?>>
+                        <input class="form-check-input" type="radio" name="level[]" value="<?php echo $level; ?>" id="level_<?php echo strtolower($level); ?>" <?php if ($isChecked)
+                                                                                                                                                                    echo 'checked'; ?>>
                         <label class="form-check-label" for="level_<?php echo strtolower($level); ?>">
                             <?php echo $level; ?>
                         </label>
                     </div>
                 </div>
-                <?php
+            <?php
             }
             ?>
         </div>
@@ -349,7 +380,7 @@ $total_pages = $result['total_pages'];
             <div class="col-4">
                 <div class="form-check">
                     <input class="form-check-input" type="radio" name="time_min" value="0" id="time_min_0" <?php if (isset($_GET['time_min']) && $_GET['time_min'] == '0')
-                        echo 'checked'; ?>>
+                                                                                                                echo 'checked'; ?>>
                     <label class="form-check-label" for="time_min_0">
                         0 minutes
                     </label>
@@ -358,7 +389,7 @@ $total_pages = $result['total_pages'];
             <div class="col-4">
                 <div class="form-check">
                     <input class="form-check-input" type="radio" name="time_min" value="5" id="time_min_5" <?php if (isset($_GET['time_min']) && $_GET['time_min'] == '5')
-                        echo 'checked'; ?>>
+                                                                                                                echo 'checked'; ?>>
                     <label class="form-check-label" for="time_min_5">
                         5 minutes
                     </label>
@@ -367,7 +398,7 @@ $total_pages = $result['total_pages'];
             <div class="col-4">
                 <div class="form-check">
                     <input class="form-check-input" type="radio" name="time_min" value="15" id="time_min_15" <?php if (isset($_GET['time_min']) && $_GET['time_min'] == '15')
-                        echo 'checked'; ?>>
+                                                                                                                    echo 'checked'; ?>>
                     <label class="form-check-label" for="time_min_15">
                         15 minutes
                     </label>
@@ -386,12 +417,8 @@ $total_pages = $result['total_pages'];
                     </div>
                 </div>
                 <div class="min-max-range">
-                    <input type="range" min="0" max="30"
-                        value="<?php echo isset($_GET['time_min']) ? $_GET['time_min'] : '0'; ?>" class="range" id="min"
-                        name="time_min">
-                    <input type="range" min="31" max="60"
-                        value="<?php echo isset($_GET['time_max']) ? $_GET['time_max'] : '60'; ?>" class="range"
-                        id="max" name="time_max">
+                    <input type="range" min="0" max="30" value="<?php echo isset($_GET['time_min']) ? $_GET['time_min'] : '0'; ?>" class="range" id="min" name="time_min">
+                    <input type="range" min="31" max="60" value="<?php echo isset($_GET['time_max']) ? $_GET['time_max'] : '60'; ?>" class="range" id="max" name="time_max">
                 </div>
 
             </div>
@@ -414,12 +441,11 @@ $total_pages = $result['total_pages'];
             if ($count % 4 == 0) {
                 echo '<div class="row">';
             }
-            ?>
+        ?>
             <div class="col-12 col-md-6 col-xxl-3 mt-2 card_product">
                 <div class="card position-relative" style="height: 100%;">
                     <a href="../products/product_detail.php?quick_snack_id=<?php echo $row['quick_snack_id']; ?>">
-                        <img src="<?php echo $row['image_address']; ?>" class="img-fluid rounded m-3" alt="..."
-                            style="width: 160px; height: 160px">
+                        <img src="<?php echo $row['image_address']; ?>" class="img-fluid rounded m-3" alt="..." style="width: 160px; height: 160px">
                         <div class="card-body">
                             <h5 class="card-title">
                                 <?php echo $row['name']; ?>
@@ -445,21 +471,21 @@ $total_pages = $result['total_pages'];
                         if (isset($_COOKIE['userID'])) {
                             $user_id = $_COOKIE['userID'];
                             $isInWishlist = isInWishlist($row['quick_snack_id'], $conn, $user_id);
-                            ?>
+                        ?>
                             <a href="../../models/products/products_detail.php?product_id=<?php echo $row['quick_snack_id'] ?>">
                                 <?php echo ($isInWishlist ? '<i class="fa-solid fa-bookmark wishlist-link-wished"></i>' : '<i class="far fa-bookmark wishlist-link" id="favoriteIcon"></i>') ?>
                             </a>
-                            <?php
+                        <?php
                         } else {
-                            ?>
+                        ?>
                             <a href="../../views/auth/SignIn.html" class="wishlist-link">Login to add to wishlist</a>
-                            <?php
+                        <?php
                         }
                         ?>
                     </div>
                 </div>
             </div>
-            <?php
+        <?php
             $count++;
             if ($count % 4 == 0) {
                 echo '</div>';
@@ -475,13 +501,15 @@ $total_pages = $result['total_pages'];
 
 
     <!-- Hiển thị phân trang -->
-    <div class="pagination">
-        <?php for ($i = 1; $i <= $total_pages; $i++) { ?>
-            <a href="?page=<?php echo $i; ?>&filter=true&<?php echo http_build_query($filters); ?>&sort=<?php echo isset($_GET['sort']) ? $_GET['sort'] : 'default'; ?>"
-                <?php if ($i == $page)
-                    echo 'class="active"'; ?>><?php echo $i; ?></a>
-        <?php } ?>
-    </div>
+    <div class="mx-auto">
+                    <div class="pages">
+                        <?php for ($i = 1; $i <= $total_pages; $i++) { ?>
+                            <a href="?page=<?php echo $i; ?>&filter=true&<?php echo http_build_query($filters); ?>" <?php if ($i == $numberOfpage)
+                                                                                                                        echo 'class="page_active"';
+                                                                                                                    ?>><?php echo $i; ?></a>
+                        <?php } ?>
+                    </div>
+                </div>
 
 
     <script src="https://kit.fontawesome.com/54dbfefd83.js" crossorigin="anonymous"></script>
@@ -497,58 +525,90 @@ $total_pages = $result['total_pages'];
         var defaultMax = parseInt(maxSlider.max);
         var radioValue = <?php echo isset($_GET['time_min']) ? $_GET['time_min'] : '0'; ?>;
         document.querySelectorAll('input[name="time_min"]').forEach((radio) => {
-            radio.addEventListener('change', function () {
+            radio.addEventListener('change', function() {
                 var radioVal = parseInt(this.value);
 
                 if (radioVal < defaultMin) {
                     minSlider.value = defaultMin;
                     maxSlider.value = defaultMax;
                 } else if (radioVal > defaultMax) {
-                
+
                     minSlider.value = defaultMin;
                     maxSlider.value = radioVal;
                 } else {
-                  
+
                     minSlider.value = radioVal;
                     maxSlider.value = defaultMax;
                 }
 
-               
+
                 outputMin.innerHTML = minSlider.value;
                 outputMax.innerHTML = maxSlider.value;
             });
         });
 
-      
-        minSlider.oninput = function () {
-        
+
+        minSlider.oninput = function() {
+
             outputMin.innerHTML = this.value;
         };
 
-        maxSlider.oninput = function () {
-           
+        maxSlider.oninput = function() {
+
             outputMax.innerHTML = this.value;
         };
 
-       
+
         if (radioValue < defaultMin) {
-          
+
             minSlider.value = defaultMin;
             maxSlider.value = defaultMax;
         } else if (radioValue > defaultMax) {
-          
+
             minSlider.value = defaultMin;
             maxSlider.value = radioValue;
         } else {
-            
+
             minSlider.value = radioValue;
             maxSlider.value = defaultMax;
         }
 
-      
+
         outputMin.innerHTML = minSlider.value;
         outputMax.innerHTML = maxSlider.value;
 
+        function toggleCategory(allCheckbox) {
+            var checkboxes = document.querySelectorAll('input[name="category[]"]');
+            if (allCheckbox.value === 'all') {
+                checkboxes.forEach(function(checkbox) {
+                    if (checkbox !== allCheckbox) {
+                        checkbox.checked = false;
+                    }
+                });
+            } else {
+                document.getElementById('category-all').checked = false;
+            }
+        }
+
+        // Function to toggle 'All' checkbox for ingredients
+        function toggleIngredient(allCheckbox) {
+            var checkboxes = document.querySelectorAll('input[name="ingredient[]"]');
+            if (allCheckbox.value === 'all') {
+                checkboxes.forEach(function(checkbox) {
+                    if (checkbox !== allCheckbox) {
+                        checkbox.checked = false;
+                    }
+                });
+            } else {
+                document.getElementById('ingredient-all').checked = false;
+            }
+        }
+
+        // Set 'All' checkboxes as checked by default
+        window.onload = function() {
+            document.getElementById('category-all').checked = true;
+            document.getElementById('ingredient-all').checked = true;
+        }
     </script>
 </body>
 

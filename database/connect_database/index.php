@@ -1,5 +1,5 @@
 <?php
-$hostName = "localhost:3306";
+$hostName = "localhost";
 $userName_db = "root";
 $password_db = "12345678";
 $databaseName = "quick_snack_db";

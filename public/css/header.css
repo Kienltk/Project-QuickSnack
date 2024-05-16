@@ -227,7 +227,7 @@ body {
       left: 5%;
     }
     .dropdownUser {
-      left: none;
+      left: 0% !important;
 
     }
   }

@@ -38,7 +38,7 @@
                         echo '<div class="col-md-2 ">';
                         echo '<div class="image">';
                         echo '<a href="../products/product_detail.php?quick_snack_id=' . $quickSnackId . '">';
-                        echo '<img src="' . $imageUrl . '" class="img-fluid" style = "border: 2px solid #f57c0c;">';
+                        echo '<img src="' . $imageUrl . '" class="img-fluid">';
                         echo '</a>';
                         echo '</div>';
                         echo '</div>';

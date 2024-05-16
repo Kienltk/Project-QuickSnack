@@ -63,7 +63,7 @@ if ($_POST["action"] == "search") {
 
 
 
-        <!-- // $q2 = $conn->query("SELECT * FROM `product`  WHERE   p_title LIKE '%{$searchTerm}%'");;
+<!-- // $q2 = $conn->query("SELECT * FROM `product`  WHERE   p_title LIKE '%{$searchTerm}%'");;
 //         $total_record = mysqli_num_rows($q2);
 //         $total_page = ceil($total_record / $limit_per_page);
 //         $output .= '<nav aria-label="Page navigation example my-5" class="d-flex justify-content-center mt-5" style="cursor: pointer; font-size:1.5rem;" >
