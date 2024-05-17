@@ -1009,7 +1009,7 @@ VALUES
 (21, 'Onion Rings', 1, '../../public/image/product/Onion Rings2.jpg'),
 
 (22, 'Mozzarella Sticks', 0, '../../public/image/product/Mozzarella Sticks.jpg'),
-(22, 'Mozzarella Sticks', 1, '../../public/image/product/Mozzaralla sticks1.jpg'),
+(22, 'Mozzarella Sticks', 1, '../../public/image/product/Mozzarella sticks1.jpg'),
 (22, 'Mozzarella Sticks', 1, '../../public/image/product/Mozzarella Sticks2.jpg'),
 
 (23, 'Stuffed Mushrooms', 0, '../../public/image/product/Stuffed mushroom.jpg'),
@@ -1112,7 +1112,7 @@ ALTER TABLE user ADD COLUMN profile_image VARCHAR(255);
 
 DELETE FROM quick_snack_to_user_category
 WHERE quick_snack_id = 1 AND user_category_id = 1;
-
+ALTER TABLE user ADD COLUMN profile_image VARCHAR(255);
 
 
 

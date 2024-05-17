@@ -178,8 +178,21 @@ $result = $conn->query($query);
                     </table>
                 </div>
             </div>
+            <div style="margin : 10px 0 ; color : #ff9a62;">
+                <span style="font-size : 30px ; font-style: italic;">Categorys : </span>
+                <?php $categoryTag = getCategoryTag();
+                if ($categoryTag->num_rows > 0) {
+                    while ($categoryTagResult = $categoryTag->fetch_assoc()) {
+                        echo '<button style="border-radius : 10px ; margin-left:10px;padding :5px;border: 1px solid orange;><a href="products.php?categoryId=' . $categoryTagResult["category_id"] . '">' . $categoryTagResult["category_name"] . '</a></button>';
+                    }
+                } else {
+                    echo "Không có nguyên liệu nào.";
+                }
+                ?>
+
+            </div>
         </div>
-        <div class="mt-5 row">
+        <div class=" mt-5 row">
             <div class="col-12 col-sm-6" style="border-right: #E37E21 solid 2px;">
                 <h4 class="fs-4 text-center">
                     <i class="fa fa-coffee" aria-hidden="true" style="color: #ff9a62"></i>

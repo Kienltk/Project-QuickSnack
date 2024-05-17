@@ -78,7 +78,14 @@ function averageRating($conn, $quick_snack_id)
     $avg_rating = ($row['avg_rating']);
     return $avg_rating;
 }
-
+function getCategoryTag()
+{
+    include ('../../database/connect_database/index.php');
+    $id = $_GET['quick_snack_id'];
+    $query = "SELECT category_name, category.category_id FROM category INNER JOIN category_to_quick_snack ON category.category_id = category_to_quick_snack.category_id WHERE quick_snack_id=$id";
+    $result = $conn->query($query);
+    return $result;
+}
 
 $id = $_GET['quick_snack_id'];
 $query = 'SELECT * FROM image_quick_snack WHERE quick_snack_id= ' . $id . ' AND kind = 1 LIMIT 3';
