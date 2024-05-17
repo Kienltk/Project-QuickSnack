@@ -1,5 +1,5 @@
-<?php include("../../database/connect_database/index.php");
-include("../../database/query_database/products.php");
+<?php include ("../../database/connect_database/index.php");
+include ("../../database/query_database/products.php");
 $category = getCategory();
 $ingredient = getIngredient();
 $category_id = isset($_GET['categoryId']) ? intval($_GET['categoryId']) : null;
@@ -45,7 +45,9 @@ $total_pages = $result['total_pages'];
 
     <link rel="stylesheet" href="../../public/css/products.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="shortcut icon" href="../../public/image/logo.png" type="image/x-icon">
     <link rel="stylesheet" href="../../public/css/header.css">
     <link rel="stylesheet" href="../../public/css/style.css">
     <link rel="stylesheet" href="../../public/css/footer.css">
@@ -65,7 +67,7 @@ $total_pages = $result['total_pages'];
             background-color: #dedede;
             outline: none;
             float: left;
-            
+
         }
 
         #min {
@@ -129,20 +131,20 @@ $total_pages = $result['total_pages'];
 <body>
     <header>
         <?php
-        include("../includes/header.php");
+        include ("../includes/header.php");
         ?>
     </header>
 
     <main class="container my-4">
         <?php
         if (isset($search)) {
-        ?>
+            ?>
 
             <div class="fs-3">
                 <span class="fw-bold">Search results: </span>
                 <span class="results_search"><?php echo $search ?></span>
             </div>
-        <?php
+            <?php
         }
         ?>
 
@@ -153,7 +155,8 @@ $total_pages = $result['total_pages'];
                         <span>Filter the food</span>
                     </div>
                     <div class="col-12 col-lg-6">
-                        <select id="sortDropdown" class="form-select form-select-md mx-auto sort" style="width: fit-content;" onchange="sortProducts(this.value)">
+                        <select id="sortDropdown" class="form-select form-select-md mx-auto sort"
+                            style="width: fit-content;" onchange="sortProducts(this.value)">
                             <option selected value="default" class="option">Sort</option>
                             <option value="name" class="option">Name</option>
                             <option value="rating" class="option">Rating</option>
@@ -183,13 +186,17 @@ $total_pages = $result['total_pages'];
                 </div>
 
                 <div class="row d-lg-none justify-content-center">
-                    <button class="btn filter_btn" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasResponsive" aria-controls="offcanvasResponsive" style="width: fit-content">Filter</button>
+                    <button class="btn filter_btn" type="button" data-bs-toggle="offcanvas"
+                        data-bs-target="#offcanvasResponsive" aria-controls="offcanvasResponsive"
+                        style="width: fit-content">Filter</button>
                 </div>
 
-                <div class="offcanvas-lg offcanvas-end" tabindex="-1" id="offcanvasResponsive" aria-labelledby="offcanvasResponsiveLabel">
+                <div class="offcanvas-lg offcanvas-end" tabindex="-1" id="offcanvasResponsive"
+                    aria-labelledby="offcanvasResponsiveLabel">
                     <div class="offcanvas-header">
                         <h5 class="offcanvas-title" id="offcanvasResponsiveLabel">Filter</h5>
-                        <button type="button" class="btn-close text-end" data-bs-dismiss="offcanvas" data-bs-target="#offcanvasResponsive" aria-label="Close"></button>
+                        <button type="button" class="btn-close text-end" data-bs-dismiss="offcanvas"
+                            data-bs-target="#offcanvasResponsive" aria-label="Close"></button>
                     </div>
 
                     <div class="offcanvas-body">
@@ -200,7 +207,9 @@ $total_pages = $result['total_pages'];
                                 </div>
                                 <div class="col-6">
                                     <div class="form-check">
-                                        <input class="form-check-input filter_checked" type="checkbox" name="category[]" value="all" id="category-all" onchange="toggleCategory(this)" <?php if (!isset($_GET['category']) && $category_id === null) echo 'checked'; ?>>
+                                        <input class="form-check-input filter_checked" type="checkbox" name="category[]"
+                                            value="all" id="category-all" onchange="toggleCategory(this)" <?php if (!isset($_GET['category']) && $category_id === null)
+                                                echo 'checked'; ?>>
                                         <label class="form-check-label" for="checkboxAll">
                                             All
                                         </label>
@@ -217,40 +226,46 @@ $total_pages = $result['total_pages'];
                                         $i++;
                                         if ($i < 6) {
 
-                                ?>
+                                            ?>
                                             <div class="col-6">
                                                 <div class="form-check">
-                                                    <input class="form-check-input filter_checked" type="checkbox" name="category[]" value="<?php echo $row["category_id"]; ?>" onchange="toggleCategory(this)" <?php if ($isChecked)
-                                                                                                                                                                                                            echo 'checked'; ?>>
-                                                    <label class="form-check-label text-wrap" for="category_<?php echo $row["category_id"]; ?>">
+                                                    <input class="form-check-input filter_checked" type="checkbox" name="category[]"
+                                                        value="<?php echo $row["category_id"]; ?>" onchange="toggleCategory(this)" <?php if ($isChecked)
+                                                               echo 'checked'; ?>>
+                                                    <label class="form-check-label text-wrap"
+                                                        for="category_<?php echo $row["category_id"]; ?>">
                                                         <?php echo $row["category_name"]; ?>
                                                     </label>
                                                 </div>
                                             </div>
-                                        <?php
+                                            <?php
                                         } else {
-                                        ?>
+                                            ?>
                                             <div class="col-6">
                                                 <div class="collapse" id="category">
                                                     <div class="form-check">
-                                                        <input class="form-check-input filter_checked" type="checkbox" name="category[]" value="<?php echo $row["category_id"]; ?>" onchange="toggleCategory(this)" <?php if ($isChecked)
-                                                                                                                                                                                                                echo 'checked'; ?>>
-                                                        <label class="form-check-label text-wrap" for="category_<?php echo $row["category_id"]; ?>">
+                                                        <input class="form-check-input filter_checked" type="checkbox"
+                                                            name="category[]" value="<?php echo $row["category_id"]; ?>"
+                                                            onchange="toggleCategory(this)" <?php if ($isChecked)
+                                                                echo 'checked'; ?>>
+                                                        <label class="form-check-label text-wrap"
+                                                            for="category_<?php echo $row["category_id"]; ?>">
                                                             <?php echo $row["category_name"]; ?>
                                                         </label>
                                                     </div>
                                                 </div>
                                             </div>
-                                    <?php
+                                            <?php
                                         }
                                     }
                                     ?>
                                     <div class="col-12 text-center">
-                                        <a class="more" data-bs-toggle="collapse" href="#category" role="button" aria-expanded="false" aria-controls="collapseExample">
+                                        <a class="more" data-bs-toggle="collapse" href="#category" role="button"
+                                            aria-expanded="false" aria-controls="collapseExample">
                                             See more
                                         </a>
                                     </div>
-                                <?php
+                                    <?php
                                 }
                                 ?>
                                 <hr class="my-3">
@@ -262,7 +277,10 @@ $total_pages = $result['total_pages'];
                                 </div>
                                 <div class="col-6 ">
                                     <div class="form-check">
-                                        <input class="form-check-input filter_checked" type="checkbox" name="ingredient[]" value="all" id="ingredient-all" onchange="toggleIngredient(this)" <?php if (!isset($_GET['ingredient'])) echo 'checked'; ?>>
+                                        <input class="form-check-input filter_checked" type="checkbox"
+                                            name="ingredient[]" value="all" id="ingredient-all"
+                                            onchange="toggleIngredient(this)" <?php if (!isset($_GET['ingredient']))
+                                                echo 'checked'; ?>>
                                         <label class="form-check-label" for="flexCheckChecked">
                                             All
                                         </label>
@@ -276,40 +294,47 @@ $total_pages = $result['total_pages'];
                                         $i++;
                                         if ($i < 6) {
 
-                                ?>
+                                            ?>
                                             <div class="col-6">
                                                 <div class="form-check">
-                                                    <input class="form-check-input filter_checked" type="checkbox" name="ingredient[]" value="<?php echo $row["ingredient_id"]; ?>" onchange="toggleIngredient(this)" <?php if ($isChecked)
-                                                                                                                                                                                                                    echo 'checked'; ?>>
-                                                    <label class="form-check-label text-wrap" for="ingredient_<?php echo $row["ingredient_id"]; ?>">
+                                                    <input class="form-check-input filter_checked" type="checkbox"
+                                                        name="ingredient[]" value="<?php echo $row["ingredient_id"]; ?>"
+                                                        onchange="toggleIngredient(this)" <?php if ($isChecked)
+                                                            echo 'checked'; ?>>
+                                                    <label class="form-check-label text-wrap"
+                                                        for="ingredient_<?php echo $row["ingredient_id"]; ?>">
                                                         <?php echo $row["ingredient_name"]; ?>
                                                     </label>
                                                 </div>
                                             </div>
-                                        <?php
+                                            <?php
                                         } else {
-                                        ?>
+                                            ?>
                                             <div class="col-6 ">
                                                 <div class="collapse" id="ingredient">
                                                     <div class="form-check">
-                                                        <input class="form-check-input filter_checked" type="checkbox" name="ingredient[]" value="<?php echo $row["ingredient_id"]; ?>" onchange="toggleIngredient(this)" <?php if ($isChecked)
-                                                                                                                                                                                                                        echo 'checked'; ?>>
-                                                        <label class="form-check-label text-wrap" for="ingredient_<?php echo $row["ingredient_id"]; ?>">
+                                                        <input class="form-check-input filter_checked" type="checkbox"
+                                                            name="ingredient[]" value="<?php echo $row["ingredient_id"]; ?>"
+                                                            onchange="toggleIngredient(this)" <?php if ($isChecked)
+                                                                echo 'checked'; ?>>
+                                                        <label class="form-check-label text-wrap"
+                                                            for="ingredient_<?php echo $row["ingredient_id"]; ?>">
                                                             <?php echo $row["ingredient_name"]; ?>
                                                         </label>
                                                     </div>
                                                 </div>
                                             </div>
-                                    <?php
+                                            <?php
                                         }
                                     }
                                     ?>
                                     <div class="col-12 text-center">
-                                        <a class="more" data-bs-toggle="collapse" href="#ingredient" role="button" aria-expanded="false" aria-controls="collapseExample">
+                                        <a class="more" data-bs-toggle="collapse" href="#ingredient" role="button"
+                                            aria-expanded="false" aria-controls="collapseExample">
                                             See more
                                         </a>
                                     </div>
-                                <?php
+                                    <?php
                                 }
                                 ?>
 
@@ -324,17 +349,18 @@ $total_pages = $result['total_pages'];
                                 $levels = ['Easy', 'Medium', 'Difficult'];
                                 foreach ($levels as $level) {
                                     $isChecked = isset($_GET['level']) && in_array($level, $_GET['level']);
-                                ?>
+                                    ?>
                                     <div class="col-4">
                                         <div class="form-check">
-                                            <input class="form-check-input filter_checked" type="radio" name="level[]" value="<?php echo $level; ?>" id="level_<?php echo strtolower($level); ?>" <?php if ($isChecked)
-                                                                                                                                                                                                echo 'checked'; ?>>
+                                            <input class="form-check-input filter_checked" type="radio" name="level[]"
+                                                value="<?php echo $level; ?>" id="level_<?php echo strtolower($level); ?>" <?php if ($isChecked)
+                                                          echo 'checked'; ?>>
                                             <label class="form-check-label" for="level_<?php echo strtolower($level); ?>">
                                                 <?php echo $level; ?>
                                             </label>
                                         </div>
                                     </div>
-                                <?php
+                                    <?php
                                 }
                                 ?>
                                 <hr class="my-3">
@@ -346,8 +372,9 @@ $total_pages = $result['total_pages'];
                                 </div>
                                 <div class="col-4">
                                     <div class="form-check">
-                                        <input class="form-check-input filter_checked" type="radio" name="time_min" value="5" id="time_min_0" <?php if (isset($_GET['time_min']) && $_GET['time_min'] == '5')
-                                                                                                                                            echo 'checked'; ?>>
+                                        <input class="form-check-input filter_checked" type="radio" name="time_min"
+                                            value="5" id="time_min_0" <?php if (isset($_GET['time_min']) && $_GET['time_min'] == '5')
+                                                echo 'checked'; ?>>
                                         <label class="form-check-label" for="time_min_0">
                                             5 minutes
                                         </label>
@@ -355,8 +382,9 @@ $total_pages = $result['total_pages'];
                                 </div>
                                 <div class="col-4">
                                     <div class="form-check">
-                                        <input class="form-check-input filter_checked" type="radio" name="time_min" value="15" id="time_min_5" <?php if (isset($_GET['time_min']) && $_GET['time_min'] == '15')
-                                                                                                                                            echo 'checked'; ?>>
+                                        <input class="form-check-input filter_checked" type="radio" name="time_min"
+                                            value="15" id="time_min_5" <?php if (isset($_GET['time_min']) && $_GET['time_min'] == '15')
+                                                echo 'checked'; ?>>
                                         <label class="form-check-label" for="time_min_5">
                                             15 minutes
                                         </label>
@@ -364,8 +392,9 @@ $total_pages = $result['total_pages'];
                                 </div>
                                 <div class="col-4">
                                     <div class="form-check">
-                                        <input class="form-check-input filter_checked" type="radio" name="time_min" value="30" id="time_min_15" <?php if (isset($_GET['time_min']) && $_GET['time_min'] == '30')
-                                                                                                                                            echo 'checked'; ?>>
+                                        <input class="form-check-input filter_checked" type="radio" name="time_min"
+                                            value="30" id="time_min_15" <?php if (isset($_GET['time_min']) && $_GET['time_min'] == '30')
+                                                echo 'checked'; ?>>
                                         <label class="form-check-label" for="time_min_15">
                                             30 minutes
                                         </label>
@@ -384,8 +413,12 @@ $total_pages = $result['total_pages'];
                                         </div>
                                     </div>
                                     <div class="min-max-range">
-                                        <input type="range" min="0" max="30" value="<?php echo isset($_GET['time_min']) ? $_GET['time_min'] : '0'; ?>" class="range" id="min" name="time_min">
-                                        <input type="range" min="31" max="60" value="<?php echo isset($_GET['time_max']) ? $_GET['time_max'] : '60'; ?>" class="range" id="max" name="time_max">
+                                        <input type="range" min="0" max="30"
+                                            value="<?php echo isset($_GET['time_min']) ? $_GET['time_min'] : '0'; ?>"
+                                            class="range" id="min" name="time_min">
+                                        <input type="range" min="31" max="60"
+                                            value="<?php echo isset($_GET['time_max']) ? $_GET['time_max'] : '60'; ?>"
+                                            class="range" id="max" name="time_max">
                                     </div>
 
                                 </div>
@@ -393,9 +426,11 @@ $total_pages = $result['total_pages'];
                             </div>
 
                             <input type="hidden" name="filter" value="true">
-                            <input type="hidden" name="sort" value="<?php echo isset($_GET['sort']) ? $_GET['sort'] : 'default'; ?>">
+                            <input type="hidden" name="sort"
+                                value="<?php echo isset($_GET['sort']) ? $_GET['sort'] : 'default'; ?>">
                             <div class="row">
-                                <button type="submit" class="btn filter_btn mx-auto" style="width:fit-content">Filter</button>
+                                <button type="submit" class="btn filter_btn mx-auto"
+                                    style="width:fit-content">Filter</button>
                             </div>
                         </form>
 
@@ -413,13 +448,14 @@ $total_pages = $result['total_pages'];
                     if ($count % 4 == 0) {
                         echo '<div class="row">';
                     }
-                ?>
+                    ?>
                     <div class="col-12 col-md-6 col-xxl-3 mt-2">
                         <a href="../products/product_detail.php?quick_snack_id=<?php echo $row['quick_snack_id']; ?>">
                             <div class="card" style="height: 100%; background-color: #f3eae5">
-                                <img src="<?php echo $row['image_address']; ?>" class="rounded img-fluid my-3 px-3" height="160px">
+                                <img src="<?php echo $row['image_address']; ?>" class="rounded img-fluid my-3 px-3"
+                                    height="100%">
                                 <div class="card-body">
-                                    <div style="height: 50px">
+                                    <div style="height: 40px">
                                         <h6 class="card-subtitle mb-2 text-body-secondary" style="font-size: small;">
                                             <?php echo $row['categories']; ?>
                                         </h6>
@@ -434,7 +470,8 @@ $total_pages = $result['total_pages'];
                                             <div class="fw-bold" style="color:#E37E21"><?php echo $row['time']; ?></div>
                                         </div>
                                         <div class="col text-end">
-                                            <span><i class="fa-solid fa-star" style="color:#E37E21"></i><span><?php echo $row['average_rating']; ?></span></span>
+                                            <span><i class="fa-solid fa-star"
+                                                    style="color:#E37E21"></i><span><?php echo $row['average_rating']; ?></span></span>
                                         </div>
                                     </div>
                                     <div class="text-end">
@@ -442,15 +479,17 @@ $total_pages = $result['total_pages'];
                                         if (isset($_COOKIE['userID'])) {
                                             $user_id = $_COOKIE['userID'];
                                             $isInWishlist = isInWishlist($row['quick_snack_id'], $conn, $user_id);
-                                        ?>
-                                            <a href="../../models/products/products_detail.php?product_id=<?php echo $row['quick_snack_id'] ?>">
+                                            ?>
+                                            <a
+                                                href="../../models/products/products_detail.php?product_id=<?php echo $row['quick_snack_id'] ?>">
                                                 <?php echo ($isInWishlist ? '<i class="fa-solid fa-bookmark wishlist-link-wished"></i>' : '<i class="far fa-bookmark wishlist-link" id="favoriteIcon"></i>') ?>
                                             </a>
-                                        <?php
+                                            <?php
                                         } else {
-                                        ?>
-                                            <a href="../../views/auth/SignIn.html" class="wishlist-link"><i class="far fa-bookmark wishlist-link" id="favoriteIcon"></i></a>
-                                        <?php
+                                            ?>
+                                            <a href="../../views/auth/SignIn.html" class="wishlist-link"><i
+                                                    class="far fa-bookmark wishlist-link" id="favoriteIcon"></i></a>
+                                            <?php
                                         }
                                         ?>
                                     </div>
@@ -458,7 +497,7 @@ $total_pages = $result['total_pages'];
                             </div>
                         </a>
                     </div>
-                <?php
+                    <?php
                     $count++;
                     if ($count % 4 == 0) {
                         echo '</div>';
@@ -472,8 +511,8 @@ $total_pages = $result['total_pages'];
                     <div class=" col pages py-3 text-center">
                         <?php for ($i = 1; $i <= $total_pages; $i++) { ?>
                             <a href="?page=<?php echo $i; ?>&filter=true&<?php echo http_build_query($filters); ?>" <?php if ($i == $numberOfpage)
-                                                                                                                        echo 'class="page_active"';
-                                                                                                                    ?>><?php echo $i; ?></a>
+                                      echo 'class="page_active"';
+                                  ?>><?php echo $i; ?></a>
                         <?php } ?>
                     </div>
                 </div>
@@ -487,104 +526,88 @@ $total_pages = $result['total_pages'];
         <div class="my-5">
             <h1>Recommended</h1>
             <div class="row">
-                <div class="col-12 col-md-6 col-xxl-3 my-2">
-                    <div class="card">
-                        <div style="width: 160px; height: 160px" class="mx-auto py-4"><img src="../../public/image/product/Bagel Bites1.jpg" class="img-fluid rounded" alt="...">
-                        </div>
-                        <div class="card-body">
-                            <h5 class="card-title">Sản phẩm</h5>
-                            <h6 class="card-subtitle mb-2 text-body-secondary" style="font-size:small">Card subtitle
-                            </h6>
-                            <div class="row">
-                                <div class="col-6">
-                                    <span>Time</span>
+                <?php
+                $product = getRandomProduct();
+                if ($product->num_rows > 0) {
+                    $i = 0;
+                    while ($row = $product->fetch_assoc()) {
+                        $i++;
+                        if ($i > 4) {
+                            break;
+                        }
+                        ?>
+                        <div class="col-12 col-md-6 col-xxl-3 mt-2">
+                            <a href="../products/product_detail.php?quick_snack_id=<?php echo $row['quick_snack_id']; ?>">
+                                <div class="card" style="background-color: #f3eae5; height: 100%; width:100% ">
+                                    <img src="<?php echo $row['address_img']; ?>" class="rounded img-fluid my-3 px-3"
+                                        height="160px">
+                                    <div class="card-body">
+                                        <div style="height: 50px">
+                                            <h6 class="card-subtitle mb-2 text-body-secondary" style="font-size: small;">
+                                                <?php echo $row['category_name']; ?>
+                                            </h6>
+                                        </div>
+                                        <div style="height: 55px">
+                                            <h5 class="card-title">
+                                                <?php echo $row['name']; ?>
+                                            </h5>
+                                        </div>
+                                        <div style="height: 60px" class="row align-items-center">
+                                            <div class="col text-start">
+                                                <div class="fw-bold" style="color:#E37E21"><?php echo $row['time']; ?></div>
+                                            </div>
+                                            <div class="col text-end">
+                                                <span><i class="fa-solid fa-star"
+                                                        style="color:#E37E21"></i><span><?php echo $row['avg_rating']; ?></span></span>
+                                            </div>
+                                        </div>
+                                        <div class="text-end">
+                                            <?php
+                                            if (isset($_COOKIE['userID'])) {
+                                                $user_id = $_COOKIE['userID'];
+                                                $isInWishlist = isInWishlist($row['quick_snack_id'], $conn, $user_id);
+                                                ?>
+                                                <a
+                                                    href="../../models/products/products_detail.php?product_id=<?php echo $row['quick_snack_id'] ?>">
+                                                    <?php echo ($isInWishlist ? '<i class="fa-solid fa-bookmark wishlist-link-wished"></i>' : '<i class="far fa-bookmark wishlist-link" id="favoriteIcon"></i>') ?>
+                                                </a>
+                                                <?php
+                                            } else {
+                                                ?>
+                                                <a href="../../views/auth/SignIn.html" class="wishlist-link"><i
+                                                        class="far fa-bookmark wishlist-link" id="favoriteIcon"></i></a>
+                                                <?php
+                                            }
+                                            ?>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div class="col-6 text-end">
-                                    <span>Rating</span>
-                                </div>
-                            </div>
-
-                            <div class="text-end"><a href="#">Add</a></div>
+                            </a>
                         </div>
-                    </div>
-                </div>
-                <div class="col-12 col-md-6 col-xxl-3 mt-2">
-                    <div class="card">
-                        <div style="width: 160px; height: 160px" class="mx-auto py-4"><img src="../../public/image/product/Bagel Bites1.jpg" class="img-fluid rounded" alt="...">
-                        </div>
-                        <div class="card-body">
-                            <h5 class="card-title">Sản phẩm</h5>
-                            <h6 class="card-subtitle mb-2 text-body-secondary" style="font-size:small">Card subtitle
-                            </h6>
-                            <div class="row">
-                                <div class="col-6">
-                                    <span>Time</span>
-                                </div>
-                                <div class="col-6 text-end">
-                                    <span>Rating</span>
-                                </div>
-                            </div>
-
-                            <div class="text-end"><a href="#">Add</a></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-12 col-md-6 col-xxl-3 mt-2">
-                    <div class="card">
-                        <div style="width: 160px; height: 160px" class="mx-auto py-4"><img src="../../public/image/product/Bagel Bites1.jpg" class="img-fluid rounded" alt="...">
-                        </div>
-                        <div class="card-body">
-                            <h5 class="card-title">Sản phẩm</h5>
-                            <h6 class="card-subtitle mb-2 text-body-secondary" style="font-size:small">Card subtitle
-                            </h6>
-                            <div class="row">
-                                <div class="col-6">
-                                    <span>Time</span>
-                                </div>
-                                <div class="col-6 text-end">
-                                    <span>Rating</span>
-                                </div>
-                            </div>
-
-                            <div class="text-end"><a href="#">Add</a></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-12 col-md-6 col-xxl-3 mt-2">
-                    <div class="card">
-                        <div style="width: 160px; height: 160px" class="mx-auto py-4"><img src="../../public/image/product/Bagel Bites1.jpg" class="img-fluid rounded" alt="...">
-                        </div>
-                        <div class="card-body">
-                            <h5 class="card-title">Sản phẩm</h5>
-                            <h6 class="card-subtitle mb-2 text-body-secondary" style="font-size:small">Card subtitle
-                            </h6>
-                            <div class="row">
-                                <div class="col-6">
-                                    <span>Time</span>
-                                </div>
-                                <div class="col-6 text-end">
-                                    <span>Rating</span>
-                                </div>
-                            </div>
-
-                            <div class="text-end"><a href="#">Add</a></div>
-                        </div>
-                    </div>
-                </div>
+                        <?php
+                    }
+                }
+                ?>
             </div>
         </div>
     </main>
 
     <footer>
         <?php
-        include("../includes/footer.php")
-        ?>
+        include ("../includes/footer.php")
+            ?>
     </footer>
 
     <script src="https://kit.fontawesome.com/54dbfefd83.js" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js" integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+        integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
+        integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"
+        integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+"
+        crossorigin="anonymous"></script>
 
     <script>
         var minSlider = document.getElementById('min');
@@ -596,7 +619,7 @@ $total_pages = $result['total_pages'];
         var defaultMax = parseInt(maxSlider.max);
         var radioValue = <?php echo isset($_GET['time_min']) ? $_GET['time_min'] : '0'; ?>;
         document.querySelectorAll('input[name="time_min"]').forEach((radio) => {
-            radio.addEventListener('change', function() {
+            radio.addEventListener('change', function () {
                 var radioVal = parseInt(this.value);
 
                 if (radioVal < defaultMin) {
@@ -619,12 +642,12 @@ $total_pages = $result['total_pages'];
         });
 
 
-        minSlider.oninput = function() {
+        minSlider.oninput = function () {
 
             outputMin.innerHTML = this.value;
         };
 
-        maxSlider.oninput = function() {
+        maxSlider.oninput = function () {
 
             outputMax.innerHTML = this.value;
         };
@@ -651,7 +674,7 @@ $total_pages = $result['total_pages'];
         function toggleCategory(allCheckbox) {
             var checkboxes = document.querySelectorAll('input[name="category[]"]');
             if (allCheckbox.value === 'all') {
-                checkboxes.forEach(function(checkbox) {
+                checkboxes.forEach(function (checkbox) {
                     if (checkbox !== allCheckbox) {
                         checkbox.checked = false;
                     }
@@ -661,11 +684,10 @@ $total_pages = $result['total_pages'];
             }
         }
 
-        // Function to toggle 'All' checkbox for ingredients
         function toggleIngredient(allCheckbox) {
             var checkboxes = document.querySelectorAll('input[name="ingredient[]"]');
             if (allCheckbox.value === 'all') {
-                checkboxes.forEach(function(checkbox) {
+                checkboxes.forEach(function (checkbox) {
                     if (checkbox !== allCheckbox) {
                         checkbox.checked = false;
                     }

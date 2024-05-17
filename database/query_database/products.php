@@ -132,6 +132,23 @@ function getProduct($filters, $page, $search = null)
     return ['products' => $result, 'total_pages' => $total_pages, 'current_sort' => $sort];
 }
 
+function getRandomProduct() {
+    include ("../../database/connect_database/index.php");
+    $smtc = $conn->prepare("SELECT quick_snack.quick_snack_id, name, level, quick_snack.time, yield, created_at, quick_snack.user_id, category_to_quick_snack.category_id, 
+    category_name, ROUND(AVG(review.rating), 1) as avg_rating, address_img FROM quick_snack 
+    JOIN category_to_quick_snack ON quick_snack.quick_snack_id = category_to_quick_snack.quick_snack_id 
+    JOIN category ON category_to_quick_snack.category_id = category.category_id
+    JOIN review ON review.quick_snack_id = quick_snack.quick_snack_id
+    JOIN image_quick_snack on image_quick_snack.quick_snack_id = quick_snack.quick_snack_id
+    GROUP BY quick_snack.quick_snack_id
+    ORDER BY RAND()
+    LIMIT 4");
+    $smtc->execute();
+    $result = $smtc->get_result();
+    $conn->close();
+    return $result;    
+}
+
 function getImage($param)
 {
     include ("../../database/connect_database/index.php");

@@ -2,7 +2,8 @@
   color: #dc582a;
 }
 
-.sort, .filter_checked{
+.sort,
+.filter_checked {
   border-color: #e37e21 !important;
 }
 
@@ -12,22 +13,32 @@
 }
 
 .filter_:checked:checked {
-    background-color: #dc582a !important;
+  background-color: #dc582a !important;
 }
 
 .filter_btn {
-    background-color: #e37e21 !important;
-    color: white !important;
+  background-color: #e37e21 !important;
+  color: white !important;
 }
 .filter_btn:hover {
-    background-color: #dc582a !important;
-    color: white !important;
+  background-color: #dc582a !important;
+  color: white !important;
 }
 
 .more {
-    color: #dc582a !important;
+  color: #dc582a !important;
 }
 
 .more:hover {
-    color: red !important;
+  color: red !important;
+}
+.rounded {
+  height:85% !important;
+  width: 100% !important;
+}
+.img-fluid{
+height: 20vh !important;
+}
+.card-title {
+  margin-top: -5px !important;
 }

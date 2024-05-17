@@ -129,7 +129,43 @@
   color: #ffc107;
 }
 
-
 .comment-count {
   cursor: pointer;
+}
+.carousel-inner .carousel-item img {
+  max-height: 450px;
+  /* Điều chỉnh chiều cao tối đa của ảnh */
+  width: auto;
+  margin: 0 auto;
+}
+
+/* Tùy chỉnh kích thước của carousel */
+#carouselExampleIndicators {
+  width: 100%;
+  /* Đảm bảo rộng 100% của carousel */
+}
+
+/* Tùy chỉnh kích thước của carousel control */
+.carousel-control-prev,
+.carousel-control-next {
+  width: 5%;
+  /* Điều chỉnh chiều rộng của nút điều khiển */
+}
+
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+  width: 30px;
+  /* Điều chỉnh chiều rộng của biểu tượng điều khiển */
+  height: 30px;
+  /* Điều chỉnh chiều cao của biểu tượng điều khiển */
+  background-size: 100%, 100%;
+  background-repeat: no-repeat;
+}
+
+.wishlist-link {
+  color: #ff9a62;
+}
+
+.wishlist-link-wished {
+  color: #ff9a62;
 }

@@ -19,45 +19,6 @@ $result = $conn->query($query);
     <link rel="stylesheet" href="../../public/css/header.css">
     <link rel="stylesheet" href="../../public/css/product-detail.css">
     <link rel="stylesheet" href="../../public/css/footer.css" />
-    <style>
-        .carousel-inner .carousel-item img {
-            max-height: 450px;
-            /* Điều chỉnh chiều cao tối đa của ảnh */
-            width: auto;
-            margin: 0 auto;
-        }
-
-        /* Tùy chỉnh kích thước của carousel */
-        #carouselExampleIndicators {
-            width: 100%;
-            /* Đảm bảo rộng 100% của carousel */
-        }
-
-        /* Tùy chỉnh kích thước của carousel control */
-        .carousel-control-prev,
-        .carousel-control-next {
-            width: 5%;
-            /* Điều chỉnh chiều rộng của nút điều khiển */
-        }
-
-        .carousel-control-prev-icon,
-        .carousel-control-next-icon {
-            width: 30px;
-            /* Điều chỉnh chiều rộng của biểu tượng điều khiển */
-            height: 30px;
-            /* Điều chỉnh chiều cao của biểu tượng điều khiển */
-            background-size: 100%, 100%;
-            background-repeat: no-repeat;
-        }
-
-        .wishlist-link {
-            color: #ff9a62;
-        }
-
-        .wishlist-link-wished {
-            color: #ff9a62;
-        }
-    </style>
 </head>
 
 <body>
@@ -81,7 +42,8 @@ $result = $conn->query($query);
                     <?php
                 } else {
                     ?>
-                    <a href="../../views//auth/SignIn.html" class="wishlist-link">Login to add to wishlist</a>
+                    <a href="../../views//auth/SignIn.html" class="wishlist-link"><i class="far fa-bookmark wishlist-link"
+                            id="favoriteIcon"></i></a>
                     <?php
                 }
                 ?>
@@ -115,7 +77,11 @@ $result = $conn->query($query);
                     <i class="fas fa-heart" style="color: #ff9a62"></i> Like
                 </span>
                 <span class="pt-1 fw-bold">
-                    <i class="far fa-calendar" style="color: #ff9a62"></i> Apr 30, 2024
+                    <i class="far fa-calendar" style="color: #ff9a62"></i> <?php $createdAt = $detailRow['created_at'];
+                    // Định dạng ngày tháng năm
+                    $formattedDate = date('d/m/Y', strtotime($createdAt));
+                    echo $formattedDate;
+                    ?>
                 </span>
             </div>
             <span class="pt-1 fw-bold">
@@ -137,7 +103,7 @@ $result = $conn->query($query);
                         $active = true;
                         if ($result_img->num_rows > 0) {
                             while ($row = $result_img->fetch_assoc()) {
-                                $activeClass = $active ? 'active' : ''; 
+                                $activeClass = $active ? 'active' : '';
                                 echo '<div class="carousel-item ' . $activeClass . '">';
                                 echo '<img src="' . $row['address_img'] . '" class="d-block w-100" alt="Product Image">';
                                 echo '</div>';
@@ -304,9 +270,6 @@ $result = $conn->query($query);
                 echo "<p>No comments available.</p>";
             }
             ?>
-            <div class="text-center mt-3">
-                <button class="btn_comment">Load More Comments</button>
-            </div>
             <div class="comment-form mt-4">
                 <form id="comment-form" action="../../database/query_database/comment_handler.php" method="post">
                     <input type="hidden" name="quick_snack_id" value="<?php echo $id; ?>">
@@ -358,6 +321,20 @@ $result = $conn->query($query);
                     behavior: 'smooth'
                 });
             });
+        });
+        document.getElementById('comment-form').addEventListener('submit', function (e) {
+            // Lưu trữ giá trị vào localStorage trước khi gửi form
+            localStorage.setItem('scrollToComments', 'true');
+        });
+
+        window.addEventListener('load', function () {
+            // Kiểm tra giá trị trong localStorage khi trang tải lại
+            if (localStorage.getItem('scrollToComments') === 'true') {
+                // Cuộn xuống phần bình luận
+                document.querySelector('.comment-rating').scrollIntoView({ behavior: 'smooth' });
+                // Xóa giá trị sau khi đã cuộn
+                localStorage.removeItem('scrollToComments');
+            }
         });
     </script>
 </body>

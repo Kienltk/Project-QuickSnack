@@ -21,6 +21,9 @@ function getUserCategoryByCategoryId($param) {
 
 function getProductFromUserCategory($param) {
     include ("../../database/connect_database/index.php");
+    $smtc = $conn->prepare("SET @@Global.sql_mode='STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION';
+    ");
+    $smtc->execute();
     $smtc = $conn->prepare("SELECT * FROM user_category
     JOIN quick_snack_to_user_category ON user_category.user_category_id = quick_snack_to_user_category.user_category_id
     JOIN quick_snack ON quick_snack.quick_snack_id = quick_snack_to_user_category.quick_snack_id
