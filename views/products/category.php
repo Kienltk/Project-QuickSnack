@@ -104,12 +104,14 @@ function isInWishlist($quick_snack_id, $conn, $user_id)
                 // Duyệt qua từng hàng dữ liệu và hiển thị
                 while ($row = $result->fetch_assoc()) {
                     echo '<div class="col-12 col-sm-6 col-lg-3 mb-3">';
+                    echo '<a href="products.php?categoryId='.$row["id"].'">';
                     echo '<div class="card">';
                     echo '<img src="' . $row["address_img_category"] . '" class="card-img-top my-3" alt="Category Image">';
                     echo '<div class="card-body">';
                     echo '<h5 class="card-title">' . $row["name"] . '</h5>';
                     echo '</div>';
                     echo '</div>';
+                    echo '</a>';
                     echo '</div>';
                 }
             } else {
@@ -118,6 +120,7 @@ function isInWishlist($quick_snack_id, $conn, $user_id)
             $conn->close();
             ?>
         </div>
+
         <!-- Điều hướng phân trang -->
         <nav aria-label="Page navigation">
             <ul class="pagination justify-content-center">
